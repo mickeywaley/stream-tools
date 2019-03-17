@@ -11,7 +11,7 @@ from urllib.request import Request, urlopen
 ssl._create_default_https_context = ssl._create_unverified_context
 
 
-class HREFParser(HTMLParser):
+class AhndHrefParser(HTMLParser):
     """
     Parser that extracts hrefs
     """
@@ -43,7 +43,7 @@ class HREFParser(HTMLParser):
 
 class Crawler(object):
 
-    def __init__(self, cache=None, depth=1):
+    def __init__(self):
         """
         depth: how many time it will bounce from page one (optional)
         cache: a basic cache controller (optional)
@@ -51,7 +51,7 @@ class Crawler(object):
         self.channel_map = {}
         self.request_url = ''
 
-    def crawl(self, url, no_cache=None):
+    def crawl(self, url):
         """
         url: where we start crawling, should be a complete URL like
         'http://www.intel.com/news/'
@@ -94,7 +94,7 @@ class Crawler(object):
         Read through HTML content and returns a tuple of links
         internal to the given domain
         """
-        parser = HREFParser()
+        parser = AhndHrefParser()
         parser.feed(html)
 
         #
