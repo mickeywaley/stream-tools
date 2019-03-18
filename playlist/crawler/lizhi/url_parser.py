@@ -1,0 +1,45 @@
+from bs4 import BeautifulSoup
+
+
+def default_tag_filter(tag):
+    print(tag.name)
+    return tag.name == 'a'
+
+
+def default_attr_filter(tag):
+    return tag.has_attr('href')
+
+
+def default_url_getter(tag):
+    return tag.get('href')
+
+
+def default_name_getter(tag):
+    return tag.get_text()
+
+
+class UrlParser:
+    """
+    Parser that extracts hrefs
+    """
+
+    def __init__(self, tag_filter=default_tag_filter, attr_filter=default_attr_filter, url_getter=default_url_getter,
+                 url_name_getter=default_name_getter):
+        self.tag_filter = tag_filter
+        self.attr_filter = attr_filter
+        self.url_getter = url_getter
+        self.url_name_getter = url_name_getter
+        self.url_map = {}
+
+    def parse(self, html):
+        soup = BeautifulSoup(html, 'lxml')
+
+        tags = soup.find_all(self.tag_filter)
+
+        tags = [tag for tag in tags if self.attr_filter(tag)]
+
+        print(tags)
+
+        self.url_map = {self.url_getter(tag): self.url_name_getter(tag) for tag in tags}
+
+        print(self.url_map)
