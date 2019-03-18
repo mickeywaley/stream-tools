@@ -9,7 +9,7 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 class UrlCrawler(object):
 
-    def __init__(self, parser=None, url_mapper=lambda x: x):
+    def __init__(self, parser=None, url_mapper=lambda x: x, debug=False):
         """
         depth: how many time it will bounce from page one (optional)
         cache: a basic cache controller (optional)
@@ -18,6 +18,7 @@ class UrlCrawler(object):
         self.init_url = ''
         self.url_parser = parser
         self.url_mapper = url_mapper
+        self.debug = debug
 
     def crawl(self, url):
         """
@@ -30,7 +31,11 @@ class UrlCrawler(object):
 
         html = self.curl(url)
 
+        if self.debug:
+            print(html)
+
         self.url_parser.parse(html)
+        self.url_map = self.url_parser.url_map
 
     def curl(self, url):
         """
