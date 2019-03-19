@@ -2,7 +2,6 @@ from bs4 import BeautifulSoup
 
 
 def default_tag_filter(tag):
-    print(tag.name)
     return tag.name == 'a'
 
 
@@ -38,8 +37,8 @@ class UrlParser:
 
         tags = [tag for tag in tags if self.attr_filter(tag)]
 
-        print(tags)
+        # print(tags)
 
         self.url_map = {self.url_getter(tag): self.url_name_getter(tag) for tag in tags}
 
-        print(self.url_map)
+        # print(self.url_map)
