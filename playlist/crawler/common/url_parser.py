@@ -23,12 +23,13 @@ class UrlParser:
     """
 
     def __init__(self, tag_filter=default_tag_filter, attr_filter=default_attr_filter, url_getter=default_url_getter,
-                 url_name_getter=default_name_getter):
+                 url_name_getter=default_name_getter, charset='utf-8'):
         self.tag_filter = tag_filter
         self.attr_filter = attr_filter
         self.url_getter = url_getter
         self.url_name_getter = url_name_getter
         self.url_map = {}
+        self.charset = charset
 
     def parse(self, html):
         soup = BeautifulSoup(html, 'lxml')
