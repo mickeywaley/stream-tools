@@ -54,7 +54,7 @@ def channel_sort(first, second):
     return result
 
 
-def generate_me8u_file(group, channel_map):
+def generate_m3u8_file(group, channel_map):
     for channel, url in channel_map.items():
         print("{}:{}".format(channel, url))
 
@@ -86,4 +86,4 @@ channel_group = crawler.channel_group
 for group, channel_map in channel_group.items():
     # channel_map = {k: channel_map[k] for k in sorted(channel_map, key=cmp_to_key(channel_sort), reverse=False)}
     channel_map = {k: channel_map[k] for k in channel_map}
-    generate_me8u_file(group, channel_map)
+    generate_m3u8_file(group, channel_map)

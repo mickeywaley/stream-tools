@@ -36,6 +36,9 @@ http://weblive.hebtv.com/live/sjgw_bq/index.m3u8
 #EXTINF:-1,河北农民频道
 http://weblive.hebtv.com/live/nmpd_bq/index.m3u8
 
+#EXTINF:-1,河北少儿频道
+http://weblive.hebtv.com/live/hbse_bq/index.m3u8
+
 #EXTINF:-1,河北公共频道
 http://weblive.hebtv.com/live/hbgg_bq/index.m3u8
 
@@ -156,9 +159,6 @@ http://playback-livehyuwxjtv122qn.sobeycache.com/sobeylive/xjtv2.m3u8
 #EXTINF:-1,北碚综合频道
 http://222.178.181.121:12034/beibei01.m3u8
 
-#EXTINF:-1,新华社中文台
-http://live.xinhuashixun.com/live/chn01/desc.m3u8
-
 #EXTINF:-1,上海法治天地频道
 http://223.110.243.150/PLTV/2/224/3221226027/index.m3u8
 
@@ -224,6 +224,9 @@ http://ksdlive.gwpd.iqilu.com/ggpd.m3u8
 
 #EXTINF:-1,山东体育频道
 http://zb.allook.cn/live/sdty/chunklist_w1316542910.m3u8
+
+#EXTINF:-1,福州综合频道
+http://live1.fzntv.cn/live/zohi_fztv1/playlist.m3u8
 
 #EXTINF:-1,福州影视频道
 http://live1.fzntv.cn/live/zohi_fztv2/playlist.m3u8
@@ -473,6 +476,12 @@ http://gdlive.grtn.cn/jjkt1/sd/live.m3u8
 
 #EXTINF:-1,嘉佳卡通
 http://223.110.243.150/PLTV/2/224/3221226099/index.m3u8
+
+#EXTINF:-1,五星体育
+http://hls.mv.wa5.com/live/gssports1/playlist.m3u8
+
+#EXTINF:-1,五星体育
+http://111.48.34.235/wh7f454c46tw3750732377_2143940495/huaweicdn.hb.chinamobile.com/PLTV/2510088/224/3221225772/index.m3u8
 
 #EXTINF:-1,动作电影
 http://183.207.249.10/PLTV/3/224/3221225529/index.m3u8

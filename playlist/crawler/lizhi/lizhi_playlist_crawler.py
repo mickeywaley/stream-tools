@@ -1,15 +1,13 @@
 import os
-import re
 
-from playlist.crawler.lizhi.url_crawler import UrlCrawler
-from playlist.crawler.lizhi.url_parser import UrlParser
+from playlist.crawler.common.playlist_crawler import PlaylistCrawler
+from playlist.crawler.common.url_crawler import UrlCrawler
+from playlist.crawler.common.url_parser import UrlParser
 
 
-class LizhiPlaylistCrawler:
+class LizhiPlaylistCrawler(PlaylistCrawler):
     def __init__(self):
-        self.result_map = {}
-        self.name = ''
-        self.base_url = ''
+        super().__init__()
 
     def crawl(self, name='playlist', base_url=''):
 
@@ -28,24 +26,8 @@ class LizhiPlaylistCrawler:
 
         print(self.result_map)
 
-        self.generate_me8u_file()
+        self.generate_m3u8_file()
 
-    def generate_me8u_file(self):
-
-        # converter = Converter('zh-hans')
-        cwd = os.getcwd()
-        with open(os.path.join(cwd, '{}-playlist.m3u8'.format(self.name)), 'wb') as f:
-
-            f.write(b'#EXTM3U\n\n')
-
-            for channel, urls in self.result_map.items():
-                name = '#EXTINF:-1,' + channel + '\n'
-
-                for url in urls:
-                    link = url + '\n\n'
-
-                    f.write(name.encode(encoding='utf8'))
-                    f.write(link.encode(encoding='utf8'))
 
     def _crawl_page(self, page_url):
 
@@ -128,7 +110,7 @@ if __name__ == "__main__":
     # crawer.crawl("地方电视台", 'http://www.lizhizu.com/channel/weishi')
 
     # crawer.crawl("港澳台电视台", 'http://www.lizhizu.com/channel/gangaotai')
-    crawer.crawl("国外电视台", 'http://www.lizhizu.com/channel/inter')
+    # crawer.crawl("国外电视台", 'http://www.lizhizu.com/channel/inter')
     crawer.crawl("其他综合台", 'http://www.lizhizu.com/channel/other')
 
 

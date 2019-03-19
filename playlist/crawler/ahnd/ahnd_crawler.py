@@ -4,7 +4,7 @@ from urllib.parse import urlparse, parse_qs
 from playlist.crawler.ahnd.ahnd_url_crawler import Crawler
 
 
-def getm38u(url):
+def getm3u8(url):
     u_parse = urlparse(url)
 
     params = dict(parse_qs(u_parse.query))
@@ -238,7 +238,7 @@ def channel_sort(first, second):
     return result
 
 
-def generate_me8u_file(channel_map):
+def generate_m3u8_file(channel_map):
     for channel, url in channel_map.items():
         print("{}:{}".format(channel, url))
 
@@ -250,7 +250,7 @@ def generate_me8u_file(channel_map):
             name = '#EXTINF:-1,' + channel + '\n'
 
             for url in urls:
-                link = getm38u(url) + '\n\n'
+                link = getm3u8(url) + '\n\n'
 
                 f.write(name.encode(encoding='utf8'))
                 f.write(link.encode(encoding='utf8'))
@@ -268,4 +268,4 @@ channel_map = crawler.channel_map
 channel_map = {k: channel_map[k] for k in sorted(channel_map, key=cmp_to_key(channel_sort), reverse=False)}
 
 
-generate_me8u_file(channel_map)
+generate_m3u8_file(channel_map)
