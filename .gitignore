@@ -1,0 +1,21 @@
+*.log
+*.log.*
+*.iml
+
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+.idea/
+target/
+__pycache__/
+*.pyc
+*.pyo
+
+venv/
