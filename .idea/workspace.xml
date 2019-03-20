@@ -1,17 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4229c304-77af-46b4-a4d5-c05ca13cd1e9" name="Default Changelist" comment="#添加荔枝直播crawler">
-      <change afterPath="$PROJECT_DIR$/playlist/crawler/ahnd/ahnd_playlist_crawler.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/playlist/crawler/common/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/playlist/crawler/common/playlist_crawler.py" afterDir="false" />
+    <list default="true" id="4229c304-77af-46b4-a4d5-c05ca13cd1e9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/playlist/crawler/ahnd/ahnd_crawler.py" beforeDir="false" afterPath="$PROJECT_DIR$/playlist/crawler/ahnd/ahnd_crawler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/playlist/crawler/iptv201/iptv201_crawler.py" beforeDir="false" afterPath="$PROJECT_DIR$/playlist/crawler/iptv201/iptv201_crawler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/playlist/crawler/lizhi/playlist_crawler.py" beforeDir="false" afterPath="$PROJECT_DIR$/playlist/crawler/lizhi/lizhi_playlist_crawler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/playlist/crawler/lizhi/url_crawler.py" beforeDir="false" afterPath="$PROJECT_DIR$/playlist/crawler/common/url_crawler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/playlist/crawler/lizhi/url_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/playlist/crawler/common/url_parser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/playlist/crawler/lizhi/其他综合台-playlist.m3u8" beforeDir="false" afterPath="$PROJECT_DIR$/playlist/crawler/lizhi/其他综合台-playlist.m3u8" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -40,7 +31,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/playlist/crawler/iptv201/iptv201_crawler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
+            <state relative-caret-position="723">
               <caret line="50" column="60" lean-forward="true" selection-start-line="50" selection-start-column="60" selection-end-line="50" selection-end-column="60" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
@@ -64,7 +55,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/playlist/crawler/common/url_parser.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
+            <state relative-caret-position="168">
               <caret line="19" selection-start-line="19" selection-end-line="19" />
             </state>
           </provider>
@@ -82,7 +73,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/playlist/crawler/lizhi/其他综合台-playlist.m3u8">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-285">
@@ -91,14 +82,28 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/playlist/crawler/ahnd/ahnd_playlist_crawler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="468">
-              <caret line="48" column="52" selection-start-line="48" selection-start-column="52" selection-end-line="48" selection-end-column="52" />
+            <state relative-caret-position="393">
+              <caret line="46" column="71" lean-forward="true" selection-start-line="46" selection-start-column="71" selection-end-line="46" selection-end-column="71" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/playlist/crawler/ahnd/安徽农大-playlist.m3u8">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/playlist/crawler/lizhi/中央电视台-playlist.m3u8">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="628">
+              <caret line="141" selection-start-line="141" selection-end-line="141" selection-end-column="78" />
             </state>
           </provider>
         </entry>
@@ -111,24 +116,6 @@
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/playlist/crawler/common/playlist_crawler.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="21" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/playlist/crawler/iptv201/iptv201_url_crawler.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2715">
-              <caret line="185" selection-start-line="185" selection-end-line="204" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -230,6 +217,11 @@
               <item name="crawler" type="462c0819:PsiDirectoryNode" />
               <item name="lizhi" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="stream-tools" type="b2602c69:ProjectViewProjectNode" />
+              <item name="stream-tools" type="462c0819:PsiDirectoryNode" />
+              <item name="resource" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -242,7 +234,7 @@
     <property name="GO_FMT" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552969174657" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553042306087" />
     <property name="go.gopath.indexing.explicitly.defined" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -336,7 +328,7 @@
       <updated>1552882085686</updated>
       <workItem from="1552882087877" duration="12693000" />
       <workItem from="1552955295960" duration="3820000" />
-      <workItem from="1552967685978" duration="1370000" />
+      <workItem from="1552967685978" duration="2143000" />
     </task>
     <task id="LOCAL-00001" summary="#添加通用parser，爬取荔枝直播">
       <created>1552912823843</created>
@@ -359,15 +351,28 @@
       <option name="project" value="LOCAL" />
       <updated>1552958826940</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="#重构安徽农大crawler">
+      <created>1552969172439</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1552969172439</updated>
+    </task>
+    <task id="LOCAL-00005" summary="#重构安徽农大crawler">
+      <created>1552969206342</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1552969206342</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17883000" />
+    <option name="totallyTimeSpent" value="18656000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25595567" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -407,7 +412,8 @@
     <MESSAGE value="#添加通用parser，爬取荔枝直播" />
     <MESSAGE value="Merge branch 'master' of https://github.com/lizhiyong2000/stream-tools&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
     <MESSAGE value="#添加荔枝直播crawler" />
-    <option name="LAST_COMMIT_MESSAGE" value="#添加荔枝直播crawler" />
+    <MESSAGE value="#重构安徽农大crawler" />
+    <option name="LAST_COMMIT_MESSAGE" value="#重构安徽农大crawler" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -460,47 +466,13 @@
     <entry file="file://$PROJECT_DIR$/playlist/crawler/lizhi/地方电视台-playlist.m3u8">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/playlist/crawler/lizhi/中央电视台-playlist.m3u8">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2115">
-          <caret line="141" selection-start-line="141" selection-end-line="141" selection-end-column="78" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/playlist/crawler/lizhi/港澳台电视台-playlist.m3u8">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/playlist/crawler/iptv201/iptv201_crawler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="50" column="60" lean-forward="true" selection-start-line="50" selection-start-column="60" selection-end-line="50" selection-end-column="60" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/playlist/crawler/iptv201/iptv201_url_crawler.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2715">
           <caret line="185" selection-start-line="185" selection-end-line="204" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/playlist/crawler/common/url_crawler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
-          <folding>
-            <element signature="e#57#67#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/playlist/crawler/common/url_parser.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
         </state>
       </provider>
     </entry>
@@ -511,27 +483,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/playlist/crawler/lizhi/lizhi_playlist_crawler.py">
+    <entry file="file://$PROJECT_DIR$/playlist/crawler/ahnd/ahnd_crawler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="453">
-          <caret line="113" column="65" lean-forward="true" selection-start-line="113" selection-start-column="65" selection-end-line="113" selection-end-column="65" />
+        <state relative-caret-position="603">
+          <caret line="259" column="9" selection-start-line="259" selection-start-column="9" selection-end-line="259" selection-end-column="9" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/playlist/crawler/ahnd/ahnd_playlist_crawler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="393">
+          <caret line="46" column="71" lean-forward="true" selection-start-line="46" selection-start-column="71" selection-end-line="46" selection-end-column="71" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/playlist/crawler/lizhi/其他综合台-playlist.m3u8">
+    <entry file="file://$PROJECT_DIR$/playlist/crawler/iptv201/iptv201_crawler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-285">
-          <caret line="32" column="19" lean-forward="true" selection-start-line="32" selection-start-column="19" selection-end-line="32" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/playlist/crawler/ahnd/ahnd_crawler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="603">
-          <caret line="259" column="9" selection-start-line="259" selection-start-column="9" selection-end-line="259" selection-end-column="9" />
+        <state relative-caret-position="723">
+          <caret line="50" column="60" lean-forward="true" selection-start-line="50" selection-start-column="60" selection-end-line="50" selection-end-column="60" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
           </folding>
@@ -548,13 +523,47 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/playlist/crawler/ahnd/ahnd_playlist_crawler.py">
+    <entry file="file://$PROJECT_DIR$/playlist/crawler/ahnd/安徽农大-playlist.m3u8">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/playlist/crawler/common/url_crawler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="48" column="52" selection-start-line="48" selection-start-column="52" selection-end-line="48" selection-end-column="52" />
+        <state relative-caret-position="45">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+          <folding>
+            <element signature="e#57#67#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/playlist/crawler/common/url_parser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/playlist/crawler/lizhi/lizhi_playlist_crawler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="453">
+          <caret line="113" column="65" lean-forward="true" selection-start-line="113" selection-start-column="65" selection-end-line="113" selection-end-column="65" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/playlist/crawler/lizhi/中央电视台-playlist.m3u8">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="628">
+          <caret line="141" selection-start-line="141" selection-end-line="141" selection-end-column="78" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/playlist/crawler/lizhi/其他综合台-playlist.m3u8">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-285">
+          <caret line="32" column="19" lean-forward="true" selection-start-line="32" selection-start-column="19" selection-end-line="32" selection-end-column="19" />
         </state>
       </provider>
     </entry>
