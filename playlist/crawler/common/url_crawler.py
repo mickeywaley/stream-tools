@@ -56,7 +56,12 @@ class UrlCrawler(object):
 
             if response.url != req.full_url:
                 return response.url
-            return response.read().decode(response.headers.get_content_charset(), 'ignore')
+
+            charset = self.url_parser.charset
+
+            if response.headers.get_content_charset():
+                charset = response.headers.get_content_charset()
+            return response.read().decode(charset, 'ignore')
         except Exception as e:
             print("error %s: %s" % (url, e))
             return ''

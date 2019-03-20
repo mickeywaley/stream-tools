@@ -1,4 +1,7 @@
 import os
+import urllib
+from functools import cmp_to_key
+from urllib.parse import urlparse, parse_qs
 
 from playlist.crawler.common.playlist_crawler import PlaylistCrawler
 from playlist.crawler.common.url_crawler import UrlCrawler
@@ -8,6 +11,241 @@ from playlist.crawler.common.url_parser import UrlParser
 class AhndPlaylistCrawler(PlaylistCrawler):
     def __init__(self):
         super().__init__()
+
+
+    def getm3u8(self, url):
+        u_parse = urlparse(url)
+
+        params = dict(parse_qs(u_parse.query))
+
+        params = {k: v[0] for k, v in params.items()}
+        # print(params)
+
+        channel = params.get("channel")
+        server = params.get("server")
+        type = params.get("type")
+
+        if not channel:
+            channel = ''
+
+        if not server:
+            server = ''
+
+        if not type:
+            type = ''
+
+        # print('channel:%s\nserver:%s\ntype:%s\n' % (channel, server, type))
+
+        if channel[0:7] == "rtmp://" or channel[0:7] == "http://":
+            return channel
+
+        if server == "":
+            preStr = "http://" + u_parse.netloc + "/"
+        else:
+            preStr = "http://" + u_parse.netloc + ":8" + server + "/"
+
+        if type == "":
+            return preStr + "hls/" + channel + ".m3u8"
+
+        if type == "hlsp":
+            return preStr + "hls/" + channel + "/playlist.m3u8"
+
+        if type == "hlsi":
+            return preStr + "hls/" + channel + "/index.m3u8"
+
+        if type == "lived":
+            return preStr + "live/" + channel + ".m3u8"
+
+        if type == "livexd":
+            return preStr + "live/" + channel + "/" + channel + ".m3u8"
+
+        if type == "liven":
+            return preStr + "live/" + channel + "/.m3u8"
+
+        if type == "livep":
+            return preStr + "live/" + channel + "/playlist.m3u8"
+
+        if type == "livei":
+            return preStr + "live/" + channel + "/index.m3u8"
+
+        if type == "livet":
+            return preStr + "live/" + channel + "/tzwj_video.m3u8"
+
+        if type == "n":
+            return preStr + channel + ".m3u8"
+
+        if type == "nx":
+            return preStr + channel
+
+        if type == "nf":
+            return preStr + channel + ".flv"
+
+        if type == "p":
+            return preStr + channel + "/playlist.m3u8"
+
+        if type == "i":
+            return preStr + channel + "/index.m3u8"
+
+        if type == "l":
+            return preStr + channel + "/live.m3u8"
+
+        if type == "xxxs":
+            return preStr + channel + "/sd/live.m3u8"
+
+        if type == "xxxh":
+            return preStr + channel + "/hd/live.m3u8"
+
+        if type == "tsls":
+            return preStr + "tslslive/" + channel + "/hls/live_sd.m3u8"
+
+        if type == "chnnetcq":
+            return preStr + "PLTV/88888888/224/322122" + channel + "/chunklist.m3u8"
+
+        if type == "cmcc88":
+            return preStr + "PLTV/88888888/224/322122" + channel + "/index.m3u8"
+
+        if type == "cmccsy":
+            return preStr + "hwottcdn.ln.chinamobile.com/PLTV/88888890/224/322122" + channel + "/index.m3u8"
+
+        if type == "cmcchb":
+            return preStr + "huaweicdn.hb.chinamobile.com/PLTV/2510088/224/322122" + channel[0:4] + "/" + channel[
+                                                                                                          4:5] + ".m3u8"
+
+        if type == "cmccxa":
+            return preStr + "dbiptv.sn.chinamobile.com/PLTV/88888890/224/322122" + channel + "/index.m3u8"
+
+        if type == "cmccnj":
+            return preStr + "PLTV/" + channel[0:1] + "/224/322122" + channel[1:5] + "/2.m3u8"
+
+        if type == "cmccjs":
+            return preStr + "ott.js.chinamobile.com/PLTV/3/224/322122" + channel + "/index.m3u8"
+
+        if type == "cmcccl":
+            return preStr + "PLTV/88888888/224/322122" + channel + "/chunklist.m3u8"
+
+        if type == "lec":
+            return preStr + "live/hls/" + channel + "/desc.m3u8"
+
+        if type == "aodytv":
+            return preStr + "tv_radio_" + channel[0:5] + "/tv_channel_" + channel[5] + "__redirect__" + channel[
+                                                                                                        0:5] + ".m3u8"
+
+        if type == "aodylm":
+            return preStr + "lms_" + channel[0:5] + "/tv_channel_" + channel[5] + "__redirect__" + channel[0:5] + ".m3u8"
+
+        if type == "aodygd":
+            return preStr + "guangdianyun_" + channel[0:5] + "/tv_channel_" + channel[5] + "__redirect__" + channel[
+                                                                                                            0:5] + ".m3u8"
+
+        if type == "cjybc":
+            return preStr + "video/s10" + channel + "/index.m3u8"
+
+        if type == "cucc":
+            return preStr + "gitv_live/" + channel + "/" + channel + ".m3u8"
+
+        if type == "chxl":
+            return preStr + "channels/" + channel + "/live.flv"
+
+        if type == "chxlm":
+            return preStr + "channels/" + channel + "/m3u8:500k/live.m3u8"
+
+        if type == "ah05":
+            return preStr + "channels/preview/" + channel + "/m3u8:500k/live.m3u8"
+
+        if type == "ah06":
+            return preStr + "channels/39/500.flv"
+
+        if type == "zgjt":
+            return preStr + "zgjt/beijing.m3u8?auth_key=1701185783-0-0-e36f09598d451ea4440bbd83411e7fd5"
+
+        if type == "zgjtah":
+            return preStr + "zgjt/zgjtah.m3u8?auth_key=1893430861-0-0-d46bdf4ba08863c373461a56e8057d56"
+
+        if type == "zgjthb":
+            return preStr + "zgjt/zgjthb.m3u8?auth_key=1893430861-0-0-f7357974c29e0b417e899dc47121337c"
+
+        if type == "yntv":
+            return preStr + "channels/yn/" + channel + "/m3u8:sd/live.m3u8"
+
+        if type == "nm05":
+            return preStr + "channels/btgd/" + channel + "/m3u8:500k/live.m3u8"
+
+        if type == "njtv":
+            return preStr + "channels/njtv/" + channel + "/m3u8:500k/live.m3u8"
+
+        if type == "nttv":
+            return preStr + "channels/nttv/" + channel + "/m3u8:SD/live.m3u8"
+
+        if type == "lantian":
+            return preStr + "channels/lantian/channel" + channel + "/360p.m3u8"
+
+        if type == "sihtv":
+            return preStr + "channels/tvie/" + channel + "/m3u8:500k/live.m3u8"
+
+        if type == "cooldiao":
+            return preStr + "cmstop/s10001-video-" + channel + ".m3u8"
+
+        if type == "nnlivef":
+            return preStr + "nn_live.flv?id=" + channel
+
+        if type == "rtmp":
+            return "rtmp://" + u_parse.netloc + "/ahau/" + channel
+
+        return "http://" + u_parse.netloc + "/hls/cctv5.m3u8"
+
+        pass
+
+
+    def channel_sort(self, first, second):
+        pattern = '';
+        if first.startswith('CCTV') and second.startswith('CCTV'):
+            # pattern = 'CCTV(\d+)'
+            #
+            # ch1 = re.search(pattern, first)
+
+            result = (lambda a, b: (a > b) - (a < b))(first, second)
+
+            # print("1{} {} {}".format(first, '>' if result > 0 else '<', second))
+            return result
+        else:
+            if first.startswith('CCTV'):
+                # print("2{} {} {}".format(first, '<', second))
+                return -1
+            if second.startswith('CCTV'):
+                # print("3{} {} {}".format(first, '>', second))
+                return 1
+
+        if first.startswith('《') and second.startswith('《'):
+            result = (lambda a, b: (a > b) - (a < b))(first, second)
+
+            # print("4{} {} {}".format(first, '>' if result > 0 else '<', second))
+            return result
+        else:
+            if first.startswith('《'):
+                # print("5{} {} {}".format(first, '>', second))
+                return 1
+            if second.startswith('《'):
+                # print("6{} {} {}".format(first, '<', second))
+                return -1
+
+        if first.endswith('卫视') and second.endswith('卫视'):
+            result = (lambda a, b: (a > b) - (a < b))(first, second)
+
+            # print("7{} {} {}".format(first, '>' if result > 0 else '<', second))
+            return result
+        else:
+            if first.endswith('卫视'):
+                # print("8{} {} {}".format(first, '<', second))
+                return -1
+            if second.endswith('卫视'):
+                # print("9{} {} {}".format(first, '>', second))
+                return 1
+
+        result = (lambda a, b: (a > b) - (a < b))(first, second)
+
+        # print("10{} {} {}".format(first, '>' if result > 0 else '<', second))
+        return result
+
 
     def crawl(self, name='playlist', base_url=''):
 
@@ -46,7 +284,7 @@ class AhndPlaylistCrawler(PlaylistCrawler):
         attr_filter = lambda x: x.has_attr('title')
         # url_name_getter = lambda tag: tag.find_all("p")[0].get_text()
 
-        url_parser = UrlParser(tag_filter=tag_filter)
+        url_parser = UrlParser(tag_filter=tag_filter, charset='gb2312')
 
         crawler = UrlCrawler(parser=url_parser)
         crawler.crawl(page_url)
@@ -55,59 +293,29 @@ class AhndPlaylistCrawler(PlaylistCrawler):
 
         if len(crawler.url_map.items()) == 0:
             raise Exception("Failed to get url")
-        #
-        # html = crawler.curl('http://www.lizhizu.com/player?id=5&val=1')
-        # tag_filter = lambda tag: tag.name == 'a'
-        attr_filter = lambda x: x.has_attr('onclick') and x.has_attr('data-player')
-        url_getter = lambda tag: tag.attrs['data-player']
-        url_parser = UrlParser(
-            attr_filter=attr_filter, url_getter=url_getter)
+
 
         def url_mapper(url):
-            parts = url.split('_')
-            return 'http://www.lizhizu.com/player?id={}&val={}'.format(parts[0], parts[1])
+            return self.getm3u8(urllib.parse.urljoin(self.base_url, url))
 
-        inner_tag_filter = lambda tag: tag.name == 'script' and not tag.has_attr('src')
+        url_map = { url_mapper(k):crawler.url_map[k] for k in sorted(crawler.url_map)}
 
-        inner_attr_filter = lambda x: True
 
-        def inner_url_getter(tag):
-            s = tag.get_text()
-            left = s.find('$http')
-            right = s.find('$m3u8')
-            if right > left and left > 0:
-                result=  s[left + 1:right]
-                print(result)
-                return result
-            return None
-        inner_url_name_getter = lambda x: None
-
-        inner_url_parser = UrlParser(tag_filter=inner_tag_filter,
-                                     attr_filter=inner_attr_filter, url_getter=inner_url_getter, url_name_getter=inner_url_name_getter)
-
-        # '信号1$http://223.110.243.168/PLTV/2510088/224/3221227343/1.m3u8$m3u8'
-        for url, name in crawler.url_map.items():
+        for url, name in url_map.items():
             print('{} :{}'.format(url, name))
-            result_map[name] = []
-            crawler = UrlCrawler(parser=url_parser, debug=False)
-            crawler.crawl(url)
 
-            url_map = { url_mapper(k):crawler.url_map[k] for k in sorted(crawler.url_map)}
+            if not name in result_map.keys():
+                result_map[name] = []
 
-            for inner_url, inner_name in url_map.items():
-                # result_map[name][inner_name] = []
+            result_map[name].append(url)
 
-                inner_crawler = UrlCrawler(parser=inner_url_parser, debug=False)
-                inner_crawler.crawl(inner_url)
+        result_map = {k: result_map[k] for k in sorted(result_map, key=cmp_to_key(self.channel_sort), reverse=False)}
 
-                for m3u8 in inner_crawler.url_map.keys():
-                    print('{} {}'.format(name, m3u8))
-                    if m3u8 and m3u8.endswith('m3u8'):
-                        result_map[name].append(m3u8)
 
         for name, urls in result_map.items():
             if len(urls) > 0:
                 self.result_map[name] = urls
+
 
 
 if __name__ == "__main__":
