@@ -36,7 +36,7 @@ class UrlParser:
 
         tags = soup.find_all(self.tag_filter)
 
-        tags = [tag for tag in tags if self.attr_filter(tag)]
+        # tags = [tag for tag in tags if self.attr_filter(tag)]
 
         # print(tags)
 
