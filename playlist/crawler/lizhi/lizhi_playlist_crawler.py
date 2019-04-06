@@ -33,12 +33,10 @@ class LizhiPlaylistCrawler(PlaylistCrawler):
 
         result_map = {}
 
-        tag_filter = lambda tag: tag.name == 'a' and len(tag.find_all("p")) > 0
-        attr_filter = lambda x: x.has_attr('title')
+        tag_filter = lambda tag: tag.name == 'a' and tag.has_attr('title') and len(tag.find_all("p")) > 0
         url_name_getter = lambda tag: tag.find_all("p")[0].get_text()
 
         url_parser = UrlParser(tag_filter=tag_filter,
-                               attr_filter=attr_filter,
                                url_name_getter=url_name_getter)
 
         crawler = UrlCrawler(parser=url_parser)
@@ -50,11 +48,9 @@ class LizhiPlaylistCrawler(PlaylistCrawler):
             raise Exception("Failed to get url")
         #
         # html = crawler.curl('http://www.lizhizu.com/player?id=5&val=1')
-        # tag_filter = lambda tag: tag.name == 'a'
-        attr_filter = lambda x: x.has_attr('onclick') and x.has_attr('data-player')
+        tag_filter = lambda tag: tag.name == 'a' and tag.has_attr('onclick') and tag.has_attr('data-player')
         url_getter = lambda tag: tag.attrs['data-player']
-        url_parser = UrlParser(
-            attr_filter=attr_filter, url_getter=url_getter)
+        url_parser = UrlParser(tag_filter=tag_filter, url_getter=url_getter)
 
         def url_mapper(url):
             parts = url.split('_')
@@ -62,7 +58,6 @@ class LizhiPlaylistCrawler(PlaylistCrawler):
 
         inner_tag_filter = lambda tag: tag.name == 'script' and not tag.has_attr('src')
 
-        inner_attr_filter = lambda x: True
 
         def inner_url_getter(tag):
             s = tag.get_text()
@@ -75,8 +70,7 @@ class LizhiPlaylistCrawler(PlaylistCrawler):
             return None
         inner_url_name_getter = lambda x: None
 
-        inner_url_parser = UrlParser(tag_filter=inner_tag_filter,
-                                     attr_filter=inner_attr_filter, url_getter=inner_url_getter, url_name_getter=inner_url_name_getter)
+        inner_url_parser = UrlParser(tag_filter=inner_tag_filter, url_getter=inner_url_getter, url_name_getter=inner_url_name_getter)
 
         # '信号1$http://223.110.243.168/PLTV/2510088/224/3221227343/1.m3u8$m3u8'
         for url, name in crawler.url_map.items():

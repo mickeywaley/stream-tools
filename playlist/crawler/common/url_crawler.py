@@ -31,11 +31,15 @@ class UrlCrawler(object):
 
         html = self.curl(url)
 
-        if self.debug:
-            print(html)
-
         self.url_parser.parse(html)
         self.url_map = self.url_parser.url_map
+
+        if self.debug or len(self.url_map) == 0:
+
+            if len(self.url_map) == 0:
+                print("crawl url:{} return empty".format(url))
+            print(html)
+
 
     def curl(self, url):
         """
@@ -58,6 +62,34 @@ class UrlCrawler(object):
                 return response.url
 
             charset = self.url_parser.charset
+
+            if response.headers.get_content_charset():
+                charset = response.headers.get_content_charset()
+            return response.read().decode(charset, 'ignore')
+        except Exception as e:
+            print("error %s: %s" % (url, e))
+            return ''
+
+    @staticmethod
+    def curl(url, charsert='utf-8'):
+        """
+        return content at url.
+        return empty string if response raise an HTTPError (not found, 500...)
+        """
+        try:
+            print("retrieving url... %s" % (url))
+            # req = Request('%s://%s%s' % (self.scheme, self.domain, url))
+            req = Request(url)
+
+            req.add_header('User-Agent',
+                           'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.i/605.1.15')
+
+            response = urlopen(req, timeout=1)
+
+            # print(response.encoding)
+
+            if response.url != req.full_url:
+                return response.url
 
             if response.headers.get_content_charset():
                 charset = response.headers.get_content_charset()

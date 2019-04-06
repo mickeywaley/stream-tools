@@ -1,89 +1,51 @@
-from functools import cmp_to_key
-from playlist.crawler.iptv201.iptv201_url_crawler import Crawler
+import urllib
+
+from playlist.crawler.common.url_crawler import UrlCrawler
+from playlist.crawler.common.url_parser import UrlParser
+from playlist.crawler.iptv201.iptv201_playlist_crawler import Iptv201PlaylistCrawler
 from playlist.crawler.iptv201.langconv import Converter
 
 
-def channel_sort(first, second):
-    pattern = '';
-    if first.startswith('CCTV') and second.startswith('CCTV'):
-        # pattern = 'CCTV(\d+)'
-        #
-        # ch1 = re.search(pattern, first)
+def tag_filter(tag):
+    result = (tag.name == 'a' and tag.has_attr('href'))
 
-        result = (lambda a, b: (a > b) - (a < b))(first, second)
-
-        # print("1{} {} {}".format(first, '>' if result > 0 else '<', second))
+    if not result:
         return result
-    else:
-        if first.startswith('CCTV'):
-            # print("2{} {} {}".format(first, '<', second))
-            return -1
-        if second.startswith('CCTV'):
-            # print("3{} {} {}".format(first, '>', second))
-            return 1
 
-    if first.startswith('《') and second.startswith('《'):
-        result = (lambda a, b: (a > b) - (a < b))(first, second)
+    href = tag.attrs['href']
 
-        # print("4{} {} {}".format(first, '>' if result > 0 else '<', second))
-        return result
-    else:
-        if first.startswith('《'):
-            # print("5{} {} {}".format(first, '>', second))
-            return 1
-        if second.startswith('《'):
-            # print("6{} {} {}".format(first, '<', second))
-            return -1
+    if href:
+        return href.startswith('?tid=')
 
-    if first.endswith('卫视') and second.endswith('卫视'):
-        result = (lambda a, b: (a > b) - (a < b))(first, second)
+    return False
 
-        # print("7{} {} {}".format(first, '>' if result > 0 else '<', second))
-        return result
-    else:
-        if first.endswith('卫视'):
-            # print("8{} {} {}".format(first, '<', second))
-            return -1
-        if second.endswith('卫视'):
-            # print("9{} {} {}".format(first, '>', second))
-            return 1
+# url_name_getter = lambda tag: tag.find_all("p")[0].get_text()
 
-    result = (lambda a, b: (a > b) - (a < b))(first, second)
+url_parser = UrlParser(tag_filter=tag_filter)
 
-    # print("10{} {} {}".format(first, '>' if result > 0 else '<', second))
-    return result
+crawler = UrlCrawler(parser=url_parser)
+
+base_url = 'http://iptv201.com'
+crawler.crawl(base_url)
+
+converter = Converter('zh-hans')
 
 
-def generate_m3u8_file(group, channel_map):
-    for channel, url in channel_map.items():
-        print("{}:{}".format(channel, url))
-
-    converter = Converter('zh-hans')
-
-    with open('{}-playlist.m3u8'.format(converter.convert(group)), 'wb') as f:
-
-        f.write(b'#EXTM3U\n\n')
-
-        for channel, urls in channel_map.items():
-            name = '#EXTINF:-1,' + converter.convert(channel) + '\n'
-
-            for url in urls:
-                link = url + '\n\n'
-
-                f.write(name.encode(encoding='utf8'))
-                f.write(link.encode(encoding='utf8'))
+def url_mapper(url):
+    return urllib.parse.urljoin(base_url, url)
 
 
-crawler = Crawler()
-crawler.crawl('http://iptv201.com')
+url_map = {url_mapper(k): converter.convert(crawler.url_map[k]) for k in sorted(crawler.url_map)}
 
-channel_group = crawler.channel_group
-#
-# for k in
-#
-# channels = sorted(channel_map, key=cmp_to_key(channel_sort), reverse=False)
+playlistCrawler = Iptv201PlaylistCrawler()
 
-for group, channel_map in channel_group.items():
-    # channel_map = {k: channel_map[k] for k in sorted(channel_map, key=cmp_to_key(channel_sort), reverse=False)}
-    channel_map = {k: channel_map[k] for k in channel_map}
-    generate_m3u8_file(group, channel_map)
+print(url_map)
+
+for url, name in url_map.items():
+
+    playlistCrawler.crawl(name, url, root_url=base_url)
+
+
+
+
+
