@@ -2,8 +2,8 @@ import urllib
 
 from playlist.crawler.common.url_crawler import UrlCrawler
 from playlist.crawler.common.url_parser import UrlParser
-from playlist.crawler.iptv201.iptv201_playlist_crawler import Iptv201PlaylistCrawler
-from playlist.crawler.iptv201.langconv import Converter
+from playlist.crawler.sources.iptv201.iptv201_playlist_crawler import Iptv201PlaylistCrawler
+from playlist.crawler.sources.iptv201.langconv import Converter
 
 
 def tag_filter(tag):

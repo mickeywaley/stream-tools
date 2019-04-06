@@ -2,6 +2,7 @@
 # filename: ahnd_url_crawler.py
 
 import ssl
+import traceback
 from urllib.request import Request, urlopen
 
 ssl._create_default_https_context = ssl._create_unverified_context
@@ -67,6 +68,7 @@ class UrlCrawler(object):
                 charset = response.headers.get_content_charset()
             return response.read().decode(charset, 'ignore')
         except Exception as e:
+            traceback.print_exc()
             print("error %s: %s" % (url, e))
             return ''
 
@@ -76,6 +78,7 @@ class UrlCrawler(object):
         return content at url.
         return empty string if response raise an HTTPError (not found, 500...)
         """
+        charset_local = charsert
         try:
             print("retrieving url... %s" % (url))
             # req = Request('%s://%s%s' % (self.scheme, self.domain, url))
@@ -92,8 +95,8 @@ class UrlCrawler(object):
                 return response.url
 
             if response.headers.get_content_charset():
-                charset = response.headers.get_content_charset()
-            return response.read().decode(charset, 'ignore')
+                charset_local = response.headers.get_content_charset()
+            return response.read().decode(charset_local, 'ignore')
         except Exception as e:
             print("error %s: %s" % (url, e))
             return ''
