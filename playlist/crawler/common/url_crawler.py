@@ -55,7 +55,7 @@ class UrlCrawler(object):
             req.add_header('User-Agent',
                            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.i/605.1.15')
 
-            response = urlopen(req, timeout=1)
+            response = urlopen(req, timeout=10)
 
             # print(response.encoding)
 
@@ -87,7 +87,7 @@ class UrlCrawler(object):
             req.add_header('User-Agent',
                            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.i/605.1.15')
 
-            response = urlopen(req, timeout=1)
+            response = urlopen(req, timeout=10)
 
             # print(response.encoding)
 

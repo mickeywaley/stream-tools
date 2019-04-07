@@ -16,14 +16,15 @@ class Iptv201PlaylistCrawler(PlaylistCrawler):
     def get_url(self, url):
 
         try:
-            print("retrieving url... %s" % (url))
+            print("get_url retrieving url... %s, is m3u8:%s" % (url, url.find('m3u8') > 0))
             # req = Request('%s://%s%s' % (self.scheme, self.domain, url))
             req = Request(url)
 
             req.add_header('User-Agent',
                            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.i/605.1.15')
 
-            response = urlopen(req, timeout=1)
+            response = urlopen(req, timeout=10)
+
 
             # print(response.encoding)
 
@@ -35,10 +36,15 @@ class Iptv201PlaylistCrawler(PlaylistCrawler):
 
             if response.headers.get_content_charset():
                 charset = response.headers.get_content_charset()
-                res = response.read().decode(charset, 'ignore')
 
-                # print("===get_url {} result:{}".format(url, res))
-                return res
+            res = response.read().decode(charset, 'ignore')
+
+            if res.startswith('#EXTM3U'):
+                print("====get_url {} result:{}".format(url, url))
+                return url
+
+            print("===get_url {} result:{}".format(url, res))
+            return res
         except Exception as e:
             print("get_url error %s: %s" % (url, e))
             return ''
@@ -83,34 +89,88 @@ class Iptv201PlaylistCrawler(PlaylistCrawler):
             return tag.attrs['value']
         url_parser = UrlParser(tag_filter=tag_filter, url_getter=url_getter)
 
-        crawler = UrlCrawler(parser=url_parser, debug=False)
+        second_crawler = UrlCrawler(parser=url_parser, debug=False)
+
+
+        def third_tag_filter(tag):
+
+            if tag.name != 'script' or not tag.has_attr('type'):
+                return False
+            try:
+                tag.get_text().index("HlsJsPlayer")
+            except Exception as ex:
+                # print(ex)
+                return False
+            # print("tag text:" + tag.get_text())
+            return True
+
+        def third_url_getter(tag):
+            text = tag.get_text()
+            # print(text)
+            try:
+
+                left = text.index("url: '")
+                right = text.index("',", left)
+
+                innner_text = text[left+ len("url: '"):right]
+                # print(innner_text)
+                return innner_text
+            except Exception as ex:
+                # print(ex)
+                return ''
+
+
+
+        third_url_parser = UrlParser(tag_filter=third_tag_filter, url_getter=third_url_getter)
+        third_crawler = UrlCrawler(parser=third_url_parser, debug=False)
+
+
 
         for url, name in url_map.items():
 
-            crawler.crawl(url)
+            second_crawler.crawl(url)
 
-            print("craw url:{} result map:{} ".format(url, crawler.url_map))
+            print("craw url:{} result map:{} ".format(url, second_crawler.url_map))
 
-            if len(crawler.url_map.items()) == 0:
-                raise Exception("Failed to get url")
+            if len(second_crawler.url_map.items()) == 0:
+                print("Failed to get url" + url)
+                continue
 
-            for m3u8 in crawler.url_map.keys():
-                print('{} {}'.format(name, m3u8))
+            for m3u8 in second_crawler.url_map.keys():
+                print('{} m3u8:{}'.format(name, m3u8))
 
+                if not m3u8.find('m3u8') > 0:
 
-                # if m3u8 and m3u8.endswith('m3u8'):
-                if name in result_map.keys():
+                    third_crawler.crawl(m3u8)
 
-                    result_map[name].append(m3u8)
+                    if len(third_crawler.url_map.items()) == 0:
+                        print("Failed to get url" + m3u8)
+                        continue
+
+                    new_m3u8_url = list(third_crawler.url_map.keys())[0]
+
+                    new_url = self.get_url(new_m3u8_url)
+
+                    if name in result_map.keys():
+
+                        result_map[name].append(new_url)
+                    else:
+                        result_map[name] = [new_url]
                 else:
-                    result_map[name] = [m3u8]
+                    if name in result_map.keys():
 
-                for inner_name, urls in result_map.items():
-                    if len(urls) > 0:
+                        result_map[name].append(m3u8)
+                    else:
+                        result_map[name] = [m3u8]
 
-                        urls = [self.get_url(u) for u in urls]
-                        print("{} urls:{}".format(name, urls))
-                        self.result_map[name] = urls
+
+        print(result_map)
+        for inner_name, urls in result_map.items():
+            if len(urls) > 0:
+
+                # urls = [self.get_url(u) for u in urls]
+                print("{} urls:{}".format(inner_name, urls))
+                self.result_map[inner_name] = urls
 
 
 

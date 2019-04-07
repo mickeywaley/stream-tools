@@ -67,8 +67,8 @@ class LizhiPlaylistCrawler(PlaylistCrawler):
                 result=  s[left + 1:right]
                 print(result)
                 return result
-            return None
-        inner_url_name_getter = lambda x: None
+            return ''
+        inner_url_name_getter = lambda x: ''
 
         inner_url_parser = UrlParser(tag_filter=inner_tag_filter, url_getter=inner_url_getter, url_name_getter=inner_url_name_getter)
 
