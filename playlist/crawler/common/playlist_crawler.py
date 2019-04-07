@@ -33,6 +33,7 @@ class PlaylistCrawler:
 
         # converter = Converter('zh-hans')
         cwd = os.getcwd()
+
         with open(os.path.join(cwd, '{}-playlist.m3u8'.format(self.name)), 'wb') as f:
 
             f.write(b'#EXTM3U\n\n')
