@@ -43,6 +43,18 @@ print(url_map)
 
 for url, name in url_map.items():
 
+    # if name.find('央视') >=0:
+    #     continue
+    #
+    # if name.find('北方云') >=0:
+    #     continue
+    # if name.find('高清直播') >=0:
+    #     continue
+    # if name.find('福建移动') >=0:
+    #     continue
+
+    if not name.find('其他') >=0:
+        continue
     playlistCrawler.crawl(name, url, root_url=base_url)
 
 

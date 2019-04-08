@@ -33,6 +33,7 @@ class PlaylistCrawler:
 
         # converter = Converter('zh-hans')
         cwd = os.getcwd()
+
         with open(os.path.join(cwd, '{}-playlist.m3u8'.format(self.name)), 'wb') as f:
 
             f.write(b'#EXTM3U\n\n')
@@ -42,10 +43,12 @@ class PlaylistCrawler:
 
                 if isinstance(urls, list):
                     for url in urls:
-                        link = url + '\n\n'
 
-                        f.write(name.encode(encoding='utf8'))
-                        f.write(link.encode(encoding='utf8'))
+                        if url and len(url) > 0:
+                            link = url + '\n\n'
+
+                            f.write(name.encode(encoding='utf8'))
+                            f.write(link.encode(encoding='utf8'))
                 # elif isinstance(urls, str):
                 #     link = urls + '\n\n'
                 #
