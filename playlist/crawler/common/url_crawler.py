@@ -41,7 +41,6 @@ class UrlCrawler(object):
                 print("crawl url:{} return empty".format(url))
             print(html)
 
-
     def curl(self, url):
         """
         return content at url.

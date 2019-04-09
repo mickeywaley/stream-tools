@@ -12,7 +12,6 @@ class AhndPlaylistCrawler(PlaylistCrawler):
     def __init__(self):
         super().__init__()
 
-
     def getm3u8(self, url):
         u_parse = urlparse(url)
 
@@ -131,7 +130,8 @@ class AhndPlaylistCrawler(PlaylistCrawler):
                                                                                                         0:5] + ".m3u8"
 
         if type == "aodylm":
-            return preStr + "lms_" + channel[0:5] + "/tv_channel_" + channel[5] + "__redirect__" + channel[0:5] + ".m3u8"
+            return preStr + "lms_" + channel[0:5] + "/tv_channel_" + channel[5] + "__redirect__" + channel[
+                                                                                                   0:5] + ".m3u8"
 
         if type == "aodygd":
             return preStr + "guangdianyun_" + channel[0:5] + "/tv_channel_" + channel[5] + "__redirect__" + channel[
@@ -195,7 +195,6 @@ class AhndPlaylistCrawler(PlaylistCrawler):
 
         pass
 
-
     def channel_sort(self, first, second):
         pattern = '';
         if first.startswith('CCTV') and second.startswith('CCTV'):
@@ -246,7 +245,6 @@ class AhndPlaylistCrawler(PlaylistCrawler):
         # print("10{} {} {}".format(first, '>' if result > 0 else '<', second))
         return result
 
-
     def crawl(self, name='playlist', base_url=''):
 
         self.name = name
@@ -261,7 +259,6 @@ class AhndPlaylistCrawler(PlaylistCrawler):
         print(self.result_map)
 
         self.generate_m3u8_file()
-
 
     def _crawl_page(self, page_url):
 
@@ -294,12 +291,10 @@ class AhndPlaylistCrawler(PlaylistCrawler):
         if len(crawler.url_map.items()) == 0:
             raise Exception("Failed to get url")
 
-
         def url_mapper(url):
             return self.getm3u8(urllib.parse.urljoin(self.base_url, url))
 
-        url_map = { url_mapper(k):crawler.url_map[k] for k in sorted(crawler.url_map)}
-
+        url_map = {url_mapper(k): crawler.url_map[k] for k in sorted(crawler.url_map)}
 
         for url, name in url_map.items():
             print('{} :{}'.format(url, name))
@@ -311,19 +306,12 @@ class AhndPlaylistCrawler(PlaylistCrawler):
 
         result_map = {k: result_map[k] for k in sorted(result_map, key=cmp_to_key(self.channel_sort), reverse=False)}
 
-
         for name, urls in result_map.items():
             if len(urls) > 0:
                 self.result_map[name] = urls
-
 
 
 if __name__ == "__main__":
     crawer = AhndPlaylistCrawler()
 
     crawer.crawl("安徽农大", 'http://itv.ahau.edu.cn')
-
-
-
-
-

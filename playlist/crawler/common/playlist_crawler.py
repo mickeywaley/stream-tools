@@ -28,7 +28,6 @@ class PlaylistCrawler:
         print('_crawl_page')
         pass
 
-
     def generate_m3u8_file(self):
 
         # converter = Converter('zh-hans')
@@ -54,11 +53,3 @@ class PlaylistCrawler:
                 #
                 #     f.write(name.encode(encoding='utf8'))
                 #     f.write(link.encode(encoding='utf8'))
-
-
-
-
-
-
-
-
