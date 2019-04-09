@@ -1,6 +1,94 @@
 #EXTM3U
 
 #EXTINF:-1,炫动卡通
+<<<<<<< HEAD:playlist/crawler/sources/iptv201/湖北移动IPTV-playlist.m3u8
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui">
+    <meta name="referrer" content="no-referrer">
+    <title>直播播放器</title>
+    <style type="text/css">
+      html, body {width:100%;height:100%;margin:auto;overflow: hidden;}
+      body {display:flex;}
+      #mse {flex:auto;}
+    </style>
+    <script type="text/javascript">
+      window.addEventListener('resize',function(){document.getElementById('mse').style.height=window.innerHeight+'px';});
+    </script>
+  </head>
+<script language="JavaScript"> 
+if(top==self)top.location="https://www.qq.com/babygohome/"
+document.oncontextmenu=new Function("event.returnValue=false;"); 
+document.onselectstart=new Function("event.returnValue=false;");
+function killErrors() {
+return true;
+}
+window.onerror = killErrors; 
+</script>
+  <body>
+    <div id="mse"></div>
+    <script src="browser/index.js" charset="utf-8"></script>
+    <script src="npm/index.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      new window.HlsJsPlayer({
+          id: 'mse',
+          url: 'http://huaweicdn.hb.chinamobile.com/PLTV/2510088/224/3221225931/1.m3u8',
+          autoplay: true,
+          playsinline: true,
+          volume: 1.0,
+          height: window.innerHeight,
+          width: window.innerWidth
+      });
+    </script>
+  </body>
+</html>
+
+#EXTINF:-1,炫动卡通
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui">
+    <meta name="referrer" content="no-referrer">
+    <title>直播播放器</title>
+    <style type="text/css">
+      html, body {width:100%;height:100%;margin:auto;overflow: hidden;}
+      body {display:flex;}
+      #mse {flex:auto;}
+    </style>
+    <script type="text/javascript">
+      window.addEventListener('resize',function(){document.getElementById('mse').style.height=window.innerHeight+'px';});
+    </script>
+  </head>
+<script language="JavaScript"> 
+if(top==self)top.location="https://www.qq.com/babygohome/"
+document.oncontextmenu=new Function("event.returnValue=false;"); 
+document.onselectstart=new Function("event.returnValue=false;");
+function killErrors() {
+return true;
+}
+window.onerror = killErrors; 
+</script>
+  <body>
+    <div id="mse"></div>
+    <script src="browser/index.js" charset="utf-8"></script>
+    <script src="npm/index.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      new window.HlsJsPlayer({
+          id: 'mse',
+          url: 'http://huaweicdn.hb.chinamobile.com/PLTV/2510088/224/3221225931/1.m3u8',
+          autoplay: true,
+          playsinline: true,
+          volume: 1.0,
+          height: window.innerHeight,
+          width: window.innerWidth
+      });
+    </script>
+  </body>
+</html>
+=======
 http://111.48.34.208:80/huaweicdn.hb.chinamobile.com/PLTV/2510088/224/3221225931/1.m3u8?icpid=88888888&from=1&ocs=2_111.48.34.208_80&hms_devid=983
 
 #EXTINF:-1,炫动卡通
@@ -473,4 +561,5 @@ http://111.48.34.221:80/huaweicdn.hb.chinamobile.com/PLTV/2510088/224/3221225973
 
 #EXTINF:-1,上海新闻综合HD
 http://111.48.34.221:80/huaweicdn.hb.chinamobile.com/PLTV/2510088/224/3221225973/1.m3u8?icpid=88888888&from=1&ocs=2_111.48.34.221_80&hms_devid=1183
+>>>>>>> 9d1b729a378a87ec71fe6506fdeb1c96dd3b03f6:resource/湖北移动IPTV-playlist.m3u8
 
