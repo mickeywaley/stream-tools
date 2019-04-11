@@ -11,35 +11,43 @@ class M3u8Indexer:
         return self.data_list.find()
 
     def find_by_url(self, url):
-
-        myquery = { "url": url }
+        myquery = {"url": url}
         return self.data_list.find_one(myquery)
 
     def update_thumb(self, url, thumb):
-
-        myquery = { "url": url }
-        newvalues = { "$set": { "thumb": thumb } }
+        myquery = {"url": url}
+        newvalues = {"$set": {"thumb": thumb}}
         self.data_list.update_one(myquery, newvalues)
 
-    def save(self, url, name, tag, thumb):
-        myquery = { "url": url }
+    def save(self, url='', name='', thumb='', category='', tag=''):
+        myquery = {"url": url}
 
         doc = {
             "url": url,
             "name": name,
             "thumb": thumb
         }
-        return self.data_list.update_one(myquery, {'$set': doc, '$addToSet': {'tags': tag}}, upsert=True)
+        return self.data_list.update_one(myquery, {'$set': doc, '$addToSet': {'categories': category,
+                                                        'tags': tag}}, upsert=True)
+
+    def delete(self, url):
+        myquery = {"url": url}
+
+        self.data_list.delete_one(myquery)
+
+    def delete_all(self):
+        self.data_list.delete_many({})
 
 
 if __name__ == '__main__':
     mongo_url = 'mongodb://192.168.2.26:32727/replicaSet=rs0'
     indexer = M3u8Indexer(mongo_url, 'playlist', 'm3u8')
 
+    # indexer.delete_all()
+    #
+    # indexer.save('url', 'new name', 'new thumb', 'new cat', 'new tag2')
 
     for item in indexer.find_all():
-
-        indexer.save(item['url'], 'new name', 'new tag2', 'thumb')
+        indexer.save(item['url'], 'new name', 'new thumb', 'new cat', 'new tag2')
 
     print(list(indexer.find_all()))
-
