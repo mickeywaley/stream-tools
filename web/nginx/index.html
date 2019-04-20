@@ -1,266 +1,269 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>荔枝直播网 - IPTV网络电视在线直播平台</title>
-		<meta http-equiv="Content-Language" content="zh-CN">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="keywords" content="在线直播,电视直播,网络电视直播,国外电视直播,电视直播频道">
-		<meta name="description" content="荔枝电视直播网提供国内外电视在线直播，电视频道在线观看，央视、地方卫视、港澳台电视台等电视频道，海量国内外电视台在线直播信息，看电视直播就上荔枝直播网(lizhizu.com)。">
-		<link rel="stylesheet" type="text/css" href="./views/www/skin/css/style.css" />
-	</head>
-	<body>
-		<div class="header">
-	<div class="logo"><a href="http://www.lizhizu.com/" title="网络电视台在线直播"><img src="./views/www/skin/images/logo.png" alt="荔枝直播网-在线电视直播平台"></a><span class="text"></span></div>
-	<div class="history">
-		<div class="drop"><a href="javascript:void(0)">播放记录</a><i class="iconfont">&#xe698;</i></div>
-		<ul id="history-list"></ul>
-	</div>
-	<div class="user-pannel">
-				<div class="user-manage"><a href="javascript:void(0)" onclick="login_ajax()">登录</a><a href="javascript:void(0)" onclick="reg_ajax()">注册</a></div>
-			</div>
-</div>
-<div class="nav">
-	<div class="navlist">
-		<ul>
-			<li><a href="http://www.lizhizu.com/" class="nav_a nav_on">首页</a></li>
-			<li><a href="./channel.html" class="nav_a ">频道大全</a></li>
-									<li><a href="./channel/cctv" class="nav_a ">中央电视台</a></li>
-						<li><a href="./channel/weishi" class="nav_a ">地方卫视台</a></li>
-						<li><a href="./channel/gangaotai" class="nav_a ">港澳台电视</a></li>
-						<li><a href="./channel/inter" class="nav_a ">外国电视台</a></li>
-						<li><a href="./channel/other" class="nav_a ">其他综合台</a></li>
-					</ul>
-		<div class="search">
-			<form name="search" id="search" method="get" action="http://www.lizhizu.com/search" onsubmit="return key_search();">
-			<div class="searchbox flexbox">
-				<input type="text" class="input-key" name="k" id="k" placeholder="频道名称">
-				<label><input type="submit" value="" class="btn-search"><i class="iconfont">&#xe641;</i></label>
-			</div>
-			</form>
-		</div>
-	</div>
-</div>
-		<div class="container clear">
-			<div class="pannel mt-15">
-				<div class="row">
-					<h3>热门频道</h3>
-				</div>
-				<div class="list-image clear">
-					<ul>
-																		<li>
-							<div class="channel-item">
-								<a class="image" target="_blank" title="湖南卫视在线直播" href="http://www.lizhizu.com/live/HuNanWeiShi.html"><img src="./uploads/images/20180619/526c242ff4b6b6dfd3b4e7c5e5cf861a.jpg" alt="湖南卫视在线直播"></a>
-								<p class="title">湖南卫视</p>
-							</div>
-						</li>
-												<li>
-							<div class="channel-item">
-								<a class="image" target="_blank" title="江苏卫视在线直播" href="http://www.lizhizu.com/live/JiangSuWeiShi.html"><img src="./uploads/images/20180620/fcd5fcc0bef5eccd51b707eb0b6e2dfb.jpg" alt="江苏卫视在线直播"></a>
-								<p class="title">江苏卫视</p>
-							</div>
-						</li>
-												<li>
-							<div class="channel-item">
-								<a class="image" target="_blank" title="浙江卫视在线直播" href="http://www.lizhizu.com/live/ZheJiangWeiShi.html"><img src="./uploads/images/20180619/d3422abcd8bdb426c9c1baf473e234b3.jpg" alt="浙江卫视在线直播"></a>
-								<p class="title">浙江卫视</p>
-							</div>
-						</li>
-												<li>
-							<div class="channel-item">
-								<a class="image" target="_blank" title="辽宁卫视在线直播" href="http://www.lizhizu.com/live/LiaoNingWeiShi.html"><img src="./uploads/images/20180620/f4ddcbf7f07f9852b752079c8ce96f3b.jpg" alt="辽宁卫视在线直播"></a>
-								<p class="title">辽宁卫视</p>
-							</div>
-						</li>
-												<li>
-							<div class="channel-item">
-								<a class="image" target="_blank" title="安徽卫视在线直播" href="http://www.lizhizu.com/live/AnHuiWeiShi.html"><img src="./uploads/images/20180619/0359e05e2fcc186a4445d6049cbda14a.jpg" alt="安徽卫视在线直播"></a>
-								<p class="title">安徽卫视</p>
-							</div>
-						</li>
-												<li>
-							<div class="channel-item">
-								<a class="image" target="_blank" title="TVB翡翠台在线直播" href="http://www.lizhizu.com/live/FeiCuiTai.html"><img src="./uploads/images/20180620/fac62ddbd094445349cc484914f09feb.jpg" alt="TVB翡翠台在线直播"></a>
-								<p class="title">TVB翡翠台</p>
-							</div>
-						</li>
-												<li>
-							<div class="channel-item">
-								<a class="image" target="_blank" title="凤凰卫视资讯台在线直播" href="http://www.lizhizu.com/live/FengHuangZiXun.html"><img src="./uploads/images/20180620/552361c61d552b8a92be580715902dba.jpg" alt="凤凰卫视资讯台在线直播"></a>
-								<p class="title">凤凰卫视资讯台</p>
-							</div>
-						</li>
-												<li>
-							<div class="channel-item">
-								<a class="image" target="_blank" title="CCTV5体育频道在线直播" href="http://www.lizhizu.com/live/CCTV5.html"><img src="./uploads/images/20180619/631153eeed7b19710e1b308ab98a6079.jpg" alt="CCTV5体育频道在线直播"></a>
-								<p class="title">CCTV5体育频道</p>
-							</div>
-						</li>
-												<li>
-							<div class="channel-item">
-								<a class="image" target="_blank" title="CCTV1综合频道在线直播" href="http://www.lizhizu.com/live/CCTV1.html"><img src="./uploads/images/20180619/ad4c322b24273710e5f8ec5c20ea2ac8.jpg" alt="CCTV1综合频道在线直播"></a>
-								<p class="title">CCTV1综合频道</p>
-							</div>
-						</li>
-												<li>
-							<div class="channel-item">
-								<a class="image" target="_blank" title="CCTV6电影频道在线直播" href="http://www.lizhizu.com/live/CCTV6.html"><img src="./uploads/images/20180619/e10c7d73304bfcbf547740ba22c07a3e.jpg" alt="CCTV6电影频道在线直播"></a>
-								<p class="title">CCTV6电影频道</p>
-							</div>
-						</li>
-												<li>
-							<div class="channel-item">
-								<a class="image" target="_blank" title="香港卫视在线直播" href="http://www.lizhizu.com/live/XiangGangWeiShi.html"><img src="./uploads/images/20180620/3a8b8cbb718a34e6f62f6579daad66b5.jpg" alt="香港卫视在线直播"></a>
-								<p class="title">香港卫视</p>
-							</div>
-						</li>
-												<li>
-							<div class="channel-item">
-								<a class="image" target="_blank" title="五星体育在线直播" href="http://www.lizhizu.com/live/WuXingTiYu.html"><img src="./uploads/images/20180621/7e0fea90794c3865b944e8e4552e9352.jpg" alt="五星体育在线直播"></a>
-								<p class="title">五星体育</p>
-							</div>
-						</li>
-											</ul>
-				</div>
-			</div>
-			<div class="pannel mt-15">
-												<div class="row">
-					<h3><a title="更多中央电视台" target="_blank" href="./channel/cctv">中央电视台</a><span class="fr"><a title="更多中央电视台" target="_blank" href="./channel/cctv"><i class="iconfont fc-gray">&#xe617;</i></a></span></h3>
-				</div>
-				<div class="list-text clear">
-					<ul>
-																		<li><a target="_blank" title="CGTN NEWS在线直播" href="http://www.lizhizu.com/live/CGTN.html">CGTN NEWS</a></li>
-												<li><a target="_blank" title="CCTV4中文国际在线直播" href="http://www.lizhizu.com/live/CCTV4.html">CCTV4中文国际</a></li>
-												<li><a target="_blank" title="CCTV高尔夫网球在线直播" href="http://www.lizhizu.com/live/CCTVGaoErFuWangQiu.html">CCTV高尔夫网球</a></li>
-												<li><a target="_blank" title="CCTV5体育频道在线直播" href="http://www.lizhizu.com/live/CCTV5.html">CCTV5体育频道</a></li>
-												<li><a target="_blank" title="CCTV1综合频道在线直播" href="http://www.lizhizu.com/live/CCTV1.html">CCTV1综合频道</a></li>
-												<li><a target="_blank" title="CCTV13新闻频道在线直播" href="http://www.lizhizu.com/live/CCTV13.html">CCTV13新闻频道</a></li>
-												<li><a target="_blank" title="CCTV6电影频道在线直播" href="http://www.lizhizu.com/live/CCTV6.html">CCTV6电影频道</a></li>
-												<li><a target="_blank" title="CCTV老故事在线直播" href="http://www.lizhizu.com/live/CCTVLaoGuShi.html">CCTV老故事</a></li>
-												<li><a target="_blank" title="CCTV3综艺频道在线直播" href="http://www.lizhizu.com/live/CCTV3.html">CCTV3综艺频道</a></li>
-												<li><a target="_blank" title="全国党员干部现代远程教育在线直播" href="http://www.lizhizu.com/live/DangYuanEdu.html">全国党员干部现代远程教育</a></li>
-												<li><a target="_blank" title="CCTV2财经频道在线直播" href="http://www.lizhizu.com/live/CCTV2.html">CCTV2财经频道</a></li>
-												<li><a target="_blank" title="CCTV8电视剧频道在线直播" href="http://www.lizhizu.com/live/CCTV8.html">CCTV8电视剧频道</a></li>
-											</ul>
-				</div>
-								<div class="row">
-					<h3><a title="更多地方卫视台" target="_blank" href="./channel/weishi">地方卫视台</a><span class="fr"><a title="更多地方卫视台" target="_blank" href="./channel/weishi"><i class="iconfont fc-gray">&#xe617;</i></a></span></h3>
-				</div>
-				<div class="list-text clear">
-					<ul>
-																		<li><a target="_blank" title="湖南卫视在线直播" href="http://www.lizhizu.com/live/HuNanWeiShi.html">湖南卫视</a></li>
-												<li><a target="_blank" title="江苏卫视在线直播" href="http://www.lizhizu.com/live/JiangSuWeiShi.html">江苏卫视</a></li>
-												<li><a target="_blank" title="浙江卫视在线直播" href="http://www.lizhizu.com/live/ZheJiangWeiShi.html">浙江卫视</a></li>
-												<li><a target="_blank" title="辽宁卫视在线直播" href="http://www.lizhizu.com/live/LiaoNingWeiShi.html">辽宁卫视</a></li>
-												<li><a target="_blank" title="安徽卫视在线直播" href="http://www.lizhizu.com/live/AnHuiWeiShi.html">安徽卫视</a></li>
-												<li><a target="_blank" title="北京卫视在线直播" href="http://www.lizhizu.com/live/BeiJinWeiShi.html">北京卫视</a></li>
-												<li><a target="_blank" title="江西卫视在线直播" href="http://www.lizhizu.com/live/JiangXiWeiShi.html">江西卫视</a></li>
-												<li><a target="_blank" title="黑龙江卫视在线直播" href="http://www.lizhizu.com/live/HeiLongLiangWeiShi.html">黑龙江卫视</a></li>
-												<li><a target="_blank" title="湖北卫视在线直播" href="http://www.lizhizu.com/live/HuBeiWeiShi.html">湖北卫视</a></li>
-												<li><a target="_blank" title="新疆卫视在线直播" href="http://www.lizhizu.com/live/XinJiangWeiShi.html">新疆卫视</a></li>
-												<li><a target="_blank" title="人间卫视在线直播" href="http://www.lizhizu.com/live/RenJianWeiShi.html">人间卫视</a></li>
-												<li><a target="_blank" title="星空卫视在线直播" href="http://www.lizhizu.com/live/XingKongWeiShi.html">星空卫视</a></li>
-											</ul>
-				</div>
-								<div class="row">
-					<h3><a title="更多港澳台电视" target="_blank" href="./channel/gangaotai">港澳台电视</a><span class="fr"><a title="更多港澳台电视" target="_blank" href="./channel/gangaotai"><i class="iconfont fc-gray">&#xe617;</i></a></span></h3>
-				</div>
-				<div class="list-text clear">
-					<ul>
-																		<li><a target="_blank" title="台视HD台在线直播" href="http://www.lizhizu.com/live/TaiShiHD.html">台视HD台</a></li>
-												<li><a target="_blank" title="寰宇新闻台在线直播" href="http://www.lizhizu.com/live/HuanYuXinWen.html">寰宇新闻台</a></li>
-												<li><a target="_blank" title="中天新闻在线直播" href="http://www.lizhizu.com/live/ZhongTianXinWen.html">中天新闻</a></li>
-												<li><a target="_blank" title="凤凰卫视中文在线直播" href="http://www.lizhizu.com/live/FengHuangZhongWen.html">凤凰卫视中文</a></li>
-												<li><a target="_blank" title="TVB翡翠台在线直播" href="http://www.lizhizu.com/live/FeiCuiTai.html">TVB翡翠台</a></li>
-												<li><a target="_blank" title="东森新闻在线直播" href="http://www.lizhizu.com/live/DongSenXinWen.html">东森新闻</a></li>
-												<li><a target="_blank" title="壹电视新闻台在线直播" href="http://www.lizhizu.com/live/NextTV.html">壹电视新闻台</a></li>
-												<li><a target="_blank" title="凤凰卫视香港台在线直播" href="http://www.lizhizu.com/live/FengHuangXiangGang.html">凤凰卫视香港台</a></li>
-												<li><a target="_blank" title="澳视澳门台在线直播" href="http://www.lizhizu.com/live/TDMOuMun.html">澳视澳门台</a></li>
-												<li><a target="_blank" title="TVB J2台在线直播" href="http://www.lizhizu.com/live/TVBJ2.html">TVB J2台</a></li>
-												<li><a target="_blank" title="耀才财经台BSTV在线直播" href="http://www.lizhizu.com/live/YaoCaiCaiJing.html">耀才财经台BSTV</a></li>
-												<li><a target="_blank" title="健康卫视在线直播" href="http://www.lizhizu.com/live/JianKangWeiShi.html">健康卫视</a></li>
-											</ul>
-				</div>
-								<div class="row">
-					<h3><a title="更多外国电视台" target="_blank" href="./channel/inter">外国电视台</a><span class="fr"><a title="更多外国电视台" target="_blank" href="./channel/inter"><i class="iconfont fc-gray">&#xe617;</i></a></span></h3>
-				</div>
-				<div class="list-text clear">
-					<ul>
-																		<li><a target="_blank" title="新传媒8频道在线直播" href="http://www.lizhizu.com/live/MediaCorpChannel8.html">新传媒8频道</a></li>
-												<li><a target="_blank" title="美国中文电视在线直播" href="http://www.lizhizu.com/live/Sinovision.html">美国中文电视</a></li>
-												<li><a target="_blank" title="韩国中文电视台在线直播" href="http://www.lizhizu.com/live/KoreaChinaTV.html">韩国中文电视台</a></li>
-												<li><a target="_blank" title="GOODTV-韩国在线直播" href="http://www.lizhizu.com/live/GoodTVKorea.html">GOODTV-韩国</a></li>
-												<li><a target="_blank" title="韩国阿里郎Arirang在线直播" href="http://www.lizhizu.com/live/ArirangTV.html">韩国阿里郎Arirang</a></li>
-												<li><a target="_blank" title="美国气象频道在线直播" href="http://www.lizhizu.com/live/TheWeatherChannel.html">美国气象频道</a></li>
-												<li><a target="_blank" title="卡塔尔半岛电视台在线直播" href="http://www.lizhizu.com/live/AlJazeera.html">卡塔尔半岛电视台</a></li>
-												<li><a target="_blank" title="俄罗斯体育台-1在线直播" href="http://www.lizhizu.com/live/RussiaSports1.html">俄罗斯体育台-1</a></li>
-												<li><a target="_blank" title="新西兰数字电视Freeview28在线直播" href="http://www.lizhizu.com/live/NewZealanFreeview28.html">新西兰数字电视Freeview28</a></li>
-												<li><a target="_blank" title="俄罗斯体育台在线直播" href="http://www.lizhizu.com/live/RussiaSports.html">俄罗斯体育台</a></li>
-												<li><a target="_blank" title="Green Belt在线直播" href="http://www.lizhizu.com/live/GreenBelt.html">Green Belt</a></li>
-												<li><a target="_blank" title="俄罗斯体育台-2在线直播" href="http://www.lizhizu.com/live/RussiaSports2.html">俄罗斯体育台-2</a></li>
-											</ul>
-				</div>
-								<div class="row">
-					<h3><a title="更多其他综合台" target="_blank" href="./channel/other">其他综合台</a><span class="fr"><a title="更多其他综合台" target="_blank" href="./channel/other"><i class="iconfont fc-gray">&#xe617;</i></a></span></h3>
-				</div>
-				<div class="list-text clear">
-					<ul>
-																		<li><a target="_blank" title="广东珠江电视台在线直播" href="http://www.lizhizu.com/live/ZhuJiangTV.html">广东珠江电视台</a></li>
-												<li><a target="_blank" title="浙江公共新闻频道在线直播" href="http://www.lizhizu.com/live/ZJGGXinWen.html">浙江公共新闻频道</a></li>
-												<li><a target="_blank" title="广东体育在线直播" href="http://www.lizhizu.com/live/GuangDongTiYu.html">广东体育</a></li>
-												<li><a target="_blank" title="NewTV超级电视剧在线直播" href="http://www.lizhizu.com/live/NewTVChaoJiDSJ.html">NewTV超级电视剧</a></li>
-												<li><a target="_blank" title="Newtv潮妈辣婆在线直播" href="http://www.lizhizu.com/live/NewTVChaoMaLaPo.html">Newtv潮妈辣婆</a></li>
-												<li><a target="_blank" title="家有购物在线直播" href="http://www.lizhizu.com/live/JiaYouGouWu.html">家有购物</a></li>
-												<li><a target="_blank" title="四川TV-1在线直播" href="http://www.lizhizu.com/live/SiChuanTV1.html">四川TV-1</a></li>
-												<li><a target="_blank" title="超级体育1在线直播" href="http://www.lizhizu.com/live/ChaoJiTiYu1.html">超级体育1</a></li>
-												<li><a target="_blank" title="劲爆体育在线直播" href="http://www.lizhizu.com/live/JingBaoTiTu.html">劲爆体育</a></li>
-												<li><a target="_blank" title="金华都市农村频道在线直播" href="http://www.lizhizu.com/live/JHDuShiNongCun.html">金华都市农村频道</a></li>
-												<li><a target="_blank" title="延安公共在线直播" href="http://www.lizhizu.com/live/YanAnGongGong.html">延安公共</a></li>
-												<li><a target="_blank" title="金华新闻综合频道在线直播" href="http://www.lizhizu.com/live/JHXinWenZongHe.html">金华新闻综合频道</a></li>
-											</ul>
-				</div>
-							</div>
-			<div class="pannel mt-15">
-				<div class="row">
-					<h3>最新更新</h3>
-				</div>
-				<div class="list-text clear">
-					<ul>
-																		<li><a target="_blank" title="CEC汉语文化在线直播" href="http://www.lizhizu.com/live/CECHanYu.html">CEC汉语文化</a></li>
-												<li><a target="_blank" title="全国党员干部现代远程教育在线直播" href="http://www.lizhizu.com/live/DangYuanEdu.html">全国党员干部现代远程教育</a></li>
-												<li><a target="_blank" title="印度ZOOM电视台在线直播" href="http://www.lizhizu.com/live/YinDuZoom.html">印度ZOOM电视台</a></li>
-												<li><a target="_blank" title="联合国电视台在线直播" href="http://www.lizhizu.com/live/Un.html">联合国电视台</a></li>
-												<li><a target="_blank" title="动物星球在线直播" href="http://www.lizhizu.com/live/DongWuXingQiu.html">动物星球</a></li>
-												<li><a target="_blank" title="流浪地球在线直播" href="http://www.lizhizu.com/live/LiuLangDiQiu.html">流浪地球</a></li>
-												<li><a target="_blank" title="澳门澳视体育在线直播" href="http://www.lizhizu.com/live/TDMSports.html">澳门澳视体育</a></li>
-												<li><a target="_blank" title="CCTV5体育频道在线直播" href="http://www.lizhizu.com/live/CCTV5.html">CCTV5体育频道</a></li>
-												<li><a target="_blank" title="无线新闻台在线直播" href="http://www.lizhizu.com/live/TVBNews.html">无线新闻台</a></li>
-												<li><a target="_blank" title="TVB翡翠台在线直播" href="http://www.lizhizu.com/live/FeiCuiTai.html">TVB翡翠台</a></li>
-												<li><a target="_blank" title="Cinefil WOWOW在线直播" href="http://www.lizhizu.com/live/CinefilWOWOW.html">Cinefil WOWOW</a></li>
-												<li><a target="_blank" title="韩国MBC电视台在线直播" href="http://www.lizhizu.com/live/MBCTV.html">韩国MBC电视台</a></li>
-												<li><a target="_blank" title="韩国CBS电视台在线直播" href="http://www.lizhizu.com/live/HGCBSTV.html">韩国CBS电视台</a></li>
-												<li><a target="_blank" title="上海东方购物频道在线直播" href="http://www.lizhizu.com/live/SHDongFangGouWu.html">上海东方购物频道</a></li>
-												<li><a target="_blank" title="东方财经浦东频道在线直播" href="http://www.lizhizu.com/live/DongFangCaiJing.html">东方财经浦东频道</a></li>
-												<li><a target="_blank" title="CCTV老故事在线直播" href="http://www.lizhizu.com/live/CCTVLaoGuShi.html">CCTV老故事</a></li>
-												<li><a target="_blank" title="新华社中文台在线直播" href="http://www.lizhizu.com/live/CNC.html">新华社中文台</a></li>
-												<li><a target="_blank" title="ViuTV在线直播" href="http://www.lizhizu.com/live/ViuTV.html">ViuTV</a></li>
-											</ul>
-				</div>
-			</div>
-		</div>
-		<div class="flink">
-			<span>友情链接：</span><span><a href="http://www.doniao.com/" target="_blank">电影天堂</a><a href="http://www.bskl.net" target="_blank">笑话大全</a></span>
-		</div>
-		<div class="footer">
-	<div class="abouts">
-						<a href="http://www.lizhizu.com/page/about.html" target="_blank">关于我们</a><span>|</span>
-				<a href="http://www.lizhizu.com/page/statement.html" target="_blank">免责声明</a><span>|</span>
-				<a href="http://www.lizhizu.com/page/contact.html" target="_blank">联系我们</a><span>|</span>
-				<a href="http://www.lizhizu.com/message" target="_blank">在线留言</a></div>
-	<div class="copyright">荔枝直播网 lizhizu.com 版权所有@ 2018 渝ICP备15003400号-3<br>本站所有在线直播内容均来自网络。如侵犯了您的权利，请联系我们删除，感谢您的支持。</div>	
-</div>
-		<script type="text/javascript" src="./public/js/jquery.js" ></script>
-		<script type="text/javascript" src="./public/js/layer/layer.js"></script>
-		<script type="text/javascript" src="./views/www/skin/js/public.js" ></script>
-	</body>
+
+<head>
+  <meta charset="utf-8">
+  <title>荔枝直播网 - IPTV网络电视在线直播平台</title>
+  <meta http-equiv="Content-Language" content="zh-CN">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="keywords" content="在线直播,电视直播,网络电视直播,国外电视直播,电视直播频道">
+  <meta name="description" content="荔枝电视直播网提供国内外电视在线直播，电视频道在线观看，央视、地方卫视、港澳台电视台等电视频道，海量国内外电视台在线直播信息，看电视直播就上荔枝直播网(lizhizu.com)。">
+  <link rel="stylesheet" type="text/css" href="./views/www/skin/css/style.css" />
+</head>
+
+<body>
+  <div class="header">
+    <div class="logo"><a href="http://www.lizhizu.com/" title="网络电视台在线直播"><img src="./views/www/skin/images/logo.png" alt="荔枝直播网-在线电视直播平台"></a><span class="text"></span></div>
+    <div class="history">
+      <div class="drop"><a href="javascript:void(0)">播放记录</a><i class="iconfont">&#xe698;</i></div>
+      <ul id="history-list"></ul>
+    </div>
+    <div class="user-pannel">
+      <div class="user-manage"><a href="javascript:void(0)" onclick="login_ajax()">登录</a><a href="javascript:void(0)" onclick="reg_ajax()">注册</a></div>
+    </div>
+  </div>
+  <div class="nav">
+    <div class="navlist">
+      <ul>
+        <li><a href="http://www.lizhizu.com/" class="nav_a nav_on">首页</a></li>
+        <li><a href="./channel.html" class="nav_a ">频道大全</a></li>
+        <li><a href="./channel/cctv" class="nav_a ">中央电视台</a></li>
+        <li><a href="./channel/weishi" class="nav_a ">地方卫视台</a></li>
+        <li><a href="./channel/gangaotai" class="nav_a ">港澳台电视</a></li>
+        <li><a href="./channel/inter" class="nav_a ">外国电视台</a></li>
+        <li><a href="./channel/other" class="nav_a ">其他综合台</a></li>
+      </ul>
+      <div class="search">
+        <form name="search" id="search" method="get" action="http://www.lizhizu.com/search" onsubmit="return key_search();">
+          <div class="searchbox flexbox">
+            <input type="text" class="input-key" name="k" id="k" placeholder="频道名称">
+            <label><input type="submit" value="" class="btn-search"><i class="iconfont">&#xe641;</i></label>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="container clear">
+    <div class="pannel mt-15">
+      <div class="row">
+        <h3>热门频道</h3>
+      </div>
+      <div class="list-image clear">
+        <ul>
+          <li>
+            <div class="channel-item">
+              <a class="image" target="_blank" title="湖南卫视在线直播" href="http://www.lizhizu.com/live/HuNanWeiShi.html"><img src="./uploads/images/20180619/526c242ff4b6b6dfd3b4e7c5e5cf861a.jpg" alt="湖南卫视在线直播"></a>
+              <p class="title">湖南卫视</p>
+            </div>
+          </li>
+          <li>
+            <div class="channel-item">
+              <a class="image" target="_blank" title="江苏卫视在线直播" href="http://www.lizhizu.com/live/JiangSuWeiShi.html"><img src="./uploads/images/20180620/fcd5fcc0bef5eccd51b707eb0b6e2dfb.jpg" alt="江苏卫视在线直播"></a>
+              <p class="title">江苏卫视</p>
+            </div>
+          </li>
+          <li>
+            <div class="channel-item">
+              <a class="image" target="_blank" title="浙江卫视在线直播" href="http://www.lizhizu.com/live/ZheJiangWeiShi.html"><img src="./uploads/images/20180619/d3422abcd8bdb426c9c1baf473e234b3.jpg" alt="浙江卫视在线直播"></a>
+              <p class="title">浙江卫视</p>
+            </div>
+          </li>
+          <li>
+            <div class="channel-item">
+              <a class="image" target="_blank" title="辽宁卫视在线直播" href="http://www.lizhizu.com/live/LiaoNingWeiShi.html"><img src="./uploads/images/20180620/f4ddcbf7f07f9852b752079c8ce96f3b.jpg" alt="辽宁卫视在线直播"></a>
+              <p class="title">辽宁卫视</p>
+            </div>
+          </li>
+          <li>
+            <div class="channel-item">
+              <a class="image" target="_blank" title="安徽卫视在线直播" href="http://www.lizhizu.com/live/AnHuiWeiShi.html"><img src="./uploads/images/20180619/0359e05e2fcc186a4445d6049cbda14a.jpg" alt="安徽卫视在线直播"></a>
+              <p class="title">安徽卫视</p>
+            </div>
+          </li>
+          <li>
+            <div class="channel-item">
+              <a class="image" target="_blank" title="TVB翡翠台在线直播" href="http://www.lizhizu.com/live/FeiCuiTai.html"><img src="./uploads/images/20180620/fac62ddbd094445349cc484914f09feb.jpg" alt="TVB翡翠台在线直播"></a>
+              <p class="title">TVB翡翠台</p>
+            </div>
+          </li>
+          <li>
+            <div class="channel-item">
+              <a class="image" target="_blank" title="凤凰卫视资讯台在线直播" href="http://www.lizhizu.com/live/FengHuangZiXun.html"><img src="./uploads/images/20180620/552361c61d552b8a92be580715902dba.jpg" alt="凤凰卫视资讯台在线直播"></a>
+              <p class="title">凤凰卫视资讯台</p>
+            </div>
+          </li>
+          <li>
+            <div class="channel-item">
+              <a class="image" target="_blank" title="CCTV5体育频道在线直播" href="http://www.lizhizu.com/live/CCTV5.html"><img src="./uploads/images/20180619/631153eeed7b19710e1b308ab98a6079.jpg" alt="CCTV5体育频道在线直播"></a>
+              <p class="title">CCTV5体育频道</p>
+            </div>
+          </li>
+          <li>
+            <div class="channel-item">
+              <a class="image" target="_blank" title="CCTV1综合频道在线直播" href="http://www.lizhizu.com/live/CCTV1.html"><img src="./uploads/images/20180619/ad4c322b24273710e5f8ec5c20ea2ac8.jpg" alt="CCTV1综合频道在线直播"></a>
+              <p class="title">CCTV1综合频道</p>
+            </div>
+          </li>
+          <li>
+            <div class="channel-item">
+              <a class="image" target="_blank" title="CCTV6电影频道在线直播" href="http://www.lizhizu.com/live/CCTV6.html"><img src="./uploads/images/20180619/e10c7d73304bfcbf547740ba22c07a3e.jpg" alt="CCTV6电影频道在线直播"></a>
+              <p class="title">CCTV6电影频道</p>
+            </div>
+          </li>
+          <li>
+            <div class="channel-item">
+              <a class="image" target="_blank" title="香港卫视在线直播" href="http://www.lizhizu.com/live/XiangGangWeiShi.html"><img src="./uploads/images/20180620/3a8b8cbb718a34e6f62f6579daad66b5.jpg" alt="香港卫视在线直播"></a>
+              <p class="title">香港卫视</p>
+            </div>
+          </li>
+          <li>
+            <div class="channel-item">
+              <a class="image" target="_blank" title="五星体育在线直播" href="http://www.lizhizu.com/live/WuXingTiYu.html"><img src="./uploads/images/20180621/7e0fea90794c3865b944e8e4552e9352.jpg" alt="五星体育在线直播"></a>
+              <p class="title">五星体育</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="pannel mt-15">
+      <div class="row">
+        <h3><a title="更多中央电视台" target="_blank" href="./channel/cctv">中央电视台</a><span class="fr"><a title="更多中央电视台" target="_blank" href="./channel/cctv"><i class="iconfont fc-gray">&#xe617;</i></a></span></h3>
+      </div>
+      <div class="list-text clear">
+        <ul>
+          <li><a target="_blank" title="CGTN NEWS在线直播" href="http://www.lizhizu.com/live/CGTN.html">CGTN NEWS</a></li>
+          <li><a target="_blank" title="CCTV4中文国际在线直播" href="http://www.lizhizu.com/live/CCTV4.html">CCTV4中文国际</a></li>
+          <li><a target="_blank" title="CCTV高尔夫网球在线直播" href="http://www.lizhizu.com/live/CCTVGaoErFuWangQiu.html">CCTV高尔夫网球</a></li>
+          <li><a target="_blank" title="CCTV5体育频道在线直播" href="http://www.lizhizu.com/live/CCTV5.html">CCTV5体育频道</a></li>
+          <li><a target="_blank" title="CCTV1综合频道在线直播" href="http://www.lizhizu.com/live/CCTV1.html">CCTV1综合频道</a></li>
+          <li><a target="_blank" title="CCTV13新闻频道在线直播" href="http://www.lizhizu.com/live/CCTV13.html">CCTV13新闻频道</a></li>
+          <li><a target="_blank" title="CCTV6电影频道在线直播" href="http://www.lizhizu.com/live/CCTV6.html">CCTV6电影频道</a></li>
+          <li><a target="_blank" title="CCTV老故事在线直播" href="http://www.lizhizu.com/live/CCTVLaoGuShi.html">CCTV老故事</a></li>
+          <li><a target="_blank" title="CCTV3综艺频道在线直播" href="http://www.lizhizu.com/live/CCTV3.html">CCTV3综艺频道</a></li>
+          <li><a target="_blank" title="全国党员干部现代远程教育在线直播" href="http://www.lizhizu.com/live/DangYuanEdu.html">全国党员干部现代远程教育</a></li>
+          <li><a target="_blank" title="CCTV2财经频道在线直播" href="http://www.lizhizu.com/live/CCTV2.html">CCTV2财经频道</a></li>
+          <li><a target="_blank" title="CCTV8电视剧频道在线直播" href="http://www.lizhizu.com/live/CCTV8.html">CCTV8电视剧频道</a></li>
+        </ul>
+      </div>
+      <div class="row">
+        <h3><a title="更多地方卫视台" target="_blank" href="./channel/weishi">地方卫视台</a><span class="fr"><a title="更多地方卫视台" target="_blank" href="./channel/weishi"><i class="iconfont fc-gray">&#xe617;</i></a></span></h3>
+      </div>
+      <div class="list-text clear">
+        <ul>
+          <li><a target="_blank" title="湖南卫视在线直播" href="http://www.lizhizu.com/live/HuNanWeiShi.html">湖南卫视</a></li>
+          <li><a target="_blank" title="江苏卫视在线直播" href="http://www.lizhizu.com/live/JiangSuWeiShi.html">江苏卫视</a></li>
+          <li><a target="_blank" title="浙江卫视在线直播" href="http://www.lizhizu.com/live/ZheJiangWeiShi.html">浙江卫视</a></li>
+          <li><a target="_blank" title="辽宁卫视在线直播" href="http://www.lizhizu.com/live/LiaoNingWeiShi.html">辽宁卫视</a></li>
+          <li><a target="_blank" title="安徽卫视在线直播" href="http://www.lizhizu.com/live/AnHuiWeiShi.html">安徽卫视</a></li>
+          <li><a target="_blank" title="北京卫视在线直播" href="http://www.lizhizu.com/live/BeiJinWeiShi.html">北京卫视</a></li>
+          <li><a target="_blank" title="江西卫视在线直播" href="http://www.lizhizu.com/live/JiangXiWeiShi.html">江西卫视</a></li>
+          <li><a target="_blank" title="黑龙江卫视在线直播" href="http://www.lizhizu.com/live/HeiLongLiangWeiShi.html">黑龙江卫视</a></li>
+          <li><a target="_blank" title="湖北卫视在线直播" href="http://www.lizhizu.com/live/HuBeiWeiShi.html">湖北卫视</a></li>
+          <li><a target="_blank" title="新疆卫视在线直播" href="http://www.lizhizu.com/live/XinJiangWeiShi.html">新疆卫视</a></li>
+          <li><a target="_blank" title="人间卫视在线直播" href="http://www.lizhizu.com/live/RenJianWeiShi.html">人间卫视</a></li>
+          <li><a target="_blank" title="星空卫视在线直播" href="http://www.lizhizu.com/live/XingKongWeiShi.html">星空卫视</a></li>
+        </ul>
+      </div>
+      <div class="row">
+        <h3><a title="更多港澳台电视" target="_blank" href="./channel/gangaotai">港澳台电视</a><span class="fr"><a title="更多港澳台电视" target="_blank" href="./channel/gangaotai"><i class="iconfont fc-gray">&#xe617;</i></a></span></h3>
+      </div>
+      <div class="list-text clear">
+        <ul>
+          <li><a target="_blank" title="台视HD台在线直播" href="http://www.lizhizu.com/live/TaiShiHD.html">台视HD台</a></li>
+          <li><a target="_blank" title="寰宇新闻台在线直播" href="http://www.lizhizu.com/live/HuanYuXinWen.html">寰宇新闻台</a></li>
+          <li><a target="_blank" title="中天新闻在线直播" href="http://www.lizhizu.com/live/ZhongTianXinWen.html">中天新闻</a></li>
+          <li><a target="_blank" title="凤凰卫视中文在线直播" href="http://www.lizhizu.com/live/FengHuangZhongWen.html">凤凰卫视中文</a></li>
+          <li><a target="_blank" title="TVB翡翠台在线直播" href="http://www.lizhizu.com/live/FeiCuiTai.html">TVB翡翠台</a></li>
+          <li><a target="_blank" title="东森新闻在线直播" href="http://www.lizhizu.com/live/DongSenXinWen.html">东森新闻</a></li>
+          <li><a target="_blank" title="壹电视新闻台在线直播" href="http://www.lizhizu.com/live/NextTV.html">壹电视新闻台</a></li>
+          <li><a target="_blank" title="凤凰卫视香港台在线直播" href="http://www.lizhizu.com/live/FengHuangXiangGang.html">凤凰卫视香港台</a></li>
+          <li><a target="_blank" title="澳视澳门台在线直播" href="http://www.lizhizu.com/live/TDMOuMun.html">澳视澳门台</a></li>
+          <li><a target="_blank" title="TVB J2台在线直播" href="http://www.lizhizu.com/live/TVBJ2.html">TVB J2台</a></li>
+          <li><a target="_blank" title="耀才财经台BSTV在线直播" href="http://www.lizhizu.com/live/YaoCaiCaiJing.html">耀才财经台BSTV</a></li>
+          <li><a target="_blank" title="健康卫视在线直播" href="http://www.lizhizu.com/live/JianKangWeiShi.html">健康卫视</a></li>
+        </ul>
+      </div>
+      <div class="row">
+        <h3><a title="更多外国电视台" target="_blank" href="./channel/inter">外国电视台</a><span class="fr"><a title="更多外国电视台" target="_blank" href="./channel/inter"><i class="iconfont fc-gray">&#xe617;</i></a></span></h3>
+      </div>
+      <div class="list-text clear">
+        <ul>
+          <li><a target="_blank" title="新传媒8频道在线直播" href="http://www.lizhizu.com/live/MediaCorpChannel8.html">新传媒8频道</a></li>
+          <li><a target="_blank" title="美国中文电视在线直播" href="http://www.lizhizu.com/live/Sinovision.html">美国中文电视</a></li>
+          <li><a target="_blank" title="韩国中文电视台在线直播" href="http://www.lizhizu.com/live/KoreaChinaTV.html">韩国中文电视台</a></li>
+          <li><a target="_blank" title="GOODTV-韩国在线直播" href="http://www.lizhizu.com/live/GoodTVKorea.html">GOODTV-韩国</a></li>
+          <li><a target="_blank" title="韩国阿里郎Arirang在线直播" href="http://www.lizhizu.com/live/ArirangTV.html">韩国阿里郎Arirang</a></li>
+          <li><a target="_blank" title="美国气象频道在线直播" href="http://www.lizhizu.com/live/TheWeatherChannel.html">美国气象频道</a></li>
+          <li><a target="_blank" title="卡塔尔半岛电视台在线直播" href="http://www.lizhizu.com/live/AlJazeera.html">卡塔尔半岛电视台</a></li>
+          <li><a target="_blank" title="俄罗斯体育台-1在线直播" href="http://www.lizhizu.com/live/RussiaSports1.html">俄罗斯体育台-1</a></li>
+          <li><a target="_blank" title="新西兰数字电视Freeview28在线直播" href="http://www.lizhizu.com/live/NewZealanFreeview28.html">新西兰数字电视Freeview28</a></li>
+          <li><a target="_blank" title="俄罗斯体育台在线直播" href="http://www.lizhizu.com/live/RussiaSports.html">俄罗斯体育台</a></li>
+          <li><a target="_blank" title="Green Belt在线直播" href="http://www.lizhizu.com/live/GreenBelt.html">Green Belt</a></li>
+          <li><a target="_blank" title="俄罗斯体育台-2在线直播" href="http://www.lizhizu.com/live/RussiaSports2.html">俄罗斯体育台-2</a></li>
+        </ul>
+      </div>
+      <div class="row">
+        <h3><a title="更多其他综合台" target="_blank" href="./channel/other">其他综合台</a><span class="fr"><a title="更多其他综合台" target="_blank" href="./channel/other"><i class="iconfont fc-gray">&#xe617;</i></a></span></h3>
+      </div>
+      <div class="list-text clear">
+        <ul>
+          <li><a target="_blank" title="广东珠江电视台在线直播" href="http://www.lizhizu.com/live/ZhuJiangTV.html">广东珠江电视台</a></li>
+          <li><a target="_blank" title="浙江公共新闻频道在线直播" href="http://www.lizhizu.com/live/ZJGGXinWen.html">浙江公共新闻频道</a></li>
+          <li><a target="_blank" title="广东体育在线直播" href="http://www.lizhizu.com/live/GuangDongTiYu.html">广东体育</a></li>
+          <li><a target="_blank" title="NewTV超级电视剧在线直播" href="http://www.lizhizu.com/live/NewTVChaoJiDSJ.html">NewTV超级电视剧</a></li>
+          <li><a target="_blank" title="Newtv潮妈辣婆在线直播" href="http://www.lizhizu.com/live/NewTVChaoMaLaPo.html">Newtv潮妈辣婆</a></li>
+          <li><a target="_blank" title="家有购物在线直播" href="http://www.lizhizu.com/live/JiaYouGouWu.html">家有购物</a></li>
+          <li><a target="_blank" title="四川TV-1在线直播" href="http://www.lizhizu.com/live/SiChuanTV1.html">四川TV-1</a></li>
+          <li><a target="_blank" title="超级体育1在线直播" href="http://www.lizhizu.com/live/ChaoJiTiYu1.html">超级体育1</a></li>
+          <li><a target="_blank" title="劲爆体育在线直播" href="http://www.lizhizu.com/live/JingBaoTiTu.html">劲爆体育</a></li>
+          <li><a target="_blank" title="金华都市农村频道在线直播" href="http://www.lizhizu.com/live/JHDuShiNongCun.html">金华都市农村频道</a></li>
+          <li><a target="_blank" title="延安公共在线直播" href="http://www.lizhizu.com/live/YanAnGongGong.html">延安公共</a></li>
+          <li><a target="_blank" title="金华新闻综合频道在线直播" href="http://www.lizhizu.com/live/JHXinWenZongHe.html">金华新闻综合频道</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="pannel mt-15">
+      <div class="row">
+        <h3>最新更新</h3>
+      </div>
+      <div class="list-text clear">
+        <ul>
+          <li><a target="_blank" title="CEC汉语文化在线直播" href="http://www.lizhizu.com/live/CECHanYu.html">CEC汉语文化</a></li>
+          <li><a target="_blank" title="全国党员干部现代远程教育在线直播" href="http://www.lizhizu.com/live/DangYuanEdu.html">全国党员干部现代远程教育</a></li>
+          <li><a target="_blank" title="印度ZOOM电视台在线直播" href="http://www.lizhizu.com/live/YinDuZoom.html">印度ZOOM电视台</a></li>
+          <li><a target="_blank" title="联合国电视台在线直播" href="http://www.lizhizu.com/live/Un.html">联合国电视台</a></li>
+          <li><a target="_blank" title="动物星球在线直播" href="http://www.lizhizu.com/live/DongWuXingQiu.html">动物星球</a></li>
+          <li><a target="_blank" title="流浪地球在线直播" href="http://www.lizhizu.com/live/LiuLangDiQiu.html">流浪地球</a></li>
+          <li><a target="_blank" title="澳门澳视体育在线直播" href="http://www.lizhizu.com/live/TDMSports.html">澳门澳视体育</a></li>
+          <li><a target="_blank" title="CCTV5体育频道在线直播" href="http://www.lizhizu.com/live/CCTV5.html">CCTV5体育频道</a></li>
+          <li><a target="_blank" title="无线新闻台在线直播" href="http://www.lizhizu.com/live/TVBNews.html">无线新闻台</a></li>
+          <li><a target="_blank" title="TVB翡翠台在线直播" href="http://www.lizhizu.com/live/FeiCuiTai.html">TVB翡翠台</a></li>
+          <li><a target="_blank" title="Cinefil WOWOW在线直播" href="http://www.lizhizu.com/live/CinefilWOWOW.html">Cinefil WOWOW</a></li>
+          <li><a target="_blank" title="韩国MBC电视台在线直播" href="http://www.lizhizu.com/live/MBCTV.html">韩国MBC电视台</a></li>
+          <li><a target="_blank" title="韩国CBS电视台在线直播" href="http://www.lizhizu.com/live/HGCBSTV.html">韩国CBS电视台</a></li>
+          <li><a target="_blank" title="上海东方购物频道在线直播" href="http://www.lizhizu.com/live/SHDongFangGouWu.html">上海东方购物频道</a></li>
+          <li><a target="_blank" title="东方财经浦东频道在线直播" href="http://www.lizhizu.com/live/DongFangCaiJing.html">东方财经浦东频道</a></li>
+          <li><a target="_blank" title="CCTV老故事在线直播" href="http://www.lizhizu.com/live/CCTVLaoGuShi.html">CCTV老故事</a></li>
+          <li><a target="_blank" title="新华社中文台在线直播" href="http://www.lizhizu.com/live/CNC.html">新华社中文台</a></li>
+          <li><a target="_blank" title="ViuTV在线直播" href="http://www.lizhizu.com/live/ViuTV.html">ViuTV</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="flink">
+    <span>友情链接：</span><span><a href="http://www.doniao.com/" target="_blank">电影天堂</a><a href="http://www.bskl.net" target="_blank">笑话大全</a></span>
+  </div>
+  <div class="footer">
+    <div class="abouts">
+      <a href="http://www.lizhizu.com/page/about.html" target="_blank">关于我们</a><span>|</span>
+      <a href="http://www.lizhizu.com/page/statement.html" target="_blank">免责声明</a><span>|</span>
+      <a href="http://www.lizhizu.com/page/contact.html" target="_blank">联系我们</a><span>|</span>
+      <a href="http://www.lizhizu.com/message" target="_blank">在线留言</a></div>
+    <div class="copyright">荔枝直播网 lizhizu.com 版权所有@ 2018 渝ICP备15003400号-3<br>本站所有在线直播内容均来自网络。如侵犯了您的权利，请联系我们删除，感谢您的支持。</div>
+  </div>
+  <script type="text/javascript" src="./public/js/jquery.js"></script>
+  <script type="text/javascript" src="./public/js/layer/layer.js"></script>
+  <script type="text/javascript" src="./views/www/skin/js/public.js"></script>
+</body>
+
 </html>
