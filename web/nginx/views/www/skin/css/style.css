@@ -268,7 +268,7 @@ input.btn-biglarge,button.btn-biglarge{width:300px;height:54px}
 /*会员中心*/
 .member{width: 100%; padding: 15px; background: #fff; border-radius: 5px;}
 
-.menu{width: 150px;}
+/* .menu{width: 150px;} */
 .menu:after{content: " ";display: inline-block; border-right: #E0E0E0 1px solid;}
 .menu .avatar{width: 100%; text-align: center; margin-bottom: 15px;}
 .menu .avatar img{width: 100px; height: 100px; border-radius: 50%;}
