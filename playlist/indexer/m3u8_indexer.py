@@ -1,4 +1,10 @@
+import datetime
+import time
+from pathlib import Path
+
 import pymongo
+
+from playlist.downloader.m3u8_downloader import get_file_content, M3u8Downloader
 
 
 class M3u8Indexer:
@@ -13,6 +19,12 @@ class M3u8Indexer:
     def find_by_url(self, url):
         myquery = {"url": url}
         return self.data_list.find_one(myquery)
+
+    def find_by_tag(self, tag):
+
+        myquery = {"tags": {"$elemMatch": {"$regex": ".*{}.*".format(tag), "$options": "i" }}}
+
+        return self.data_list.find(myquery)
 
     def update_thumb(self, url, thumb):
         myquery = {"url": url}
@@ -30,6 +42,47 @@ class M3u8Indexer:
         return self.data_list.update_one(myquery, {'$set': doc, '$addToSet': {'categories': category,
                                                         'tags': tag}}, upsert=True)
 
+
+    def index(self, file):
+
+        all_content = get_file_content(file)
+
+        file_name = Path(file).name
+
+        category = file_name[:file_name.find("-")]
+
+        # print(all_content)
+
+        file_line = all_content.splitlines()
+
+        if not file_line or len(file_line) == 0:
+            raise BaseException(u"获取M3U8失败")
+        # 通过判断文件头来确定是否是M3U8文件
+        if file_line[0] != "#EXTM3U":
+            raise BaseException(u"非M3U8的链接")
+
+        for index, line in enumerate(file_line):
+
+
+            if "EXTINF" in line:
+                # 拼出ts片段的URL
+                pd_name = line[line.find(",") + 1 :].strip()
+                pd_url = file_line[index + 1].strip()
+
+                self.save(url=pd_url, category=category, tag=pd_name)
+
+    def index_thumb(self, url, thumb):
+
+        print("[Index-Thumb]: {}".format(url))
+        myquery = {"url": url}
+
+        doc = {
+            "url": url,
+            "thumb_time": time.mktime(datetime.datetime.now().timetuple()),
+            "thumb": thumb
+        }
+        return self.data_list.update_one(myquery, {'$set': doc}, upsert=True)
+
     def delete(self, url):
         myquery = {"url": url}
 
@@ -40,14 +93,16 @@ class M3u8Indexer:
 
 
 if __name__ == '__main__':
-    mongo_url = 'mongodb://192.168.2.26:32727/replicaSet=rs0'
+    mongo_url = 'mongodb://192.168.2.26:32717,192.168.2.26:32727,192.168.2.26:32737/playlist?replicaSet=rs0'
     indexer = M3u8Indexer(mongo_url, 'playlist', 'm3u8')
 
     # indexer.delete_all()
     #
     # indexer.save('url', 'new name', 'new thumb', 'new cat', 'new tag2')
 
-    for item in indexer.find_all():
-        indexer.save(item['url'], 'new name', 'new thumb', 'new cat', 'new tag2')
+    result = indexer.find_by_tag("安徽")
 
-    print(list(indexer.find_all()))
+    for item in result:
+        print(item)
+
+    # print(list(indexer.find_all()))

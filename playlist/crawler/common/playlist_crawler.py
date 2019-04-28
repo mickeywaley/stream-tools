@@ -2,6 +2,9 @@ import os
 
 
 class PlaylistCrawler:
+
+    result_path = os.path.join(os.getcwd(), "result", "playlist")
+
     def __init__(self):
         self.result_map = {}
         self.name = ''
@@ -31,9 +34,13 @@ class PlaylistCrawler:
     def generate_m3u8_file(self):
 
         # converter = Converter('zh-hans')
-        cwd = os.getcwd()
+        result_path  = PlaylistCrawler.result_path
 
-        with open(os.path.join(cwd, '{}-playlist.m3u8'.format(self.name)), 'wb') as f:
+        if not os.path.exists(result_path):
+
+            os.makedirs(result_path)
+
+        with open(os.path.join(result_path, '{}-playlist.m3u8'.format(self.name)), 'wb') as f:
 
             f.write(b'#EXTM3U\n\n')
 

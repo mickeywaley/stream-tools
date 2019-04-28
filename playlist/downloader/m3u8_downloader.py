@@ -1,5 +1,7 @@
+import base64
 import os
 import subprocess
+import threading
 import traceback
 import urllib
 
@@ -12,25 +14,37 @@ from playlist.crawler.common.url_crawler import UrlCrawler
 """
 下载M3U8文件里的所有片段
 """
+def get_file_content(file_path):
+    with open(file_path, 'r') as file:
+        data = file.read()
+        return data
 
 
-class M3u8Downloader:
-    def __init__(self):
-        self.url = None
-        self.download_path = None
+class M3u8Downloader(threading.Thread):
+    def __init__(self, url, download_path):
+        threading.Thread.__init__(self)
+        self.url = url
+        self.download_path = download_path
         self.key = None
 
-    def download(self, url, path):
-        self.url = url
-        self.download_path = os.getcwd() + "/download"
+
+
+    def run(self):
+
+        download_path = self.download_path
 
         if not os.path.exists(download_path):
             os.mkdir(download_path)
 
 
-        all_content = UrlCrawler.curl(url)
+        if self.url.startswith("http"):
 
-        print(all_content)
+            all_content = UrlCrawler.curl(self.url)
+
+        elif self.url.startswith("/"):
+            all_content = get_file_content(self.url)
+
+        # print(all_content)
 
         file_line = all_content.splitlines()
 
@@ -55,7 +69,7 @@ class M3u8Downloader:
                     quotation_mark_pos = line.rfind('"')
                     key_path = line[uri_pos:quotation_mark_pos].split('"')[1]
 
-                    key_url = self.get_inner_url(url, key_path)# 拼出key解密密钥URL
+                    key_url = self.get_inner_url(self.url, key_path)# 拼出key解密密钥URL
                     self.key = UrlCrawler.curl(key_url)
                     print("key：", self.key)
 
@@ -63,16 +77,16 @@ class M3u8Downloader:
                 # 拼出ts片段的URL
                 pd_url = file_line[index + 1]
 
-                inner_url = self.get_inner_url(url, pd_url)
+                inner_url = self.get_inner_url(self.url, pd_url)
 
                 if pd_url.find('.ts') > 0:
-                    ret, path = self.download_ts_file(inner_url, download_path, self.key)
+                    ret, path = self.download_ts_file(self.url, inner_url, download_path, self.key)
 
                     if ret:
-                        print("[OK]: url {}, path {}".format(url, path))
+                        print("[OK]: url {}, path {}".format(self.url, path))
                         break
                 else:
-                    M3u8Downloader().download(inner_url, download_path)
+                    M3u8Downloader(inner_url, download_path).start()
 
 
 
@@ -87,12 +101,15 @@ class M3u8Downloader:
             return '%s/%s' % (base_url, path)
 
     @staticmethod
-    def download_ts_file(ts_url, download_dir, key):
+    def download_ts_file(m3u8, ts_url, download_dir, key):
 
         file_name = ts_url[ts_url.rfind('/'):]
         print('[file_name]:', file_name)
         curr_path = '%s%s' % (download_dir, file_name)
-        thumb_path = '%s%s_thumb.jpg' % (download_dir, file_name[:file_name.rfind('.')])
+
+        thumb_name = bytes.decode(base64.b64encode(m3u8.encode(encoding="UTF-8")))
+
+        thumb_path = os.path.join(download_dir, '%s.jpg' % (thumb_name))
         print('[download]:', ts_url)
         print('[target]:', curr_path)
         if os.path.isfile(curr_path):
@@ -128,11 +145,12 @@ class M3u8Downloader:
 
             print(stderrdata)
 
+            os.remove(curr_path)
             if os.path.exists(thumb_path) and os.path.getsize(thumb_path) > 0:
 
-                os.remove(curr_path)
                 return True, thumb_path
             else:
+
                 return False, None
         except Exception as es:
             print('[warn]: download error:{}'.format(ts_url))
@@ -152,5 +170,5 @@ if __name__ == '__main__':
     # m3u2 = m3u8.load(m3u8_url)
 
     download_path = os.getcwd() + "/download"
-    M3u8Downloader().download(url=m3u8_url,
-                                  path=download_path)
+    M3u8Downloader(url=m3u8_url,
+                                  path=download_path).start()
