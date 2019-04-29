@@ -123,12 +123,37 @@ body {
 
 /*面包屑*/
 .crumb {
-    width: 100%;
+    width: 80%;
     padding: 10px;
+    margin: 0 auto;
     margin-bottom: 15px;
     background: #fff;
     border-radius: 3px;
 }
+
+
+@media screen and (max-width: 1200px) and (min-width: 770px) {
+    .crumb {
+        width: 90%;
+        padding: 10px;
+            margin: 0 auto;
+        margin-bottom: 15px;
+        background: #fff;
+        border-radius: 3px;
+    }
+}
+
+@media screen and (max-width: 770px)  {
+    .crumb {
+        width: 100%;
+        padding: 10px;
+            margin: 0 auto;
+        margin-bottom: 15px;
+        background: #fff;
+        border-radius: 3px;
+    }
+}
+
 
 .crumb span {
     padding: 0 5px;
@@ -144,13 +169,36 @@ body {
     overflow: hidden;
 }
 
+
 .nav {
-    width: 100%;
+    width: 80%;
     margin: 0 auto;
     background: #3D92E4;
     border-radius: 5px;
     overflow: hidden;
 }
+
+
+@media screen and (max-width: 1200px) and (min-width: 770px) {
+    .nav {
+        width: 90%;
+        margin: 0 auto;
+        background: #3D92E4;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+}
+
+@media screen and (max-width: 770px)  {
+    .nav {
+        width: 100%;
+        margin: 0 auto;
+        background: #3D92E4;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+}
+
 
 .nav .navlist .nav_a {
     float: left;
