@@ -144,8 +144,9 @@ input.btn-biglarge,button.btn-biglarge{width:300px;height:54px}
 .history ul li.noresult{color: #999; padding: 10px 0; text-align: center;}
 
 /*导航菜单*/
+.nav_path{ width: 1000px; margin: 0 auto; background: #ffffff; border-radius: 5px; overflow: hidden;}
 .nav{width: 1000px;  margin: 0 auto; background: #3D92E4; border-radius: 5px; overflow: hidden;}
-.nav .navlist .nav_a{float: left; line-height: 45px; padding: 0 15px; text-align: center; font-size: 15px; color: #fff;}
+.nav .navlist .nav_a {float: left; line-height: 45px; padding: 0 15px; text-align: center; font-size: 15px; color: #ffffff;}
 .nav .navlist .nav_on,.nav .navlist a:hover{background: #2273C4;}
 
 .search{position: relative; float: right}
