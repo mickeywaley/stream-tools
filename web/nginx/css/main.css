@@ -2,10 +2,10 @@
 /** Font **/
 @font-face {
   font-family: "Merriweather";
-  src: url("/assets/css/fonts/Merriweather-Black.ttf"); }
+  src: url("/css/fonts/Merriweather-Black.ttf"); }
 @font-face {
   font-family: "Merriweather-Light";
-  src: url("/assets/css/fonts/Merriweather-Light.ttf"); }
+  src: url("/css/fonts/Merriweather-Light.ttf"); }
 /*
  * variables
  */
