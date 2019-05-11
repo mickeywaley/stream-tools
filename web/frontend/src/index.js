@@ -12,7 +12,7 @@ const store = createStore(tasks)
 
 
 ReactDOM.render(
-    <Provider store={store}
+    <Provider store={store} >
         <App />
     </Provider>
 

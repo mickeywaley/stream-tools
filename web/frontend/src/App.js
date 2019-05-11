@@ -17,14 +17,19 @@ import "./App.css";
 //   console.log("current state: ", store.getState());
 // });
 // store.dispatch({ type: "INCREMENT" });
+function mapStateToProps(state) {
+     return {
+         tasks: state.tasks
+     }
+}
 
 
 class App extends Component {
   render() {
     return (
       <div className="main-content">
-        {" "}
-        <TasksPage tasks={mockTasks} />{" "}
+
+        <TasksPage tasks={this.props.tasks} />
       </div>
     );
   }
