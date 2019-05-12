@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@csstools/normalize.css": "^9.0.1",
+    "axios": "^0.18.0",
     "babel": "^6.23.0",
     "csstools": "^0.1.5",
     "normalize-css": "^2.3.1",
@@ -11,7 +12,8 @@
     "react-dom": "^16.8.6",
     "react-redux": "^7.0.3",
     "react-scripts": "3.0.0",
-    "redux": "^4.0.1"
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -33,5 +35,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "redux-devtools-extension": "^2.13.8"
   }
 }
