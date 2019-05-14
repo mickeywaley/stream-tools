@@ -4,6 +4,8 @@ import TasksPage from './components/TasksPage';
 import FlashMessage from './components/FlashMessage';
 import { createTask, editTask, fetchTasks } from './actions';
 
+import Header from './containers/Header'
+
 class App extends Component {
   componentDidMount() {
     this.props.dispatch(fetchTasks());
@@ -19,7 +21,9 @@ class App extends Component {
 
   render() {
     return (
+
       <div className="container">
+           <Header />
         {this.props.error && <FlashMessage message={this.props.error} />}
         <div className="main-content">
           <TasksPage
