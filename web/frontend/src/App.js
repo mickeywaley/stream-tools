@@ -22,7 +22,7 @@ class App extends Component {
   render() {
     return (
 
-      <div className="container">
+      <div>
       
            <Header />
         {this.props.error && <FlashMessage message={this.props.error} />}
