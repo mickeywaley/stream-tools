@@ -21,7 +21,7 @@ class Header extends Component {
                       </li>
 
                       <li>
-                          <a href="/channel.html" className="nav_a ">
+                          <a href="/channel" className="nav_a ">
                               频道搜索
                           </a>
                       </li>

@@ -7,11 +7,14 @@
     "axios": "^0.18.0",
     "babel": "^6.23.0",
     "bootstrap": "^4.3.1",
+    "connected-react-router": "^6.4.0",
     "csstools": "^0.1.5",
     "normalize-css": "^2.3.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^7.0.3",
+    "react-router": "^5.0.0",
+    "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.0",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0"
@@ -38,6 +41,7 @@
     ]
   },
   "devDependencies": {
+    "esformatter-jsx": "^8.0.1",
     "eslint": "^5.16.0",
     "eslint-plugin-react": "^7.13.0",
     "redux-devtools-extension": "^2.13.8"

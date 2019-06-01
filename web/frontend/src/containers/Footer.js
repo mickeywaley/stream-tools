@@ -14,12 +14,12 @@ return (
                         </h4>
                         <ul>
                             <li>
-                                <a href="http://www.freeiptv.cn/about"  target="_blank">
+                                <a href="/about"  target="_self">
                                     简介
                                 </a>
                             </li>
                             <li>
-                                <a href="http://www.freeiptv.cn/legal" target="_blank">
+                                <a href="/legal" target="_self">
                                     免责声明
                                 </a>
                             </li>
@@ -31,12 +31,12 @@ return (
                         </h4>
                         <ul>
                             <li>
-                                <a href="http://www.freeiptv.cn" target="_blank">
+                                <a href="/" target="_self">
                                     首页
                                 </a>
                             </li>
                             <li>
-                                <a href="http://www.freeiptv.cn/blog" target="_blank">
+                                <a href="/blog" target="_self">
                                     技术文章
                                 </a>
                             </li>
