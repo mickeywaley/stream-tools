@@ -38,9 +38,11 @@ class TasksPage extends Component {
     this.resetForm();
   };
 
+
   toggleForm = () => {
     this.setState({ showNewCardForm: !this.state.showNewCardForm });
   };
+
 
   render() {
     if (this.props.isLoading) {

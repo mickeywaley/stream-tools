@@ -2,15 +2,18 @@ import React from 'react';
 
 import { TASK_STATUSES } from '../constants';
 
+
+
 const Task = props => {
   return (
     <div className="task">
       <div className="task-header">
         <div>{props.task.title}</div>
         <select value={props.task.status} onChange={onStatusChange}>
-          {TASK_STATUSES.map(status => (
-            <option key={status} value={status}>{status}</option>
-          ))}
+          {
+    TASK_STATUSES.map(status => (
+      <option key={status} value={status}>{status}</option>
+    ))}
         </select>
       </div>
       <hr />
