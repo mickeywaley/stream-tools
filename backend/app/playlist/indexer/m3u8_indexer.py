@@ -1,4 +1,5 @@
 import datetime
+import os
 import time
 from pathlib import Path
 
@@ -98,6 +99,13 @@ if __name__ == '__main__':
     mongo_url = 'mongodb://localhost:27017'
 
     indexer = M3u8Indexer(mongo_url, 'freeiptv', 'playitems')
+
+
+    filepath = os.path.abspath(__file__)
+
+    file = os.path.join(os.path.dirname(filepath), "../../../../result/playlist/中央电视台-playlist.m3u8")
+
+    indexer.index(file)
 
     # indexer.delete_all()
     #

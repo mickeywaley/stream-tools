@@ -1,8 +1,17 @@
 // import serviceWorker from './serviceWorker';
+// import * as serviceWorker from './serviceWorker';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+
+
+import { Provider } from 'react-redux'
+import { Route, Switch } from 'react-router' // react-router v4/v5
+import { ConnectedRouter } from 'connected-react-router'
+import configureStore, { history } from './configureStore'
+
+// import App from './App';
+import Home from './views/home';
 
 import Channel from './views/channel';
 
@@ -17,20 +26,11 @@ ReactDOM.render(
     <Provider store={ store }>
         <ConnectedRouter history={ history }>
             <Switch>
-                <Route path='/' component={ App }>
                     <Route exact path="/" component={ Home } />
-
-
                     <Route exact path='/channel' component={ Channel } />
-
-
                     <Route exact path='/contact' component={ Contact } />
-
                     <Route exact path='/about' component={ About } />
-
                     <Route exact path='/legal' component={ Legal } />
-
-                </Route>
             </Switch>
         </ConnectedRouter>
     </Provider>,

@@ -13,6 +13,15 @@ export default function playitems(state = initialState, action) {
         };
     }
     case 'FETCH_PLAYITEMS_SUCCEEDED': {
+
+
+        var items = action.payload.playitems;
+
+        var i;
+        for (i in items){
+            items[i].status = "IN_CHANNEL";
+        }
+
         return {
             ...state,
             playitems: action.payload.playitems,

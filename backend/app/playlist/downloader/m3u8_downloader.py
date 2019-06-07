@@ -5,7 +5,6 @@ import threading
 import traceback
 import urllib
 
-import m3u8 as m3u8
 import requests
 from Crypto.Cipher import AES
 

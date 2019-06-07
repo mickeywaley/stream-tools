@@ -1,11 +1,14 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:3001/freeiptv';
+const API_BASE_URL = 'http://localhost:5000';
 
 const client = axios.create({
     baseURL: API_BASE_URL,
     headers: {
         'Content-Type': 'application/json',
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+
     },
 });
 

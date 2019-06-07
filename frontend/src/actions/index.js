@@ -1,17 +1,17 @@
 import * as api from '../api';
 
-function fetchPlayItemsSucceeded(PlayItems) {
+function fetchPlayItemsSucceeded(playitems) {
     return {
-        type: 'FETCH_PlayItemS_SUCCEEDED',
+        type: 'FETCH_PLAYITEMS_SUCCEEDED',
         payload: {
-            PlayItems,
+            playitems,
         },
     };
 }
 
 function fetchPlayItemsFailed(error) {
     return {
-        type: 'FETCH_PlayItemS_FAILED',
+        type: 'FETCH_PLAYITEMS_FAILED',
         payload: {
             error,
         },
@@ -20,7 +20,7 @@ function fetchPlayItemsFailed(error) {
 
 function fetchPlayItemsStarted() {
     return {
-        type: 'FETCH_PlayItemS_STARTED',
+        type: 'FETCH_PLAYITEMS_STARTED',
     };
 }
 
@@ -41,7 +41,7 @@ export function fetchPlayItems() {
 
 function createPlayItemSucceeded(PlayItem) {
     return {
-        type: 'CREATE_PlayItem_SUCCEEDED',
+        type: 'CREATE_PLAYITEM_SUCCEEDED',
         payload: {
             PlayItem,
         },
@@ -62,7 +62,7 @@ export function createPlayItem({title, description, status = 'Unstarted'}) {
 
 function editPlayItemSucceeded(PlayItem) {
     return {
-        type: 'EDIT_PlayItem_SUCCEEDED',
+        type: 'EDIT_PLAYITEM_SUCCEEDED',
         payload: {
             PlayItem,
         },
