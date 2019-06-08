@@ -17,10 +17,10 @@ const PlayItem = props => {
                       )) }
                 </select>
             </div>
-            <hr />
             <div className="playitem-body">
                 { props.playitem.url }
             </div>
+            <hr />
         </div>
         );
 

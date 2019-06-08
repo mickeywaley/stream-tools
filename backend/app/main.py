@@ -1,7 +1,7 @@
 import json
 
 from bson import ObjectId
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 # from flask_restful import Resource, Api
 from flask_pymongo import PyMongo
 
@@ -33,10 +33,50 @@ class JSONEncoder(json.JSONEncoder):
 
 @app.route('/playitems')
 def playitems():
-    playitems = mongo.db.playitems.find()
+
+    keyword = request.args.get('keyword')
+
+    result = []
+
+    if keyword:
+
+        print(keyword)
+
+        myquery = {"tags": {"$elemMatch": {"$regex": ".*{}.*".format(keyword), "$options": "i" }}}
+
+        result = mongo.db.playitems.find(myquery)
+
+    else:
+        result = mongo.db.playitems.find()
+
+
 
     output = []
-    for s in playitems:
+    for s in result:
+        output.append(s)
+
+    return JSONEncoder().encode(output)
+
+@app.route('/channels')
+def channels():
+
+    keyword = request.args.get('keyword')
+
+    result = []
+
+    if keyword:
+
+        print(keyword)
+
+        myquery = {"name": {"$regex": ".*{}.*".format(keyword), "$options": "i" }}
+
+        result = mongo.db.channels.find(myquery)
+
+    else:
+        result = mongo.db.channels.find()
+
+    output = []
+    for s in result:
         output.append(s)
 
     return JSONEncoder().encode(output)
