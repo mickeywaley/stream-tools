@@ -96,7 +96,7 @@ class M3u8Indexer:
 if __name__ == '__main__':
     # mongo_url = 'mongodb://192.168.2.26:32717,192.168.2.26:32727,192.168.2.26:32737/playlist?replicaSet=rs0'
 
-    mongo_url = 'mongodb://localhost:27017'
+    mongo_url = 'mongodb://freeiptv.cn:27070'
 
     indexer = M3u8Indexer(mongo_url, 'freeiptv', 'playitems')
 
