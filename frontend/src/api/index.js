@@ -4,7 +4,7 @@ import https from 'https';
 
 //const API_BASE_URL = 'http://localhost:5000';
 
-const API_BASE_URL = 'https://freeiptv.cn/backend';
+const API_BASE_URL = 'http://freeiptv.cn/backend';
 
 const agent = new https.Agent({
     rejectUnauthorized: false
