@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+
+import {connect} from "react-redux";
+
 import queryString from 'query-string';
 
 import Header from '../components/Header'
@@ -7,21 +10,45 @@ import Footer from '../components/Footer'
 import ChannelsPage from '../components/channel/ChannelsPage'
 
 import {fetchChannels } from '../actions';
+import Filters from '../components/filter/Filters';
 
 
-import '../stylesheets/channel.css'
-import {connect} from "react-redux";
+ 
+import {CHANNEL_DISTRICTS} from '../constants';
 
+import ChannelFilter from '../components/filter/ChannelFilter'
 
+import '../stylesheets/channel.css';
+
+const CHANNEL_DISTRICT_FILTER = CHANNEL_DISTRICTS.map(item => {
+    return {
+        text: item,
+        value: item =='央视'?"CCTV":item
+    }
+});
 
 
 class Channels extends Component {
+
+    state = {
+        filters: { keyword: '',
+                    type:''
+                },
+    }
+
+    onFilterChange = (filters) => {
+        console.log(filters)
+        this.setState({ filters });
+
+        this.props.dispatch(fetchChannels(filters.keyword));
+    }
+
 
     componentDidMount() {
 
         //console.log(this.props.location.search);
         const parsed = queryString.parse(this.props.location.search);
-        console.log(parsed.keyword);
+        //console.log(parsed.keyword);
 
         this.props.dispatch(fetchChannels(parsed.keyword));
     }
@@ -63,7 +90,7 @@ class Channels extends Component {
                                 id="search"
                                 method="get"
                                 action="./channel"
-                                onSubmit="return key_search();">
+                               >
                                 <div className="searchbox flexbox">
                                     <input type="text"
                                         className="input-key"
@@ -84,115 +111,9 @@ class Channels extends Component {
                             <div className="filter-title">
                                 <h3>按地区查找</h3>
                             </div>
-                            <div className="filter-list">
-                                <ul>
-                                    <li>
-                                        <a href="./channels?keyword=CCTV">央视</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=北京">北京</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=上海">上海</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=天津">天津</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=重庆">重庆</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=河北">河北</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=山西">山西</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=辽宁">辽宁</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=吉林">吉林</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=黑龙江">黑龙江</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=江苏">江苏</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=浙江">浙江</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=安徽">安徽</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=福建">福建</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=江西">江西</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=山东">山东</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=河南">河南</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=湖北">湖北</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=湖南">湖南</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=广东">广东</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=海南">海南</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=四川">四川</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=贵州">贵州</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=云南">云南</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=陕西">陕西</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=甘肃">甘肃</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=青海">青海</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=内蒙古">内蒙古</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=广西">广西</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=西藏">西藏</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=宁夏">宁夏</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=新疆">新疆</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=xianggang">香港</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=taiwan">台湾</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=aomen">澳门</a>
-                                    </li>
-                                </ul>
-                            </div>
+                            <Filters onChange={this.onFilterChange}>
+                                <ChannelFilter filterName="keyword" filterItems={CHANNEL_DISTRICT_FILTER} />
+                            </Filters>
                         </div>
                         <div className="filter mt-15 clear">
                             <div className="filter-title">
