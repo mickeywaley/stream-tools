@@ -13,7 +13,7 @@ import configureStore, { history } from './configureStore'
 // import App from './App';
 import Home from './views/home';
 
-import Channel from './views/channel';
+import Channels from './views/channels';
 
 import Contact from './views/contact';
 import Legal from './views/legal';
@@ -27,7 +27,7 @@ ReactDOM.render(
         <ConnectedRouter history={ history }>
             <Switch>
                     <Route exact path="/" component={ Home } />
-                    <Route exact path='/channel' component={ Channel } />
+                    <Route exact path='/channels' component={ Channels } />
                     <Route exact path='/contact' component={ Contact } />
                     <Route exact path='/about' component={ About } />
                     <Route exact path='/legal' component={ Legal } />

@@ -1,5 +1,49 @@
 import * as api from '../api';
 
+
+export function fetchChannels(keyword) {
+    return dispatch => {
+        dispatch(fetchChannelsStarted());
+
+        api
+            .fetchChannels(keyword)
+            .then(resp => {
+                dispatch(fetchChannelsSucceeded(resp.data));
+            })
+            .catch(err => {
+                dispatch(fetchChannelsFailed(err.message));
+            });
+    };
+}
+
+
+function fetchChannelsSucceeded(channels) {
+    return {
+        type: 'FETCH_CHANNELS_SUCCEEDED',
+        payload: {
+            channels,
+        },
+    };
+}
+
+function fetchChannelsFailed(error) {
+    return {
+        type: 'FETCH_CHANNELS_FAILED',
+        payload: {
+            error,
+        },
+    };
+}
+
+function fetchChannelsStarted() {
+    return {
+        type: 'FETCH_CHANNELS_STARTED',
+    };
+}
+
+
+
+
 function fetchPlayItemsSucceeded(playitems) {
     return {
         type: 'FETCH_PLAYITEMS_SUCCEEDED',

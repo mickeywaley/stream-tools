@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { PLAYITEM_STATUSES } from '../constants';
+import { PLAYITEM_STATUSES } from '../../constants';
 
 const PlayItem = props => {
     return (

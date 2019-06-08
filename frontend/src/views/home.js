@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import PlayItemsPage from '../components/PlayItemsPage';
-import FlashMessage from '../components/FlashMessage';
-import { createPlayItem, editPlayItem, fetchPlayItems } from '../actions';
 
-import Header from '../containers/Header'
-import Footer from '../containers/Footer'
+import PlayItemsPage from '../components/playitem/PlayItemsPage';
+import FlashMessage from '../components/FlashMessage';
+
+import Header from '../components/Header'
+import Footer from '../components/Footer'
+
+import { createPlayItem, editPlayItem, fetchPlayItems } from '../actions';
 
 class Home extends Component {
     componentDidMount() {

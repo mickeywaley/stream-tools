@@ -16,10 +16,26 @@ export function fetchPlayItems() {
     return client.get('/playitems');
 }
 
+
 export function createPlayItem(params) {
     return client.post('/playitems', params);
 }
 
 export function editPlayItem(id, params) {
     return client.put(`/playitems/${id}`, params);
+}
+
+export function fetchChannels(keyword) {
+
+    var params = {};
+
+    if (keyword)
+    {
+        console.log(keyword)
+        params.keyword = keyword;
+    }
+
+    console.log(params)
+    return client.get('/channels', {params});
+
 }

@@ -19,7 +19,7 @@ class Header extends Component {
                                 <a href="/" className="nav_a active">首页</a>
                             </li>
                             <li>
-                                <a href="/channel" className="nav_a ">频道搜索</a>
+                                <a href="/channels" className="nav_a ">频道搜索</a>
                             </li>
                             <li>
                                 <a href="/blog/" className="nav_a ">技术文章</a>

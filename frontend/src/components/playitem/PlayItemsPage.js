@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PlayItemList from './PlayItemList';
 
-import { PLAYITEM_STATUSES } from '../constants';
+import { PLAYITEM_STATUSES } from '../../constants';
 
 class PlayItemsPage extends Component {
     constructor(props) {
@@ -36,8 +36,8 @@ class PlayItemsPage extends Component {
     onCreatePlayItem = e => {
         e.preventDefault();
         this.props.onCreatePlayItem({
-            title: this.state.title,
-            description: this.state.description,
+            name: this.state.name,
+            url: this.state.url,
         });
         this.resetForm();
     };
