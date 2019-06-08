@@ -1,8 +1,14 @@
 import axios from 'axios';
 
+import https from 'https';
+
 //const API_BASE_URL = 'http://localhost:5000';
 
 const API_BASE_URL = 'https://freeiptv.cn/backend';
+
+const agent = new https.Agent({
+    rejectUnauthorized: false
+});
 
 const client = axios.create({
     baseURL: API_BASE_URL,
@@ -12,6 +18,7 @@ const client = axios.create({
         "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
 
     },
+    httpsAgent: agent
 });
 
 export function fetchPlayItems() {
