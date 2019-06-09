@@ -140,7 +140,7 @@ class Channels extends Component {
                             <h3>频道列表</h3>
                         </div>
 
-                        <ChannelsPage channels={ this.props.channels }  />
+                        <ChannelsPage channels={ this.props.channels}  />
 
 
 

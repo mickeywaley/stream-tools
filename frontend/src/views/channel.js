@@ -12,13 +12,10 @@ import InputFilter from '../components/filter/InputFilter';
 
 import { createPlayItem, editPlayItem, fetchPlayItems } from '../actions';
 
-
-
-
-class Home extends Component {
+class ChannelPage extends Component {
 
     state = {
-        filters: { title: '' },
+        filters: { keyword: '' },
     }
 
     onFilterChange = (filters) => {
@@ -28,30 +25,36 @@ class Home extends Component {
 
 
     componentDidMount() {
-        this.props.dispatch(fetchPlayItems());
+
+        const filters =  { keyword: this.props.location.state.channel.name };
+
+        this.props.dispatch(fetchPlayItems(filters));
     }
 
-    onCreatePlayItem = ({title, description}) => {
-        this.props.dispatch(createPlayItem({
-            title,
-            description
-        }));
-    };
-
-    onStatusChange = (id, status) => {
-        this.props.dispatch(editPlayItem(id, {
-            status
-        }));
-    };
 
     render() {
         const { filters } = this.state;
+
+        const {channel} = this.props.location.state;
 
         return (
 
             <div>
                 <Header />
                 { this.props.error && <FlashMessage message={ this.props.error } /> }
+
+                <div className='channel-player flexbox'>
+                    <div class="title fl">
+                        <span>
+                            <img src={ channel.thumb } alt={ channel.name } title={ channel.name } />
+                        </span>
+                        <h1 class="channel-title">{ channel.name }</h1>
+                    </div>
+                </div>
+
+                <Filters onChange={this.onFilterChange}>
+                    <InputFilter filterName="keyword" />
+                </Filters>
 
                 <div className="main-content">
                     <PlayItemsPage playitems={ this.props.playitems }
@@ -66,12 +69,13 @@ class Home extends Component {
 }
 
 function mapStateToProps(state) {
-    const {playitems, isLoading, error} = state.playitems;
+    const {channel, playitems, isLoading, error} = state.channel;
     return {
+        channel,
         playitems,
         isLoading,
         error
     };
 }
 
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps)(ChannelPage);

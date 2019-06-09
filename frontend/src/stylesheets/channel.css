@@ -273,6 +273,11 @@ li {
     white-space: nowrap;
 }
 
+/*.channel-item .title:hover {*/
+    /*color: #fff;*/
+    /*background: #3D92E4;*/
+/*}*/
+
 .filter {}
 
 .filter h3 {
@@ -308,4 +313,35 @@ li {
     /*border: 1px solid #3D92E4;*/
     /*color: #fff;*/
 /*}*/
+
+.channel-player .title {
+    flex: 1;
+}
+
+.channel-title{
+    font-size: 24px;
+    line-height: 75px;
+    color: #888888;
+    flex: 1;
+}
+
+.channel-player {
+    padding: 0 10px;
+    background: #fff;
+    /* background: url(../images/bg-1.jpg) 0 0 repeat-x; */
+}
+
+.flexbox {
+    display: flex;
+    align-items: center;
+}
+
+.fl {
+    float: left;
+}
+
+.title span img {
+    width: 121px;
+    height: 75px;
+}
 

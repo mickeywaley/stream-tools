@@ -18,7 +18,7 @@ import Channels from './views/channels';
 import Contact from './views/contact';
 import Legal from './views/legal';
 import About from './views/about';
-
+import ChannelPage from './views/channel';
 
 const store = configureStore()
 
@@ -31,6 +31,8 @@ ReactDOM.render(
                     <Route exact path='/contact' component={ Contact } />
                     <Route exact path='/about' component={ About } />
                     <Route exact path='/legal' component={ Legal } />
+
+                    <Route path='/channels/:channelId' component={ ChannelPage } />
             </Switch>
         </ConnectedRouter>
     </Provider>,

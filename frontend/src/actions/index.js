@@ -68,12 +68,12 @@ function fetchPlayItemsStarted() {
     };
 }
 
-export function fetchPlayItems() {
+export function fetchPlayItems(filters) {
     return dispatch => {
         dispatch(fetchPlayItemsStarted());
 
         api
-            .fetchPlayItems()
+            .fetchPlayItems(filters)
             .then(resp => {
                 dispatch(fetchPlayItemsSucceeded(resp.data));
             })

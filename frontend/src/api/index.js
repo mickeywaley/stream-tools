@@ -20,8 +20,16 @@ const client = axios.create({
     httpsAgent: agent
 });
 
-export function fetchPlayItems() {
-    return client.get('/playitems');
+export function fetchPlayItems(filters) {
+
+    var params = {};
+
+    if (filters)
+    {
+        params.keyword = filters.keyword;
+    }
+
+    return client.get('/playitems', {params});
 }
 
 
