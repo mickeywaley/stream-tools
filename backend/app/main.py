@@ -34,22 +34,44 @@ class JSONEncoder(json.JSONEncoder):
 @app.route('/playitems')
 def playitems():
 
+    channel = request.args.get('channel')
     keyword = request.args.get('keyword')
+    type = request.args.get('type')
 
-    result = []
+    channel_query = None
+    keyword_query = None
+    type_query= None
 
+
+    query = []
+    if channel:
+        channel_query = {"channel": {"$eq": channel}}
+        query.append(channel_query)
     if keyword:
+        keyword_query = {"tags": {"$elemMatch": {"$regex": ".*{}.*".format(keyword), "$options": "i"}}}
+        query.append(keyword_query)
+    if type:
+        type_query = {"type": {"$eq": type}}
+        query.append(type_query)
 
-        print(keyword)
-
-        myquery = {"tags": {"$elemMatch": {"$regex": ".*{}.*".format(keyword), "$options": "i" }}}
-
-        result = mongo.db.playitems.find(myquery)
-
+    if len(query) > 0:
+        result = mongo.db.playitems.find({"$and": query})
     else:
         result = mongo.db.playitems.find()
 
+    # result = mongo.db.playitems.find(
+    #         {"$and":[{"type": {"$exists": True}}, {"type": {"$eq": 'test'}}]}
+    #    )
 
+    # result = mongo.db.playitems.find({"tags": {"$elemMatch": {"$regex": ".*{}.*".format('CCTV5'), "$options": "i"}}})
+
+    # result = mongo.db.playitems.find({"$and":
+    #     [
+    #         {"tags": {"$elemMatch": {"$regex": ".*{}.*".format('CCTV5'), "$options": "i"}}},
+    #         {"type": {"$eq": 'test'}}
+    #     ]})
+    #
+    # result = mongo.db.playitems.find({"$and": query})
 
     output = []
     for s in result:
