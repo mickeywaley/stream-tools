@@ -1,6 +1,7 @@
 import datetime
 import os
 import time
+from os.path import isfile, join
 from pathlib import Path
 
 import pymongo
@@ -103,9 +104,17 @@ if __name__ == '__main__':
 
     filepath = os.path.abspath(__file__)
 
-    file = os.path.join(os.path.dirname(filepath), "../../../../result/playlist/中央电视台-playlist.m3u8")
+    playlist_path = os.path.join(os.path.dirname(filepath), "../../../../result/playlist")
 
-    indexer.index(file)
+
+
+    m3u8_files = [f for f in os.listdir(playlist_path) if isfile(join(playlist_path, f))]
+
+    # file = os.path.join(os.path.dirname(filepath), "../../../../result/playlist/中央电视台-playlist.m3u8")
+
+    for f in m3u8_files:
+        file = os.path.join(playlist_path, f)
+        indexer.index(file)
 
     # indexer.delete_all()
     #
