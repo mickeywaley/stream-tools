@@ -42,13 +42,12 @@ function fetchChannelsStarted() {
 }
 
 
-
-
-function fetchPlayItemsSucceeded(playitems) {
+function fetchPlayItemsSucceeded(result) {
     return {
         type: 'FETCH_PLAYITEMS_SUCCEEDED',
         payload: {
-            playitems,
+            playitems:result.data,
+            pagination:result.pagination
         },
     };
 }

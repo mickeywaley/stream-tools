@@ -1,4 +1,10 @@
 const initialState = {
+    pagination:{
+        total_count:-1,
+        current_page:1,
+        page_size:20
+
+    },
     playitems: [],
     isLoading: false,
     error: null,
@@ -25,6 +31,7 @@ export default function playitems(state = initialState, action) {
         return {
             ...state,
             playitems: action.payload.playitems,
+            pagination: action.payload.pagination,
             isLoading: false,
         };
     }

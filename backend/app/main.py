@@ -30,12 +30,32 @@ class JSONEncoder(json.JSONEncoder):
         return json.JSONEncoder.default(self, o)
 
 
+def is_number(s):
+    try:
+        int(s)
+        return True
+    except ValueError:
+        pass
+
+    try:
+        import unicodedata
+        unicodedata.numeric(s)
+        return True
+    except (TypeError, ValueError):
+        pass
+
+    return False
 
 @app.route('/playitems')
 def playitems():
-
     channel = request.args.get('channel')
     keyword = request.args.get('keyword')
+
+    page_num = 1 if not request.args.get('pageNum') or not is_number(request.args.get('pageNum')) or int(request.args.get('pageNum')) < 1 else int(request.args.get('pageNum'))
+
+    page_size = 20 if not request.args.get('pageSize') or  not is_number(request.args.get('pageSize')) else int(request.args.get('pageSize'))
+
+    skip = (page_num - 1)*page_size
 
     query = []
     if channel:
@@ -50,11 +70,24 @@ def playitems():
     else:
         result = mongo.db.playitems.find()
 
+    count = result.count()
+
+    print(count)
+
+    result = result.skip(skip).limit(page_size)
+
     output = []
     for s in result:
         output.append(s)
 
-    return JSONEncoder().encode(output)
+    return JSONEncoder().encode({
+        "pagination": {
+            "current_page": page_num,
+            "total_count": count,
+            "page_size": page_size
+        },
+        "data": output
+    })
 
 
 @app.route('/channels')
