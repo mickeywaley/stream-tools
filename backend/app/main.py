@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 app.config['MONGO_DBNAME'] = 'freeiptv'
 
-app.config['MONGO_URI'] = 'mongodb://localhost:27017/freeiptv'
+app.config['MONGO_URI'] = 'mongodb://localhost:27070/freeiptv'
 
 app.config.update(
     MONGO_HOST='localhost',
