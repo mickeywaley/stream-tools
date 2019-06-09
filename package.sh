@@ -8,6 +8,8 @@ popd > /dev/null
 echo "${basedir}"
 
 
+git pull
+
 cd "${basedir}/frontend"
 npm run build
 
