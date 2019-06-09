@@ -1,12 +1,12 @@
 import * as api from '../api';
 
 
-export function fetchChannels(keyword) {
+export function fetchChannels(filters) {
     return dispatch => {
         dispatch(fetchChannelsStarted());
 
         api
-            .fetchChannels(keyword)
+            .fetchChannels(filters)
             .then(resp => {
                 dispatch(fetchChannelsSucceeded(resp.data));
             })

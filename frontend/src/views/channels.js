@@ -14,7 +14,7 @@ import Filters from '../components/filter/Filters';
 
 
  
-import {CHANNEL_DISTRICTS} from '../constants';
+import {CHANNEL_DISTRICTS, CHANNEL_TYPES} from '../constants';
 
 import ChannelFilter from '../components/filter/ChannelFilter'
 
@@ -24,6 +24,14 @@ const CHANNEL_DISTRICT_FILTER = CHANNEL_DISTRICTS.map(item => {
     return {
         text: item,
         value: item =='央视'?"CCTV":item
+    }
+});
+
+
+const CHANNEL_TYPE_FILTER = CHANNEL_TYPES.map(item => {
+    return {
+        text: item,
+        value: item
     }
 });
 
@@ -40,7 +48,7 @@ class Channels extends Component {
         console.log(filters)
         this.setState({ filters });
 
-        this.props.dispatch(fetchChannels(filters.keyword));
+        this.props.dispatch(fetchChannels(filters));
     }
 
 
@@ -119,70 +127,12 @@ class Channels extends Component {
                             <div className="filter-title">
                                 <h3>按类型查找</h3>
                             </div>
-                            <div className="filter-list">
-                                <ul>
-                                    <li>
-                                        <a href="./channels?keyword=卫视">卫视</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=新闻">新闻</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=影视">影视</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=娱乐">娱乐</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=体育">体育</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=财经">财经</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=健康">健康</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=生活">生活</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=儿童">儿童</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=科教">科教</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=军事">军事</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=电影">电影</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=音乐">音乐</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=综合">综合</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=记录">记录</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=游戏">游戏</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=农业">农业</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=美食">美食</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=探索">探索</a>
-                                    </li>
-                                    <li>
-                                        <a href="./channels?keyword=教育">教育</a>
-                                    </li>
-                                </ul>
-                            </div>
+
+                            <Filters onChange={this.onFilterChange}>
+                                <ChannelFilter filterName="type" filterItems={CHANNEL_TYPE_FILTER} />
+                            </Filters>
+
+
                         </div>
                     </div>
                     <div className="pannel mt-15 clear">
@@ -193,10 +143,7 @@ class Channels extends Component {
                         <ChannelsPage channels={ this.props.channels }  />
 
 
-                        <div className="pages clear">
-                            <strong>1</strong><a href="?p=2" data-ci-pagination-page="2">2</a><a href="?p=3" data-ci-pagination-page="3">3</a><a href="?p=2" data-ci-pagination-page="2"
-                                rel="next">下一页</a><a href="?p=16" data-ci-pagination-page="16">尾页</a>
-                        </div>
+
                     </div>
                 </div>
                 <Footer />

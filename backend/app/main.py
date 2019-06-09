@@ -36,12 +36,6 @@ def playitems():
 
     channel = request.args.get('channel')
     keyword = request.args.get('keyword')
-    type = request.args.get('type')
-
-    channel_query = None
-    keyword_query = None
-    type_query= None
-
 
     query = []
     if channel:
@@ -50,28 +44,11 @@ def playitems():
     if keyword:
         keyword_query = {"tags": {"$elemMatch": {"$regex": ".*{}.*".format(keyword), "$options": "i"}}}
         query.append(keyword_query)
-    if type:
-        type_query = {"type": {"$eq": type}}
-        query.append(type_query)
 
     if len(query) > 0:
         result = mongo.db.playitems.find({"$and": query})
     else:
         result = mongo.db.playitems.find()
-
-    # result = mongo.db.playitems.find(
-    #         {"$and":[{"type": {"$exists": True}}, {"type": {"$eq": 'test'}}]}
-    #    )
-
-    # result = mongo.db.playitems.find({"tags": {"$elemMatch": {"$regex": ".*{}.*".format('CCTV5'), "$options": "i"}}})
-
-    # result = mongo.db.playitems.find({"$and":
-    #     [
-    #         {"tags": {"$elemMatch": {"$regex": ".*{}.*".format('CCTV5'), "$options": "i"}}},
-    #         {"type": {"$eq": 'test'}}
-    #     ]})
-    #
-    # result = mongo.db.playitems.find({"$and": query})
 
     output = []
     for s in result:
@@ -79,20 +56,28 @@ def playitems():
 
     return JSONEncoder().encode(output)
 
+
 @app.route('/channels')
 def channels():
 
+    channel = request.args.get('channel')
     keyword = request.args.get('keyword')
+    type = request.args.get('type')
+
+    query = []
+    if channel:
+        channel_query = {"_id": {"$eq": channel}}
+        query.append(channel_query)
+    if keyword:
+        keyword_query = {"name": {"$regex": ".*{}.*".format(keyword), "$options": "i"}}
+        query.append(keyword_query)
+    if type:
+        type_query = {"type": {"$eq": type}}
+        query.append(type_query)
 
     result = []
-
-    if keyword:
-
-        print(keyword)
-
-        myquery = {"name": {"$regex": ".*{}.*".format(keyword), "$options": "i" }}
-
-        result = mongo.db.channels.find(myquery)
+    if len(query) > 0:
+        result = mongo.db.channels.find({"$and": query})
 
     else:
         result = mongo.db.channels.find()

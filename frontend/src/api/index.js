@@ -2,9 +2,8 @@ import axios from 'axios';
 
 import https from 'https';
 
-//const API_BASE_URL = 'http://localhost:5000';
-
-const API_BASE_URL = 'http://freeiptv.cn/backend';
+// const API_BASE_URL = 'http://freeiptv.cn/backend';
+const API_BASE_URL = 'http://localhost:5000';
 
 const agent = new https.Agent({
     rejectUnauthorized: false
@@ -34,14 +33,14 @@ export function editPlayItem(id, params) {
     return client.put(`/playitems/${id}`, params);
 }
 
-export function fetchChannels(keyword) {
+export function fetchChannels(filters) {
 
     var params = {};
 
-    if (keyword)
+    if (filters)
     {
-        console.log(keyword)
-        params.keyword = keyword;
+        params.keyword = filters.keyword;
+        params.type  =filters.type;
     }
 
     console.log(params)
