@@ -80,7 +80,7 @@ class ChannelsPage extends Component {
                           Save
                       </button>
                   </form> }
-                <div className="playitem-lists">
+                <div className="list-image clear">
                      <ChannelList channels={ this.props.channels} />
 
                 </div>

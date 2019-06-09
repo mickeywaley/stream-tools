@@ -3,12 +3,15 @@ import Channel from './Channel';
 
 const ChannelList = props => {
     return (
-        <div className="channel-list">
 
+            <ul>
             { props.channels.map(channel => (
+                 <li>
                   <Channel key={ channel._id } channel={ channel } />
+                 </li>
               )) }
-        </div>
+            </ul>
+
         );
 };
 

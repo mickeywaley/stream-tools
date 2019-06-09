@@ -54,11 +54,11 @@ class Channels extends Component {
 
     componentDidMount() {
 
-        //console.log(this.props.location.search);
-        const parsed = queryString.parse(this.props.location.search);
-        //console.log(parsed.keyword);
+        console.log(this.props.location.search);
+        const params = queryString.parse(this.props.location.search);
+        console.log(params);
 
-        this.props.dispatch(fetchChannels(parsed.keyword));
+        this.props.dispatch(fetchChannels(params));
     }
 
 

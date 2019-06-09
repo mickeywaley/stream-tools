@@ -1,6 +1,6 @@
-body, html, div, header, footer, nav, li, h1, h2, h3, h4, h5, h6 {
-    padding: 0;
+* {
     margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
@@ -11,12 +11,14 @@ ul {
     margin-block-end: 1em;
     margin-inline-start: 0px;
     margin-inline-end: 0px;
-    padding-inline-start: 40px;
+    padding-inline-start: 10px;
 }
 
 li {
     list-style: none;
 }
+
+
 
 /*面包屑*/
 .crumb {
@@ -33,7 +35,7 @@ li {
     .crumb {
         width: 90%;
         padding: 10px;
-            margin: 0 auto;
+        margin: 0 auto;
         margin-bottom: 15px;
         background: #fff;
         border-radius: 3px;
@@ -44,7 +46,7 @@ li {
     .crumb {
         width: 100%;
         padding: 10px;
-            margin: 0 auto;
+        margin: 0 auto;
         margin-bottom: 15px;
         background: #fff;
         border-radius: 3px;
@@ -172,22 +174,22 @@ li {
         margin-left: auto
     }
 }
-.container:before, .container:after {
-    content: " ";
-    display: table
-}
+/*.container:before, .container:after {*/
+    /*content: " ";*/
+    /*display: table*/
+/*}*/
 
-.container:after {
-    clear: both
-}
+/*.container:after {*/
+    /*clear: both*/
+/*}*/
 
-.clear:after {
-    content: ".";
-    display: block;
-    height: 0;
-    clear: both;
-    overflow: hidden;
-}
+/*.clear:after {*/
+    /*content: ".";*/
+    /*display: block;*/
+    /*height: 0;*/
+    /*clear: both;*/
+    /*overflow: hidden;*/
+/*}*/
 
 .mr-15 {
     margin-right: 15px;
@@ -202,10 +204,73 @@ li {
 }
 
 
+.list-image {
+    padding: 10px 0;
+    margin-right: -16px;
+}
+
+.list-image li {
+    float: left;
+    width: 168px;
+    margin: 8px 0;
+    margin-right: 16px;
+}
+
+.list-image li a {
+    width: 100%;
+}
+
+.clear:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    overflow: hidden;
+}
+
+
 /*频道首页*/
 .channel-index {
     background: #fff;
     padding: 5px 10px;
+}
+
+.channel-item {
+    width: 100%;
+    text-align: center;
+    border: 1px solid #E0E0E0;
+    border-radius: 3px;
+    cursor: pointer;
+    display: block;
+}
+
+.channel-item:hover {
+    color: #fff;
+    background: #3D92E4;
+    border: 1px solid #3D92E4;
+}
+
+
+.channel-item .image {
+    background: #fff;
+    display: block;
+
+}
+
+.channel-item .image img {
+    width: 100%;
+    height: 92px;
+    display: block;
+    border-radius: 3px 3px 0 0;
+}
+
+.channel-item .title {
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .filter {}
@@ -238,8 +303,9 @@ li {
     cursor: pointer;
 }
 
-.filter-list li a:hover {
-    background: #3D92E4;
-    border: 1px solid #3D92E4;
-    color: #fff;
-}
+/*.filter-list li a:hover {*/
+    /*background: #3D92E4;*/
+    /*border: 1px solid #3D92E4;*/
+    /*color: #fff;*/
+/*}*/
+
