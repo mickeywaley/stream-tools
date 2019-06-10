@@ -1,30 +1,27 @@
 import base64
+import datetime
 import os
 import subprocess
 import threading
+import time
 import traceback
 import urllib
+from pathlib import Path
 
 import requests
 from Crypto.Cipher import AES
 
 from playlist.crawler.common.url_crawler import UrlCrawler
 
-"""
-下载M3U8文件里的所有片段
-"""
-def get_file_content(file_path):
-    with open(file_path, 'r') as file:
-        data = file.read()
-        return data
 
-
-class M3u8Downloader(threading.Thread):
-    def __init__(self, url, download_path):
+class ThumbDownloadThread(threading.Thread):
+    def __init__(self, url, download_path, mongo):
         threading.Thread.__init__(self)
         self.url = url
         self.download_path = download_path
         self.key = None
+
+        self.mongo = mongo
 
     def run(self):
 
@@ -33,18 +30,12 @@ class M3u8Downloader(threading.Thread):
         if not os.path.exists(download_path):
             os.mkdir(download_path)
 
-        if self.url.startswith("http"):
-
-            all_content = UrlCrawler.curl(self.url)
-
-        elif self.url.startswith("/"):
-            all_content = get_file_content(self.url)
-
-        # print(all_content)
+        all_content = UrlCrawler.curl(self.url)
 
         file_line = all_content.splitlines()
 
         if not file_line or len(file_line) == 0:
+            self.index_thumb(self.url, '')
             raise BaseException(u"获取M3U8失败")
         # 通过判断文件头来确定是否是M3U8文件
         if file_line[0] != "#EXTM3U":
@@ -80,11 +71,31 @@ class M3u8Downloader(threading.Thread):
 
                     if ret:
                         print("[OK]: url {}, path {}".format(self.url, path))
+                        self.index_thumb(self.url, path)
+
                         break
                 else:
-                    M3u8Downloader(inner_url, download_path).start()
+                    ThumbDownloadThread(inner_url, download_path, self.mongo).start()
 
+    def index_thumb(self, url, path):
 
+        try:
+            print("[Index-Thumb]: {}".format(url))
+
+            if path:
+                file_name = Path(path).name
+
+            myquery = {"url": url}
+
+            doc = {
+                "url": url,
+                "thumb_time": time.mktime(datetime.datetime.now().timetuple()),
+                "thumb": file_name
+            }
+            self.mongo.db.playitems.update_one(myquery, {'$set': doc}, upsert=True)
+        except Exception as ex:
+            print("index_thumb error for url :{}".format(url))
+            pass
 
     @staticmethod
     def get_inner_url(url, path):
@@ -156,14 +167,3 @@ class M3u8Downloader(threading.Thread):
             os.remove(curr_path)
 
             return False, None
-
-
-if __name__ == '__main__':
-    m3u8_url = "https://raw.githubusercontent.com/lizhiyong2000/stream-tools/master/resource/%E7%94%B5%E5%BD%B1-playlist.m3u8"
-
-    # m3u = m3u8.load('http://161.0.157.5/PLTV/88888888/224/3221226253/03.m3u8')
-    #
-    # m3u2 = m3u8.load(m3u8_url)
-
-    download_path = os.getcwd() + "/download"
-    M3u8Downloader(url=m3u8_url, path=download_path).start()

@@ -1,9 +1,16 @@
+import datetime
 import json
+import os
+import time
 
 from bson import ObjectId
 from flask import Flask, jsonify, request
 # from flask_restful import Resource, Api
 from flask_pymongo import PyMongo
+
+from flask_apscheduler import APScheduler
+
+from thumb_download_thread import ThumbDownloadThread
 
 app = Flask(__name__)
 # api = Api(app)
@@ -20,7 +27,62 @@ app.config.update(
     MONGO_DBNAME='freeiptv'
 )
 
+
+app.config['JOBS'] = [
+    {
+        'id': 'thumb_index_job',
+        'func': 'main:thumb_index_job',
+        'trigger': 'interval',
+        'seconds': 1
+    }
+]
+
+app.config['SCHEDULER_API_ENABLED'] = True
+
 mongo = PyMongo(app)
+
+filepath = os.path.abspath(__file__)
+
+thumb_path = os.path.join(os.path.dirname(filepath), "../../frontend/public/images/thumbs")
+
+
+
+def thumb_index_job():
+    print(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+    # M3u8Downloader(url=m3u8_url, path=download_path).start()
+
+    oneday_time = time.mktime(datetime.datetime.now().timetuple()) - 60*60*24;
+
+    thumb_query = {"$or":[{"thumb": {"$exists": False}}, {"thumb": {"$eq": ''}}, {"thumb_time": {"$lt": oneday_time}}]}
+
+    # thumb_query = {"$or":[{"thumb": {"$exists": False}}, {"thumb_time": {"$lt": oneday_time}}]}
+    # thumb_query = {"$or":[{"thumb": {"$exists": False}}, {"thumb_time": {"$lt": oneday_time}}]}
+    # thumb_query = {"thumb": {"$exists": False}}
+
+    result = mongo.db.playitems.find(thumb_query).limit(20)
+
+    print(result.count())
+
+    output = []
+    for s in result:
+        # print(JSONEncoder().encode(s))
+        output.append(s)
+        ThumbDownloadThread(s['url'], thumb_path, mongo).start()
+
+    print(JSONEncoder().encode(output))
+    # for doc in result:
+    #     print(JSONEncoder.encode(doc))
+
+
+    # doc = {
+    #     "url": url,
+    #     "thumb_time": time.mktime(datetime.datetime.now().timetuple()),
+    #     "thumb": thumb
+    # }
+    # return mongo.db.playitems.update_one(myquery, {'$set': doc}, upsert=True)
+
+
+
 
 
 class JSONEncoder(json.JSONEncoder):
@@ -143,4 +205,11 @@ def channels():
 
 if __name__ == '__main__':
     app.debug = True
-    app.run()
+
+    scheduler = APScheduler()
+    # it is also possible to enable the API directly
+    # scheduler.api_enabled = True
+    scheduler.init_app(app)
+    scheduler.start()
+
+    app.run(use_reloader=False)

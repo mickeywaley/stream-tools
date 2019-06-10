@@ -22,7 +22,6 @@ class CrawlerScheduler:
         w = PlaylistWatcher(playlist_path=self.playlist_download_path)
         w.start()
 
-
         print("thumb path:" + self.thumb_download_path)
 
         w = ThumbWatcher(thumb_path=self.thumb_download_path)
