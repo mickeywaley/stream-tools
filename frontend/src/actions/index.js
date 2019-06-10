@@ -17,11 +17,12 @@ export function fetchChannels(filters) {
 }
 
 
-function fetchChannelsSucceeded(channels) {
+function fetchChannelsSucceeded(result) {
     return {
         type: 'FETCH_CHANNELS_SUCCEEDED',
         payload: {
-            channels,
+            channels:result.data,
+            pagination:result.pagination
         },
     };
 }

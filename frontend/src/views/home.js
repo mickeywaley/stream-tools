@@ -10,8 +10,8 @@ import Footer from '../components/Footer'
 import Filters from '../components/filter/Filters';
 import InputFilter from '../components/filter/InputFilter';
 
-import Pagination from '../components/Pagination';
 import { createPlayItem, editPlayItem, fetchPlayItems } from '../actions';
+import Pagination from '../components/Pagination';
 
 import '../stylesheets/Pagination.css'
 
@@ -44,12 +44,6 @@ class Home extends Component {
         console.log(JSON.stringify(filters))
         this.props.dispatch(fetchPlayItems(filters));
 
-        //
-        //
-        //const offset = (currentPage - 1) * pageLimit;
-        //const currentCountries = allCountries.slice(offset, offset + pageLimit);
-        //
-        //this.setState({ currentPage, currentCountries, totalPages });
     }
 
     onFilterChange = (filters) => {

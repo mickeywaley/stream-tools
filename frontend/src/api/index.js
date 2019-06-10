@@ -53,6 +53,10 @@ export function fetchChannels(filters) {
     {
         params.keyword = filters.keyword;
         params.type  =filters.type;
+
+        params.pageSize = filters.pageSize;
+
+        params.pageNum = filters.pageNum;
     }
 
     console.log(params)

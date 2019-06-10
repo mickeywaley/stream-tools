@@ -53,7 +53,7 @@ def playitems():
 
     page_num = 1 if not request.args.get('pageNum') or not is_number(request.args.get('pageNum')) or int(request.args.get('pageNum')) < 1 else int(request.args.get('pageNum'))
 
-    page_size = 20 if not request.args.get('pageSize') or  not is_number(request.args.get('pageSize')) else int(request.args.get('pageSize'))
+    page_size = 20 if not request.args.get('pageSize') or not is_number(request.args.get('pageSize')) else int(request.args.get('pageSize'))
 
     skip = (page_num - 1)*page_size
 
@@ -97,6 +97,12 @@ def channels():
     keyword = request.args.get('keyword')
     type = request.args.get('type')
 
+    page_num = 1 if not request.args.get('pageNum') or not is_number(request.args.get('pageNum')) or int(request.args.get('pageNum')) < 1 else int(request.args.get('pageNum'))
+
+    page_size = 20 if not request.args.get('pageSize') or not is_number(request.args.get('pageSize')) else int(request.args.get('pageSize'))
+
+    skip = (page_num - 1)*page_size
+
     query = []
     if channel:
         channel_query = {"_id": {"$eq": channel}}
@@ -115,11 +121,24 @@ def channels():
     else:
         result = mongo.db.channels.find()
 
+    count = result.count()
+
+    print(count)
+
+    result = result.skip(skip).limit(page_size)
+
     output = []
     for s in result:
         output.append(s)
 
-    return JSONEncoder().encode(output)
+    return JSONEncoder().encode({
+        "pagination": {
+            "current_page": page_num,
+            "total_count": count,
+            "page_size": page_size
+        },
+        "data": output
+    })
 
 
 if __name__ == '__main__':

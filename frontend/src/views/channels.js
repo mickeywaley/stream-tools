@@ -9,7 +9,7 @@ import Footer from '../components/Footer'
 
 import ChannelsPage from '../components/channel/ChannelsPage'
 
-import {fetchChannels } from '../actions';
+import {fetchChannels, fetchPlayItems} from '../actions';
 import Filters from '../components/filter/Filters';
 
 
@@ -17,6 +17,10 @@ import Filters from '../components/filter/Filters';
 import {CHANNEL_DISTRICTS, CHANNEL_TYPES} from '../constants';
 
 import ChannelFilter from '../components/filter/ChannelFilter'
+
+import Pagination from '../components/Pagination';
+
+import '../stylesheets/Pagination.css'
 
 import '../stylesheets/channel.css';
 
@@ -44,11 +48,30 @@ class Channels extends Component {
                 },
     }
 
+
     onFilterChange = (filters) => {
         console.log(filters)
         this.setState({ filters });
 
         this.props.dispatch(fetchChannels(filters));
+    }
+
+    onPageChanged = data => {
+        //const { allCountries } = this.state;
+        const { currentPage, totalPages, pageLimit } = data;
+
+        const filters = {
+
+            ...this.state.filters,
+
+            pageNum: data.currentPage,
+
+            pageSize: data.pageLimit
+        }
+
+        console.log(JSON.stringify(filters))
+        this.props.dispatch(fetchChannels(filters));
+
     }
 
 
@@ -63,6 +86,11 @@ class Channels extends Component {
 
 
     render() {
+
+        const headerClass = ['text-dark py-2 pr-4 m-0', this.props.pagination.current_page ? 'border-gray border-right' : ''].join(' ').trim();
+
+        const total_pages = ~~((this.props.pagination.total_count + this.props.pagination.page_size - 1 )/this.props.pagination.page_size)
+
         return (
             <div id="channel">
                 <Header />
@@ -142,7 +170,20 @@ class Channels extends Component {
 
                         <ChannelsPage channels={ this.props.channels}  />
 
-
+                        <div className="w-100 px-4 py-5 d-flex flex-row flex-wrap align-items-center justify-content-between">
+                            <div className="d-flex flex-row align-items-center">
+                                <h2 className={ headerClass }><strong className="text-secondary">{ this.props.pagination.total_count }</strong> 频道</h2>
+                                {  this.props.pagination.current_page && (
+                                    <span className="current-page d-inline-block h-100 pl-4 text-secondary"> <span className="font-weight-bold">第 { this.props.pagination.current_page } 页</span> / <span className="font-weight-bold">共 { total_pages } 页</span></span>
+                                ) }
+                            </div>
+                            <div className="d-flex flex-row py-4 align-items-center">
+                                <Pagination totalRecords={ this.props.pagination.total_count }
+                                            pageLimit={ this.props.pagination.page_size }
+                                            pageNeighbours={ 2 }
+                                            onPageChanged={ this.onPageChanged } />
+                            </div>
+                        </div>
 
                     </div>
                 </div>
@@ -155,8 +196,9 @@ class Channels extends Component {
 
 
 function mapStateToProps(state) {
-    const {channels, isLoading, error} = state.channels;
+    const {pagination, channels, isLoading, error} = state.channels;
     return {
+        pagination,
         channels,
         isLoading,
         error

@@ -1,4 +1,10 @@
 const initialState = {
+    pagination:{
+        total_count:-1,
+        current_page:1,
+        page_size:30
+
+    },
     channels: [],
     isLoading: false,
     error: null,
@@ -20,6 +26,7 @@ export default function channels(state = initialState, action) {
         return {
             ...state,
             channels: action.payload.channels,
+            pagination: action.payload.pagination,
             isLoading: false,
         };
     }
