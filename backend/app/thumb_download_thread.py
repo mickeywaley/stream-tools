@@ -31,9 +31,16 @@ class ThumbDownloadThread(threading.Thread):
         if not os.path.exists(download_path):
             os.mkdir(download_path)
 
-        all_content = UrlCrawler.curl(self.url)
 
-        print(all_content)
+        try:
+
+            all_content = requests.get(self.url, timeout=1).text
+        except:
+
+            self.index_thumb(self.id, self.url, '')
+            return
+
+        print("all_content:" + all_content)
 
         file_line = all_content.splitlines()
 
@@ -42,6 +49,7 @@ class ThumbDownloadThread(threading.Thread):
             raise BaseException(u"获取M3U8失败")
         # 通过判断文件头来确定是否是M3U8文件
         if file_line[0] != "#EXTM3U":
+            self.index_thumb(self.id, self.url, '')
             raise BaseException(u"非M3U8的链接")
 
         for index, line in enumerate(file_line):
@@ -73,6 +81,8 @@ class ThumbDownloadThread(threading.Thread):
 
             if path:
                 file_name = Path(path).name
+            else:
+                file_name = ''
 
             myquery = {"_id": id}
 
@@ -82,6 +92,7 @@ class ThumbDownloadThread(threading.Thread):
             }
             self.mongo.db.playitems.update_one(myquery, {'$set': doc}, upsert=True)
         except Exception as ex:
+            traceback.print_exc()
             print("index_thumb {} error for url :{}".format(id, url))
             pass
 
@@ -112,12 +123,17 @@ class ThumbDownloadThread(threading.Thread):
             return True, curr_path
         try:
             res = requests.get(ts_url)
+
+            if res.status_code != 200:
+
+                return False, None
+
             with open(curr_path, 'ab') as f:
-                if key and len(key): # AES 解密
-                    cryptor = AES.new(key, AES.MODE_CBC, key)
-                    f.write(cryptor.decrypt(res.content))
-                else:
-                    f.write(res.content)
+                # if key and len(key): # AES 解密
+                #     cryptor = AES.new(key, AES.MODE_CBC, key)
+                #     f.write(cryptor.decrypt(res.content))
+                # else:
+                f.write(res.content)
 
                 f.flush()
             print('[OK]: {} saved'.format(curr_path))
@@ -140,7 +156,9 @@ class ThumbDownloadThread(threading.Thread):
 
             print(stderrdata)
 
-            os.remove(curr_path)
+            if not stderrdata:
+                os.remove(curr_path)
+
             if os.path.exists(thumb_path) and os.path.getsize(thumb_path) > 0:
 
                 return True, thumb_path
@@ -152,6 +170,9 @@ class ThumbDownloadThread(threading.Thread):
             print('[warn]: {} deleted'.format(curr_path))
             print(es)
             traceback.print_stack()
-            os.remove(curr_path)
+            try:
+                os.remove(curr_path)
+            except:
+                pass
 
             return False, None

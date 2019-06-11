@@ -53,7 +53,7 @@ def thumb_index_job():
 
     oneday_time = time.mktime(datetime.datetime.now().timetuple()) - 60*60*24;
 
-    thumb_query = {"$or":[{"thumb": {"$exists": False}}, {"thumb": {"$eq": ''}}, {"thumb_time": {"$lt": oneday_time}}]}
+    thumb_query = {"$or": [{"thumb_time": {"$exists": False}},  {"$and": [{"thumb": {"$eq": ''}}, {"thumb_time": {"$lt": oneday_time}}]}]}
 
     # thumb_query = {"$or":[{"thumb": {"$exists": False}}, {"thumb_time": {"$lt": oneday_time}}]}
     # thumb_query = {"$or":[{"thumb": {"$exists": False}}, {"thumb_time": {"$lt": oneday_time}}]}
@@ -61,13 +61,15 @@ def thumb_index_job():
 
     result = mongo.db.playitems.find(thumb_query).limit(1)
 
-    print(result.count())
+
 
     # output = []
     for s in result:
         # print(JSONEncoder().encode(s))
         # output.append(s)
         ThumbDownloadThread(s['_id'], s['url'], thumb_path, mongo).start()
+
+    print(result.count())
 
     # print(JSONEncoder().encode(output))
     # for doc in result:
