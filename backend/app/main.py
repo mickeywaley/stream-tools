@@ -33,7 +33,7 @@ app.config['JOBS'] = [
         'id': 'thumb_index_job',
         'func': 'main:thumb_index_job',
         'trigger': 'interval',
-        'seconds': 1
+        'seconds': 3
     }
 ]
 
@@ -59,17 +59,17 @@ def thumb_index_job():
     # thumb_query = {"$or":[{"thumb": {"$exists": False}}, {"thumb_time": {"$lt": oneday_time}}]}
     # thumb_query = {"thumb": {"$exists": False}}
 
-    result = mongo.db.playitems.find(thumb_query).limit(20)
+    result = mongo.db.playitems.find(thumb_query).limit(1)
 
     print(result.count())
 
-    output = []
+    # output = []
     for s in result:
         # print(JSONEncoder().encode(s))
-        output.append(s)
-        ThumbDownloadThread(s['url'], thumb_path, mongo).start()
+        # output.append(s)
+        ThumbDownloadThread(s['_id'], s['url'], thumb_path, mongo).start()
 
-    print(JSONEncoder().encode(output))
+    # print(JSONEncoder().encode(output))
     # for doc in result:
     #     print(JSONEncoder.encode(doc))
 

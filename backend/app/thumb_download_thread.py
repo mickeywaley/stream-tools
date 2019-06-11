@@ -15,8 +15,9 @@ from playlist.crawler.common.url_crawler import UrlCrawler
 
 
 class ThumbDownloadThread(threading.Thread):
-    def __init__(self, url, download_path, mongo):
+    def __init__(self, id,  url, download_path, mongo):
         threading.Thread.__init__(self)
+        self.id = id
         self.url = url
         self.download_path = download_path
         self.key = None
@@ -32,69 +33,56 @@ class ThumbDownloadThread(threading.Thread):
 
         all_content = UrlCrawler.curl(self.url)
 
+        print(all_content)
+
         file_line = all_content.splitlines()
 
         if not file_line or len(file_line) == 0:
-            self.index_thumb(self.url, '')
+            self.index_thumb(self.id, self.url, '')
             raise BaseException(u"获取M3U8失败")
         # 通过判断文件头来确定是否是M3U8文件
         if file_line[0] != "#EXTM3U":
             raise BaseException(u"非M3U8的链接")
 
         for index, line in enumerate(file_line):
-
-            if "#EXT-X-KEY" in line:  # 找解密Key
-                method_pos = line.find("METHOD")
-                comma_pos = line.find(",")
-                if comma_pos == -1:
-                    comma_pos = len(line)
-                method = line[method_pos:comma_pos].split('=')[1]
-                print("Decode Method：", method)
-
-                if method != 'NONE':
-                    uri_pos = line.find("URI")
-                    quotation_mark_pos = line.rfind('"')
-                    key_path = line[uri_pos:quotation_mark_pos].split('"')[1]
-
-                    key_url = self.get_inner_url(self.url, key_path)# 拼出key解密密钥URL
-                    self.key = UrlCrawler.curl(key_url)
-                    print("key：", self.key)
-
             if "EXTINF" in line or "EXT-X-STREAM-INF" in line:
                 # 拼出ts片段的URL
                 pd_url = file_line[index + 1]
 
                 inner_url = self.get_inner_url(self.url, pd_url)
 
+                print(inner_url)
+
                 if pd_url.find('.ts') > 0:
                     ret, path = self.download_ts_file(self.url, inner_url, download_path, self.key)
 
                     if ret:
-                        print("[OK]: url {}, path {}".format(self.url, path))
-                        self.index_thumb(self.url, path)
+                        print("[OK]: id:{}, url {}, path {}".format(self.id, self.url, path))
+                        self.index_thumb(self.id, self.url, path)
 
-                        break
+
                 else:
-                    ThumbDownloadThread(inner_url, download_path, self.mongo).start()
+                    ThumbDownloadThread(self.id, inner_url, download_path, self.mongo).start()
 
-    def index_thumb(self, url, path):
+                break
+
+    def index_thumb(self, id, url, path):
 
         try:
-            print("[Index-Thumb]: {}".format(url))
+            print("{}[Index-Thumb]: {}".format(id, url))
 
             if path:
                 file_name = Path(path).name
 
-            myquery = {"url": url}
+            myquery = {"_id": id}
 
             doc = {
-                "url": url,
                 "thumb_time": time.mktime(datetime.datetime.now().timetuple()),
                 "thumb": file_name
             }
             self.mongo.db.playitems.update_one(myquery, {'$set': doc}, upsert=True)
         except Exception as ex:
-            print("index_thumb error for url :{}".format(url))
+            print("index_thumb {} error for url :{}".format(id, url))
             pass
 
     @staticmethod
