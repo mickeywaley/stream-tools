@@ -128,9 +128,9 @@ def playitems():
         query.append(keyword_query)
 
     if len(query) > 0:
-        result = mongo.db.playitems.find({"$and": query})
+        result = mongo.db.playitems.find({"$and": query}).sort([("thumb_time", -1)])
     else:
-        result = mongo.db.playitems.find()
+        result = mongo.db.playitems.find().sort([("thumb_time", -1)])
 
     count = result.count()
 
