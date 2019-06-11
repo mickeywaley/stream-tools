@@ -9,9 +9,7 @@ import urllib
 from pathlib import Path
 
 import requests
-from Crypto.Cipher import AES
 
-from playlist.crawler.common.url_crawler import UrlCrawler
 
 
 class ThumbDownloadThread(threading.Thread):
@@ -67,7 +65,10 @@ class ThumbDownloadThread(threading.Thread):
                     if ret:
                         print("[OK]: id:{}, url {}, path {}".format(self.id, self.url, path))
                         self.index_thumb(self.id, self.url, path)
+                    else:
 
+                        print("[ERROR-TS]: id:{}, url {}, path {}".format(self.id, self.url, path))
+                        self.index_thumb(self.id, self.url, None)
 
                 else:
                     ThumbDownloadThread(self.id, inner_url, download_path, self.mongo).start()
