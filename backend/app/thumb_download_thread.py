@@ -156,8 +156,8 @@ class ThumbDownloadThread(threading.Thread):
 
             print(stderrdata)
 
-            if not stderrdata:
-                os.remove(curr_path)
+            # if not stderrdata:
+            os.remove(curr_path)
 
             if os.path.exists(thumb_path) and os.path.getsize(thumb_path) > 0:
 
