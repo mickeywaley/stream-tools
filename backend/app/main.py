@@ -43,7 +43,7 @@ mongo = PyMongo(app)
 
 filepath = os.path.abspath(__file__)
 
-thumb_path = os.path.join(os.path.dirname(filepath), "../../frontend/public/images/thumbs")
+thumb_path = os.path.join(os.path.dirname(filepath), "../../nginx/dist/images/thumbs")
 
 
 

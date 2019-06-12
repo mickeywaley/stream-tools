@@ -11,7 +11,6 @@ from pathlib import Path
 import requests
 
 
-
 class ThumbDownloadThread(threading.Thread):
     def __init__(self, id,  url, download_path, mongo):
         threading.Thread.__init__(self)
