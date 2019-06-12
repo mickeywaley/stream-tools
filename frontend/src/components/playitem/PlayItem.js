@@ -2,7 +2,12 @@ import React from 'react';
 
 import { PLAYITEM_STATUSES } from '../../constants';
 
+import "../../stylesheets/PlayItem.css"
+
 const PlayItem = props => {
+
+    const thumb_path =  '/images/thumbs/' + props.playitem.thumb
+
     return (
         <div className="playitem">
             <div className="playitem-header">
@@ -16,10 +21,14 @@ const PlayItem = props => {
                           </option>
                       )) }
                 </select>
+
+
             </div>
             <div className="playitem-body">
                 { props.playitem.url }
             </div>
+
+            <img src="/images/loading.gif" data-echo={ thumb_path } />
             <hr />
         </div>
         );

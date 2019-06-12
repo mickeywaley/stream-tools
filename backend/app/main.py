@@ -46,6 +46,28 @@ filepath = os.path.abspath(__file__)
 thumb_path = os.path.join(os.path.dirname(filepath), "../../nginx/dist/images/thumbs")
 
 
+def thumb_update_job():
+
+    result = mongo.db.playitems.find({})
+    for s in result:
+
+        myquery = {"_id": s['_id']}
+
+        try:
+            thumb_success = len(s['thumb']) > 0
+        except:
+
+            thumb_success = False
+
+
+
+        doc = {
+            "thumb_success": thumb_success
+        }
+        mongo.db.playitems.update_one(myquery, {'$set': doc}, upsert=True)
+
+        print(s['_id'])
+
 
 def thumb_index_job():
     print(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
@@ -82,9 +104,6 @@ def thumb_index_job():
     #     "thumb": thumb
     # }
     # return mongo.db.playitems.update_one(myquery, {'$set': doc}, upsert=True)
-
-
-
 
 
 class JSONEncoder(json.JSONEncoder):
@@ -130,9 +149,9 @@ def playitems():
         query.append(keyword_query)
 
     if len(query) > 0:
-        result = mongo.db.playitems.find({"$and": query}).sort([("thumb_time", -1)])
+        result = mongo.db.playitems.find({"$and": query}).sort([("thumb_success", -1), ("thumb_time", -1)])
     else:
-        result = mongo.db.playitems.find().sort([("thumb_time", -1)])
+        result = mongo.db.playitems.find().sort([("thumb_success", -1), ("thumb_time", -1)])
 
     count = result.count()
 

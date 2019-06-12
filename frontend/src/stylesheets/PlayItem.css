@@ -1,0 +1,10 @@
+.playitem{
+
+}
+.playitem img {
+
+    width: 256px;
+    height: 192px;
+    display: block;
+    border-radius: 3px 3px 0 0;
+}

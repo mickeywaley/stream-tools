@@ -26,7 +26,7 @@ class ThumbDownloadThread(threading.Thread):
         download_path = self.download_path
 
         if not os.path.exists(download_path):
-            os.mkdir(download_path)
+            os.makedirs(download_path)
 
 
         try:
@@ -88,7 +88,9 @@ class ThumbDownloadThread(threading.Thread):
 
             doc = {
                 "thumb_time": time.mktime(datetime.datetime.now().timetuple()),
-                "thumb": file_name
+                "thumb": file_name,
+                "thumb_success": len(file_name) > 0
+
             }
             self.mongo.db.playitems.update_one(myquery, {'$set': doc}, upsert=True)
         except Exception as ex:
