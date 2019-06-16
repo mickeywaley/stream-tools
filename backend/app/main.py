@@ -1,7 +1,10 @@
 import datetime
 import json
 import os
+import subprocess
 import time
+import urllib
+from urllib.parse import urlparse
 
 from bson import ObjectId
 from flask import Flask, jsonify, request
@@ -10,22 +13,16 @@ from flask_pymongo import PyMongo
 
 from flask_apscheduler import APScheduler
 
-from thumb_download_thread import ThumbDownloadThread
+from common import JSONEncoder
+from thumb_download_thread import ThumbIndexJob
+
+from config import Config
 
 app = Flask(__name__)
 # api = Api(app)
 
-app.config['MONGO_DBNAME'] = 'freeiptv'
-
-app.config['MONGO_URI'] = 'mongodb://localhost:27070/freeiptv'
-
-app.config.update(
-    MONGO_HOST='localhost',
-    MONGO_PORT=27017,
-    MONGO_USERNAME='',
-    MONGO_PASSWORD='',
-    MONGO_DBNAME='freeiptv'
-)
+app.config['MONGO_DBNAME'] = Config.MONGO_DBNAME
+app.config['MONGO_URI'] = Config.MONGO_URI
 
 
 app.config['JOBS'] = [
@@ -69,48 +66,7 @@ def thumb_update_job():
         print(s['_id'])
 
 
-def thumb_index_job():
-    print(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
-    # M3u8Downloader(url=m3u8_url, path=download_path).start()
 
-    oneday_time = time.mktime(datetime.datetime.now().timetuple()) - 60*60*24;
-
-    thumb_query = {"$or": [{"thumb_time": {"$exists": False}},  {"$and": [{"thumb": {"$eq": ''}}, {"thumb_time": {"$lt": oneday_time}}]}]}
-
-    # thumb_query = {"$or":[{"thumb": {"$exists": False}}, {"thumb_time": {"$lt": oneday_time}}]}
-    # thumb_query = {"$or":[{"thumb": {"$exists": False}}, {"thumb_time": {"$lt": oneday_time}}]}
-    # thumb_query = {"thumb": {"$exists": False}}
-
-    result = mongo.db.playitems.find(thumb_query).limit(1)
-
-
-
-    # output = []
-    for s in result:
-        # print(JSONEncoder().encode(s))
-        # output.append(s)
-        ThumbDownloadThread(s['_id'], s['url'], thumb_path, mongo).start()
-
-    print(result.count())
-
-    # print(JSONEncoder().encode(output))
-    # for doc in result:
-    #     print(JSONEncoder.encode(doc))
-
-
-    # doc = {
-    #     "url": url,
-    #     "thumb_time": time.mktime(datetime.datetime.now().timetuple()),
-    #     "thumb": thumb
-    # }
-    # return mongo.db.playitems.update_one(myquery, {'$set': doc}, upsert=True)
-
-
-class JSONEncoder(json.JSONEncoder):
-    def default(self, o):
-        if isinstance(o, ObjectId):
-            return str(o)
-        return json.JSONEncoder.default(self, o)
 
 
 def is_number(s):
@@ -225,12 +181,70 @@ def channels():
 
 
 if __name__ == '__main__':
+
+    # url = 'http://223.110.241.203:6610/gitv/live1/G_JINYING/G_JINYING/c001_1560676598_1560676608.ts?ts_min=1&zte_auth=6201d93d&zduration=10&srcurl=aHR0cDovLzExMi4yNS43LjEyOS9naXR2X2xpdmUvR19KSU5ZSU5H';
+    # o = urlparse(url)
+    #
+    # print(o.path)
+
+    # curr_path = '/Users/zhiyongli/Programs/github/stream-tools/backend/app/../../nginx/dist/images/thumbs/1560675985-1-1530921057.hls.ts'
+    #
+    # file_name = curr_path[curr_path.rfind('/') + 1:] + ".jpeg"
+    # print('[file_name]:', file_name)
+    #
+    # print('[thumb_path]:', thumb_path)
+    #
+    #
+    # thumb_jpeg_path = os.path.join(thumb_path, file_name)
+    #
+    # print('[thumb_jpeg_path]:', thumb_jpeg_path)
+    #
+    # ## ffmpeg -v -ss '00:00:01.000' -vframes 1 -i
+    # command = ['ffmpeg',
+    #            '-y',
+    #            '-v', 'error',
+    #            '-i', curr_path,
+    #            '-ss', '00:00:01.000',
+    #            '-vframes', '1',
+    #            thumb_jpeg_path
+    #            ]
+    #
+    # process = subprocess.Popen(command, stdin=subprocess.PIPE, stderr=subprocess.PIPE)
+    #
+    # (stdoutdata, stderrdata) = process.communicate()
+    #
+    # print(stdoutdata)
+    #
+    # print(stderrdata)
+    # thumb_jpeg_path = os.path.join(thumb_path, '2c7815b9567c2de428983ef1dd11ca95.jpg')
+    #
+    # try:
+    #     command = ['ffprobe',
+    #                '-v', 'error',
+    #                '-select_streams', 'v:0',
+    #                '-show_entries', 'stream=width,height',
+    #                '-of', 'csv=s=x:p=0',
+    #                thumb_jpeg_path
+    #                ]
+    #
+    #     process = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+    #
+    #     (stdoutdata, stderrdata) = process.communicate()
+    #
+    #     print('[FFMPROB]:{}{}'.format(stdoutdata, stderrdata))
+    #
+    #     if stdoutdata and len(stdoutdata) > 0:
+    #         thumb_resolution = stdoutdata.decode('utf-8').strip()
+    #         print("[thumb_resolution]:{}-{}".format(thumb_resolution, thumb_jpeg_path))
+    #
+    #
+    # except:
+    #     pass
+
+
+
+    ThumbIndexJob(thumb_path, mongo).start()
+
     app.debug = True
 
-    scheduler = APScheduler()
-    # it is also possible to enable the API directly
-    # scheduler.api_enabled = True
-    scheduler.init_app(app)
-    scheduler.start()
-
-    app.run(use_reloader=False)
+    app.run()

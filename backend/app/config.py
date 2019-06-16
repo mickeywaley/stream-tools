@@ -1,0 +1,8 @@
+class Config(object):
+    # ...
+    MONGO_URI = 'mongodb://localhost:27070/freeiptv'
+
+    MONGO_DBNAME = 'freeiptv'
+
+
+    THUMB_WORKDER_COUNT = 10

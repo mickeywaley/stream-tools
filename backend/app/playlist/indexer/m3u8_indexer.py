@@ -104,7 +104,7 @@ if __name__ == '__main__':
 
     filepath = os.path.abspath(__file__)
 
-    playlist_path = os.path.join(os.path.dirname(filepath), "../../../../result/playlist")
+    playlist_path = os.path.join(os.path.dirname(filepath), "../../../../resource")
 
 
 
