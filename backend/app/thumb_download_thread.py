@@ -36,13 +36,18 @@ class ThumbIndexJob(threading.Thread):
 
         print(' {} worker started...............'.format(self.ident))
 
+        full_count = 0
+
         while self.running_job:
 
             if self.queue.full():
-                print('queue full:{}, {}'.format(self.queue.qsize(),self.queue.maxsize))
+                print('queue full:{}, {}- {}'.format(self.queue.qsize(),self.queue.maxsize, full_count))
                 time.sleep(3)
+                full_count += 1
                 continue
 
+
+            full_count = 0
             try:
                 # print('running:{}'.format(self.queue.qsize()))
 
@@ -101,9 +106,14 @@ class ThumbDownloadWorker(threading.Thread):
 
                 self.dowload_and_index(task[0], task[1])
 
+                self.queue.task_done()
+
             except queue.Empty:
                 print("thread[%d] %s: waiting for task" %(self.ident, self.name))
-                time.sleep(60)
+                time.sleep(3)
+            except Exception as ex:
+                print("thread[%d] %s: exception for task" %(self.ident, self.name))
+                pass
 
 
     def dowload_and_index(self, id, url):
