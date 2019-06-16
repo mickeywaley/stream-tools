@@ -1,12 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 
 import { PLAYITEM_STATUSES } from '../../constants';
 
 import "../../stylesheets/PlayItem.css"
 
+
 const PlayItem = props => {
 
-    const thumb_path =  '/images/thumbs/' + props.playitem.thumb
+    const thumb_path = '/images/thumbs/' + props.playitem.thumb
 
     return (
         <div className="playitem">
@@ -21,14 +23,19 @@ const PlayItem = props => {
                           </option>
                       )) }
                 </select>
-
-
             </div>
             <div className="playitem-body">
-                { props.playitem.url }
-            </div>
 
+                <Link to={{pathname: "/player" , state:{url: props.playitem.url} }} >
+
+                { props.playitem.url }
+                </Link>
+
+            </div>
             <img src="/images/loading.gif" data-echo={ thumb_path } />
+            { props.playitem.thumb && <div className="playitem-body">
+                                          { props.playitem.thumb_resolution }
+                                      </div> }
             <hr />
         </div>
         );

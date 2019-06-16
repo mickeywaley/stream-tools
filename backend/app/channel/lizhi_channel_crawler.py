@@ -6,6 +6,7 @@ import pymongo
 
 from channel.channel_crawler import ChannelCrawler
 from channel.channel_parser import ChannelParser
+from config import Config
 from playlist.crawler.common.url_parser import UrlParser
 
 result_map = {}
@@ -36,11 +37,9 @@ for i in range(16, 0, -1):
 
 print(result_map)
 
-mongodb_url = 'mongodb://freeiptv.cn:27070'
+mongodb_url = Config.MONGO_URI
 mongo_client = pymongo.MongoClient(mongodb_url)
 data_list = mongo_client['freeiptv']['channels']
-
-
 
 
 def save_image(img_url, file_dir):
@@ -85,6 +84,6 @@ for name, thumb in result_map.items():
 
     doc = {
         "name": name,
-        "thumb": "/images/channels/{}".format(file_name)
+        "thumb": "{}".format(file_name)
     }
     data_list.update_one(myquery, {'$set': doc}, upsert=True)

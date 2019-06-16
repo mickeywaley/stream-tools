@@ -20,6 +20,8 @@ import Legal from './views/legal';
 import About from './views/about';
 import ChannelPage from './views/channel';
 
+import Player from './views/player';
+
 const store = configureStore()
 
 ReactDOM.render(
@@ -31,6 +33,8 @@ ReactDOM.render(
                     <Route exact path='/contact' component={ Contact } />
                     <Route exact path='/about' component={ About } />
                     <Route exact path='/legal' component={ Legal } />
+
+                    <Route exact path='/player' component={ Player } />
 
                     <Route path='/channels/:channelId' component={ ChannelPage } />
             </Switch>
