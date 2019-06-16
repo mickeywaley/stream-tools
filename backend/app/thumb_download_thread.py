@@ -24,9 +24,7 @@ class ThumbIndexJob(threading.Thread):
         self.mongo = mongo
         self.queue = Queue(Config.THUMB_WORKDER_COUNT)
         self.running_job = True
-
-
-
+        print(' {} inited...............'.format(self.ident))
 
     def run(self):
 
@@ -36,6 +34,8 @@ class ThumbIndexJob(threading.Thread):
         for i in range(0, Config.THUMB_WORKDER_COUNT):
             ThumbDownloadWorker(self.queue, self.thumb_path, self.mongo).start()
 
+        print(' {} worker started...............'.format(self.ident))
+
         while self.running_job:
 
             if self.queue.full():
@@ -44,9 +44,9 @@ class ThumbIndexJob(threading.Thread):
                 continue
 
             try:
-                print('running:{}'.format(self.queue.qsize()))
+                # print('running:{}'.format(self.queue.qsize()))
 
-                oneday_time = time.mktime(datetime.datetime.now().timetuple()) - 60*60*24;
+                oneday_time = time.mktime(datetime.datetime.now().timetuple()) - 60*60*1
 
                 thumb_query = {"$or": [{"thumb_time": {"$exists": False}},  {"$and": [{"thumb": {"$eq": ''}}, {"thumb_time": {"$lt": oneday_time}}]}]}
 
@@ -56,15 +56,23 @@ class ThumbIndexJob(threading.Thread):
 
                 result = self.mongo.db.playitems.find(thumb_query).sort([("thumb", -1)]).limit(10)
 
-                print('{} {}'.format(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'), result.count()))
+                print('{} running: {}'.format(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'), result.count()))
 
-                # output = []
-                for s in result:
-                    print(JSONEncoder().encode(s))
-                    # output.append(s)
-                    self.queue.put([s['_id'], s['url']], block=True, timeout=None)
 
-                    print('now running:{}'.format(self.queue.qsize()))
+                if result.count() == 0:
+
+                    time.sleep(60)
+                else:
+
+                    for s in result:
+                        print(JSONEncoder().encode(s))
+                        # output.append(s)
+                        self.queue.put([s['_id'], s['url']], block=True, timeout=None)
+
+                        print('now running:{}'.format(self.queue.qsize()))
+
+
+
 
             except Exception as ex:
                 traceback.print_exc()
@@ -95,7 +103,7 @@ class ThumbDownloadWorker(threading.Thread):
 
             except queue.Empty:
                 print("thread[%d] %s: waiting for task" %(self.ident, self.name))
-                time.sleep(1)
+                time.sleep(60)
 
 
     def dowload_and_index(self, id, url):

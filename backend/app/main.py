@@ -1,25 +1,13 @@
-import datetime
-import json
 import os
-import subprocess
-import time
-import urllib
-from urllib.parse import urlparse
 
-from bson import ObjectId
-from flask import Flask, jsonify, request
-# from flask_restful import Resource, Api
+from flask import Flask, request
 from flask_pymongo import PyMongo
 
-from flask_apscheduler import APScheduler
-
 from common import JSONEncoder
+from config import Config
 from thumb_download_thread import ThumbIndexJob
 
-from config import Config
-
 app = Flask(__name__)
-# api = Api(app)
 
 app.config['MONGO_DBNAME'] = Config.MONGO_DBNAME
 app.config['MONGO_URI'] = Config.MONGO_URI
@@ -41,6 +29,8 @@ mongo = PyMongo(app)
 filepath = os.path.abspath(__file__)
 
 thumb_path = os.path.join(os.path.dirname(filepath), "../../nginx/dist/images/thumbs")
+
+thumb_index_job = ThumbIndexJob(thumb_path, mongo)
 
 
 def thumb_update_job():
@@ -84,6 +74,17 @@ def is_number(s):
         pass
 
     return False
+
+@app.route('/start_thumb')
+def start_thumb():
+
+    if not thumb_index_job.is_alive():
+
+        thumb_index_job.start()
+
+    return JSONEncoder().encode({
+        "result": "started"
+    })
 
 @app.route('/playitems')
 def playitems():
@@ -241,9 +242,7 @@ if __name__ == '__main__':
     # except:
     #     pass
 
-
-
-    ThumbIndexJob(thumb_path, mongo).start()
+    #
 
     app.debug = True
 
