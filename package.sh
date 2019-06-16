@@ -11,6 +11,9 @@ echo "${basedir}"
 git pull
 
 cd "${basedir}/frontend"
+
+npm install
+
 npm run build
 
 rm -rf "${basedir}/nginx/dist"
