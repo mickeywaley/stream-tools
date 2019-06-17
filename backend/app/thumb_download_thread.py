@@ -52,7 +52,7 @@ class ThumbIndexJob(threading.Thread):
 
                 interval_time = time.mktime(datetime.datetime.now().timetuple()) - 60*60*2
 
-                result = self.mongo.db.playitems.find({"thumb_time": {"$lt": interval_time}}).sort([("thumb_success", -1), ("thumb_time", -1)])
+                result = self.mongo.db.playitems.find({"thumb_time": {"$lt": interval_time}}).sort([("thumb_success", -1), ("thumb_time", -1)]).limit(Config.THUMB_WORKDER_COUNT)
 
                 print('{} running: {}'.format(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'), result.count()))
 
