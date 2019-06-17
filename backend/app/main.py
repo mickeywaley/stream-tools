@@ -5,6 +5,7 @@ from flask_pymongo import PyMongo
 
 from common import JSONEncoder
 from config import Config
+from log import config_root_logger
 from thumb_download_thread import ThumbIndexJob
 
 app = Flask(__name__)
@@ -32,6 +33,8 @@ thumb_path = os.path.join(os.path.dirname(filepath), "../../nginx/dist/images/th
 
 thumb_index_job = ThumbIndexJob(thumb_path, mongo)
 
+thumb_index_job.setName("THUMB_MAIN")
+
 
 def thumb_update_job():
 
@@ -53,7 +56,7 @@ def thumb_update_job():
         }
         mongo.db.playitems.update_one(myquery, {'$set': doc}, upsert=True)
 
-        print(s['_id'])
+        # print(s['_id'])
 
 
 
@@ -112,7 +115,7 @@ def playitems():
 
     count = result.count()
 
-    print(count)
+    # print(count)
 
     result = result.skip(skip).limit(page_size)
 
@@ -163,7 +166,7 @@ def channels():
 
     count = result.count()
 
-    print(count)
+    # print(count)
 
     result = result.skip(skip).limit(page_size)
 
@@ -183,7 +186,7 @@ def channels():
 
 if __name__ == '__main__':
 
+    config_root_logger()
 
     app.debug = True
-
     app.run()
