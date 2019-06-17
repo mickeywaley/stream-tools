@@ -183,66 +183,6 @@ def channels():
 
 if __name__ == '__main__':
 
-    # url = 'http://223.110.241.203:6610/gitv/live1/G_JINYING/G_JINYING/c001_1560676598_1560676608.ts?ts_min=1&zte_auth=6201d93d&zduration=10&srcurl=aHR0cDovLzExMi4yNS43LjEyOS9naXR2X2xpdmUvR19KSU5ZSU5H';
-    # o = urlparse(url)
-    #
-    # print(o.path)
-
-    # curr_path = '/Users/zhiyongli/Programs/github/stream-tools/backend/app/../../nginx/dist/images/thumbs/1560675985-1-1530921057.hls.ts'
-    #
-    # file_name = curr_path[curr_path.rfind('/') + 1:] + ".jpeg"
-    # print('[file_name]:', file_name)
-    #
-    # print('[thumb_path]:', thumb_path)
-    #
-    #
-    # thumb_jpeg_path = os.path.join(thumb_path, file_name)
-    #
-    # print('[thumb_jpeg_path]:', thumb_jpeg_path)
-    #
-    # ## ffmpeg -v -ss '00:00:01.000' -vframes 1 -i
-    # command = ['ffmpeg',
-    #            '-y',
-    #            '-v', 'error',
-    #            '-i', curr_path,
-    #            '-ss', '00:00:01.000',
-    #            '-vframes', '1',
-    #            thumb_jpeg_path
-    #            ]
-    #
-    # process = subprocess.Popen(command, stdin=subprocess.PIPE, stderr=subprocess.PIPE)
-    #
-    # (stdoutdata, stderrdata) = process.communicate()
-    #
-    # print(stdoutdata)
-    #
-    # print(stderrdata)
-    # thumb_jpeg_path = os.path.join(thumb_path, '2c7815b9567c2de428983ef1dd11ca95.jpg')
-    #
-    # try:
-    #     command = ['ffprobe',
-    #                '-v', 'error',
-    #                '-select_streams', 'v:0',
-    #                '-show_entries', 'stream=width,height',
-    #                '-of', 'csv=s=x:p=0',
-    #                thumb_jpeg_path
-    #                ]
-    #
-    #     process = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
-    #
-    #     (stdoutdata, stderrdata) = process.communicate()
-    #
-    #     print('[FFMPROB]:{}{}'.format(stdoutdata, stderrdata))
-    #
-    #     if stdoutdata and len(stdoutdata) > 0:
-    #         thumb_resolution = stdoutdata.decode('utf-8').strip()
-    #         print("[thumb_resolution]:{}-{}".format(thumb_resolution, thumb_jpeg_path))
-    #
-    #
-    # except:
-    #     pass
-
-    #
 
     app.debug = True
 

@@ -49,17 +49,10 @@ class ThumbIndexJob(threading.Thread):
 
             full_count = 0
             try:
-                # print('running:{}'.format(self.queue.qsize()))
 
-                oneday_time = time.mktime(datetime.datetime.now().timetuple()) - 60*60*1
+                interval_time = time.mktime(datetime.datetime.now().timetuple()) - 60*60*2
 
-                thumb_query = {"$or": [{"thumb_time": {"$exists": False}},  {"$and": [{"thumb": {"$eq": ''}}, {"thumb_time": {"$lt": oneday_time}}]}]}
-
-        # thumb_query = {"$or":[{"thumb": {"$exists": False}}, {"thumb_time": {"$lt": oneday_time}}]}
-                # thumb_query = {"$or":[{"thumb": {"$exists": False}}, {"thumb_time": {"$lt": oneday_time}}]}
-                # thumb_query = {"thumb": {"$exists": False}}
-
-                result = self.mongo.db.playitems.find(thumb_query).sort([("thumb", -1)]).limit(10)
+                result = self.mongo.db.playitems.find({"thumb_time": {"$lt": interval_time}}).sort([("thumb_success", -1), ("thumb_time", -1)])
 
                 print('{} running: {}'.format(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'), result.count()))
 
@@ -75,9 +68,6 @@ class ThumbIndexJob(threading.Thread):
                         self.queue.put([s['_id'], s['url']], block=True, timeout=None)
 
                         print('now running:{}'.format(self.queue.qsize()))
-
-
-
 
             except Exception as ex:
                 traceback.print_exc()
