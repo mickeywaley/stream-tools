@@ -11,6 +11,8 @@ from pathlib import Path
 from queue import Queue
 from urllib.parse import urlparse
 
+from bson.objectid import ObjectId
+
 import requests
 
 from common import JSONEncoder
@@ -173,17 +175,17 @@ class ThumbDownloadWorker(threading.Thread):
 
                 else:
 
-                    logging.error("not ts url:{}, pd_url:{}".format(url, pd_url))
+                    # logging.error("not ts url:{}, pd_url:{}".format(url, pd_url))
                     # raise Exception(u"no ts url found in m3u8")
 
-                    #self.queue.put([id, inner_url], block=True, timeout=None)
+                    self.queue.put([id, inner_url], block=True, timeout=None)
 
                 break
 
     def index_thumb(self, id, url, delete=False, path=None, resolution=None):
         logging.info("[Index-Thumb]{}: {}".format(id, url))
         try:
-            myquery = {"url": url}
+            myquery = {"_id": ObjectId(id)}
             #
             # if delete:
             #     self.mongo.db.playitems.delete_one(myquery)
