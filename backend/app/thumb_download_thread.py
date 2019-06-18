@@ -217,7 +217,7 @@ class ThumbDownloadWorker(threading.Thread):
 
                 logging.info("[OK-MONGO]:{}".format(id))
 
-                result = self.mongo.db.playitems.update_one(myquery, updateQuery, upsert=True)
+                result = self.mongo.db.playitems.update_one(myquery, updateQuery, upsert=False)
 
                 logging.info("[UPDATE-MONGO:matched-{}, modified-{}]".format(result.matched_count, result.modified_count))
 
@@ -232,7 +232,7 @@ class ThumbDownloadWorker(threading.Thread):
                 }
                 updateQuery = {'$set': doc, '$inc': {"thumb_failed_count": 1}}
 
-                self.mongo.db.playitems.update_one(myquery, updateQuery, upsert=True)
+                self.mongo.db.playitems.update_one(myquery, updateQuery, upsert=False)
 
         except Exception as ex:
             traceback.print_exc()
