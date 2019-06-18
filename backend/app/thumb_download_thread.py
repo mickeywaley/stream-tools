@@ -106,7 +106,7 @@ class ThumbDownloadWorker(threading.Thread):
 
                 logging.info("task recv:%s ,task url:%s" % (task[0], task[1]))
 
-                self.dowload_and_index(task[0], task[1])
+                self.download_and_index(task[0], task[1])
 
                 self.queue.task_done()
 
@@ -121,8 +121,7 @@ class ThumbDownloadWorker(threading.Thread):
 
         stop_thread_logging(log_handler)
 
-
-    def dowload_and_index(self, id, url):
+    def download_and_index(self, id, url):
 
         logging.info("[Thread] start:{}".format(url))
 
@@ -173,7 +172,11 @@ class ThumbDownloadWorker(threading.Thread):
                         self.index_thumb(id, url)
 
                 else:
-                    self.queue.put([id, inner_url], block=True, timeout=None)
+
+                    logging.error("not ts url:{}, pd_url:{}".format(url, pd_url))
+                    # raise Exception(u"no ts url found in m3u8")
+
+                    #self.queue.put([id, inner_url], block=True, timeout=None)
 
                 break
 
