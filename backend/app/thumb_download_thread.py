@@ -73,6 +73,8 @@ class ThumbIndexJob(threading.Thread):
 
                     for s in result:
                         logging.info(JSONEncoder().encode(s))
+
+
                         # output.append(s)
                         self.queue.put([s['_id'], s['url']], block=True, timeout=None)
 
@@ -279,7 +281,9 @@ class ThumbDownloadWorker(threading.Thread):
         #     logging.info('[warn]: file already exist')
         #     return True, curr_path
         try:
-            res = requests.get(ts_url)
+            res = requests.get(ts_url, timeout=(5, 30))
+
+            logging.info('[requests]: status_code{}'.format(res.status_code))
 
             if res.status_code != 200:
 

@@ -222,9 +222,9 @@ const PlayItem = props => {
                 </select>
             </div>
             <div className="playitem-body">
-                <Link to={ { pathname: "/player", state: { url: props.playitem.url } } }>
+                {/*<Link to={ { pathname: "/player", state: { url: props.playitem.url } } }>*/}
                     { props.playitem.url }
-                </Link>
+                {/*</Link>*/}
             </div>
             <img src="/images/loading.gif" data-echo={ thumb_path } />
             { props.playitem.thumb && <div>
