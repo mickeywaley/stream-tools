@@ -1,3 +1,5 @@
+import {playitemConstants} from "../constants/playitem_constants";
+
 const initialState = {
     pagination:{
         total_count:-1,
@@ -12,13 +14,13 @@ const initialState = {
 
 export default function playitems(state = initialState, action) {
     switch (action.type) {
-    case 'FETCH_PLAYITEMS_STARTED': {
+    case playitemConstants.FETCH_PLAYITEMS_REQUEST: {
         return {
             ...state,
             isLoading: true,
         };
     }
-    case 'FETCH_PLAYITEMS_SUCCEEDED': {
+    case playitemConstants.FETCH_PLAYITEMS_SUCCESS: {
 
 
         var items = action.payload.playitems;
@@ -35,20 +37,20 @@ export default function playitems(state = initialState, action) {
             isLoading: false,
         };
     }
-    case 'FETCH_PLAYITEMS_FAILED': {
+    case playitemConstants.FETCH_PLAYITEMS_FAILURE: {
         return {
             ...state,
             isLoading: false,
             error: action.payload.error,
         };
     }
-    case 'CREATE_PLAYITEM_SUCCEEDED': {
+    case playitemConstants.CREATE_PLAYITEM_SUCCESS: {
         return {
             ...state,
             playitems: state.playitems.concat(action.payload.playitem),
         };
     }
-    case 'EDIT_PLAYITEM_SUCCEEDED': {
+    case playitemConstants.EDIT_PLAYITEM_SUCCESS: {
         const {payload} = action;
         const nextPlayItems = state.playitems.map(playitem => {
             if (playitem.id === payload.playitem.id) {

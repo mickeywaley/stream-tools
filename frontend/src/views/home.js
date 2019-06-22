@@ -10,7 +10,7 @@ import Footer from '../components/Footer'
 import Filters from '../components/filter/Filters';
 import InputFilter from '../components/filter/InputFilter';
 
-import { createPlayItem, editPlayItem, fetchPlayItems } from '../actions';
+import { playitemActions } from '../actions';
 import Pagination from '../components/Pagination';
 
 import '../stylesheets/Pagination.css'
@@ -42,7 +42,7 @@ class Home extends Component {
         }
 
         console.log(JSON.stringify(filters))
-        this.props.dispatch(fetchPlayItems(filters));
+        this.props.dispatch(playitemActions.fetchPlayItems(filters));
 
     }
 
@@ -60,18 +60,18 @@ class Home extends Component {
 
             pageSize: this.props.pagination.page_size
         }
-        this.props.dispatch(fetchPlayItems(filters));
+        this.props.dispatch(playitemActions.fetchPlayItems(filters));
     }
 
     onCreatePlayItem = ({title, description}) => {
-        this.props.dispatch(createPlayItem({
+        this.props.dispatch(playitemActions.createPlayItem({
             title,
             description
         }));
     };
 
     onStatusChange = (id, status) => {
-        this.props.dispatch(editPlayItem(id, {
+        this.props.dispatch(playitemActions.editPlayItem(id, {
             status
         }));
     };

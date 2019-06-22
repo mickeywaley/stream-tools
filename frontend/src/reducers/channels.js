@@ -1,3 +1,5 @@
+import {channelsConstants} from "../constants";
+
 const initialState = {
     pagination:{
         total_count:-1,
@@ -12,13 +14,13 @@ const initialState = {
 
 export default function channels(state = initialState, action) {
     switch (action.type) {
-    case 'FETCH_CHANNELS_STARTED': {
+    case channelsConstants.FETCH_CHANNELS_REQUEST: {
         return {
             ...state,
             isLoading: true,
         };
     }
-    case 'FETCH_CHANNELS_SUCCEEDED': {
+    case channelsConstants.FETCH_CHANNELS_SUCCESS: {
 
 
         var items = action.payload.channels;
@@ -30,20 +32,20 @@ export default function channels(state = initialState, action) {
             isLoading: false,
         };
     }
-    case 'FETCH_CHANNELS_FAILED': {
+    case channelsConstants.FETCH_CHANNELS_FAILURE: {
         return {
             ...state,
             isLoading: false,
             error: action.payload.error,
         };
     }
-    case 'CREATE_CHANNEL_SUCCEEDED': {
+    case channelsConstants.CREATE_CHANNEL_SUCCESS: {
         return {
             ...state,
             channels: state.channels.concat(action.payload.channel),
         };
     }
-    case 'EDIT_CHANNEL_SUCCEEDED': {
+    case channelsConstants.EDIT_CHANNEL_SUCCESS: {
         const {payload} = action;
         const nextChannels = state.channels.map(channel => {
             if (channel._id === payload.channel._id) {

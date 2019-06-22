@@ -9,16 +9,18 @@ import Footer from '../components/Footer'
 
 import ChannelsPage from '../components/channel/ChannelsPage'
 
-import {fetchChannels, fetchPlayItems} from '../actions';
 import Filters from '../components/filter/Filters';
 
 
- 
+
 import {CHANNEL_DISTRICTS, CHANNEL_TYPES} from '../constants';
 
 import ChannelFilter from '../components/filter/ChannelFilter'
 
 import Pagination from '../components/Pagination';
+
+import {channelsActions} from '../actions';
+
 
 import '../stylesheets/Pagination.css'
 
@@ -53,7 +55,7 @@ class Channels extends Component {
         console.log(filters)
         this.setState({ filters });
 
-        this.props.dispatch(fetchChannels(filters));
+        this.props.dispatch(channelsActions.fetchChannels(filters));
     }
 
     onPageChanged = data => {
@@ -70,7 +72,7 @@ class Channels extends Component {
         }
 
         console.log(JSON.stringify(filters))
-        this.props.dispatch(fetchChannels(filters));
+        this.props.dispatch(channelsActions.fetchChannels(filters));
 
     }
 
@@ -81,7 +83,7 @@ class Channels extends Component {
         const params = queryString.parse(this.props.location.search);
         console.log(params);
 
-        this.props.dispatch(fetchChannels(params));
+        this.props.dispatch(channelsActions.fetchChannels(params));
     }
 
 

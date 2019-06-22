@@ -10,7 +10,7 @@ import Footer from '../components/Footer'
 import Filters from '../components/filter/Filters';
 import InputFilter from '../components/filter/InputFilter';
 
-import { createPlayItem, editPlayItem, fetchPlayItems } from '../actions';
+import { playitemActions } from '../actions';
 
 class ChannelPage extends Component {
 
@@ -28,7 +28,7 @@ class ChannelPage extends Component {
 
         const filters =  { keyword: this.props.location.state.channel.name };
 
-        this.props.dispatch(fetchPlayItems(filters));
+        this.props.dispatch(playitemActions.fetchPlayItems(filters));
     }
 
 
