@@ -1,3 +1,4 @@
+
 from mongo import db
 
 
@@ -8,12 +9,12 @@ class User(db.Document):
     password = db.StringField(requied=True, min_length=6)
     createtime = db.DateTimeField(required=True)
 
-    def to_json(self):
-        return {
-            "uid": self.uid,
-            "name": self.name,
-            "email": self.email
-        }
+    # def to_json(self):
+    #     return {
+    #         "uid": self.uid,
+    #         "name": self.name,
+    #         "email": self.email
+    #     }
 
     def is_authenticated(self):
         return True

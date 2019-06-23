@@ -1,5 +1,5 @@
 import os
-
+from datetime import datetime
 
 from common import JSONEncoder
 from config import Config
@@ -8,10 +8,11 @@ from mongo import db, mongo, login_manager
 from thumb_download_thread import ThumbIndexJob
 
 
-from flask import Flask,request
-
+from flask import Flask, request, jsonify
 
 from user.user_service import user_blueprint
+
+from playlist.playlist_service import playlist_blueprint
 
 app = Flask(__name__)
 
@@ -47,6 +48,8 @@ login_manager.init_app(app)
 
 
 app.register_blueprint(user_blueprint, url_prefix='/users')
+
+app.register_blueprint(playlist_blueprint, url_prefix='/playlist')
 
 filepath = os.path.abspath(__file__)
 
@@ -92,6 +95,7 @@ def is_number(s):
         pass
 
     return False
+
 
 
 @app.route('/start_thumb')
@@ -200,7 +204,6 @@ def channels():
         },
         "data": output
     })
-
 
 
 if __name__ == '__main__':
