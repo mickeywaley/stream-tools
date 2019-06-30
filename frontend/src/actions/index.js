@@ -7,5 +7,6 @@ export * from './channels'
 export * from './playitem'
 
 
+export * from './playlist'
 
 

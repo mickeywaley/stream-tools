@@ -49,7 +49,7 @@ login_manager.init_app(app)
 
 app.register_blueprint(user_blueprint, url_prefix='/users')
 
-app.register_blueprint(playlist_blueprint, url_prefix='/playlist')
+app.register_blueprint(playlist_blueprint, url_prefix='/playlists')
 
 filepath = os.path.abspath(__file__)
 

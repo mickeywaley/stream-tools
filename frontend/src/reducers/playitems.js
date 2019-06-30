@@ -1,4 +1,4 @@
-import {playitemConstants} from "../constants/playitem_constants";
+import {playitemConstants} from "../constants";
 
 const initialState = {
     pagination:{
@@ -13,6 +13,7 @@ const initialState = {
 };
 
 export default function playitems(state = initialState, action) {
+
     switch (action.type) {
     case playitemConstants.FETCH_PLAYITEMS_REQUEST: {
         return {

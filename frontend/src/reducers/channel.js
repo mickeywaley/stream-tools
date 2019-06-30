@@ -1,4 +1,4 @@
-import { playitemConstants } from "../constants/playitem_constants";
+import { playitemConstants } from "../constants";
 
 const initialState = {
     channel: null,

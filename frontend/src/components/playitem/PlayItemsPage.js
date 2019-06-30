@@ -89,6 +89,7 @@ class PlayItemsPage extends Component {
                               <PlayItemList key={ status }
                                   status={ status }
                                   playitems={ statusPlayItems }
+                                            playlists={ this.props.playlists }
                                   onStatusChange={ this.props.onStatusChange } />
                               );
                       }) }

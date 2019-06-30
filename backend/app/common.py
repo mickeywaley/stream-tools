@@ -49,18 +49,18 @@ def todict(obj, classkey=None):
         if classkey is not None and hasattr(obj, "__class__"):
             data[classkey] = obj.__class__.__name__
 
-        print("__dict__ return:{}".format(data))
+        # print("__dict__ return:{}".format(data))
         return data
 
     else:
-        print("no action return:{}".format(obj))
+        # print("no action return:{}".format(obj))
         return obj
 
 
 class JSONEncoder(json.JSONEncoder):
     def default(self, obj):
 
-        print("-----------JSONEncoder:{}".format(type(obj)))
+        # print("-----------JSONEncoder:{}".format(type(obj)))
         if isinstance(obj, ObjectId):
             return str(obj)
         if isinstance(obj, Decimal):

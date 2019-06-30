@@ -10,7 +10,7 @@ import Footer from '../components/Footer'
 import Filters from '../components/filter/Filters';
 import InputFilter from '../components/filter/InputFilter';
 
-import { playitemActions } from '../actions';
+import { playitemActions, playlistActions } from '../actions';
 import Pagination from '../components/Pagination';
 
 import '../stylesheets/Pagination.css'
@@ -41,7 +41,7 @@ class Home extends Component {
             pageSize: data.pageLimit
         }
 
-        console.log(JSON.stringify(filters))
+        //console.log(JSON.stringify(filters))
         this.props.dispatch(playitemActions.fetchPlayItems(filters));
 
     }
@@ -60,7 +60,10 @@ class Home extends Component {
 
             pageSize: this.props.pagination.page_size
         }
-        this.props.dispatch(playitemActions.fetchPlayItems(filters));
+        //this.props.dispatch(playitemActions.fetchPlayItems(filters));
+
+
+        this.props.dispatch(playlistActions.fetchPlaylists());
     }
 
     onCreatePlayItem = ({title, description}) => {
@@ -93,7 +96,7 @@ class Home extends Component {
 
         const total_pages = ~~((this.props.pagination.total_count + this.props.pagination.page_size - 1 )/this.props.pagination.page_size)
 
-        console.log(this.props.pagination.total_count)
+        // console.log(this.props.pagination.total_count)
 
         return (
 
@@ -102,6 +105,8 @@ class Home extends Component {
                 { this.props.error && <FlashMessage message={ this.props.error } /> }
                 <div className="main-content">
                     <PlayItemsPage playitems={ this.props.playitems }
+
+                                   playlists={ this.props.playlists }
                         onCreatePlayItem={ this.onCreatePlayItem }
                         onStatusChange={ this.onStatusChange }
                         isLoading={ this.props.isLoading } />
@@ -130,11 +135,15 @@ class Home extends Component {
 
 function mapStateToProps(state) {
     const {pagination, playitems, isLoading, error} = state.playitems;
+
+    const {playlists} = state.playlists;
+
     return {
         pagination,
         playitems,
         isLoading,
-        error
+        error,
+        playlists
     };
 }
 
