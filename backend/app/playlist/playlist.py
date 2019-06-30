@@ -7,6 +7,7 @@ class Playlist(gj.Document):
     uid = db.IntField(required=True)
     name = db.StringField(required=True, max_length=100)
     create_time = db.DateTimeField(required=True)
+    items = db.ListField(required=False)
 
     # def to_json(self):
     #     return {
