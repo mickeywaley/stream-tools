@@ -105,8 +105,6 @@ class Home extends Component {
                 { this.props.error && <FlashMessage message={ this.props.error } /> }
                 <div className="main-content">
                     <PlayItemsPage playitems={ this.props.playitems }
-
-                                   playlists={ this.props.playlists }
                         onCreatePlayItem={ this.onCreatePlayItem }
                         onStatusChange={ this.onStatusChange }
                         isLoading={ this.props.isLoading } />

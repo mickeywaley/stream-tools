@@ -5,7 +5,8 @@ export const playlistActions = {
     fetchPlaylists,
     createPlaylist,
     editPlaylist,
-    deletePlaylist
+    deletePlaylist,
+    togglePlaylistItem,
 };
 
 
@@ -178,6 +179,43 @@ function deletePlaylist(id) {
         };
     }
 }
+
+
+function togglePlaylistItem(id, itemId, checked) {
+
+    return (dispatch) => {
+
+        dispatch(request());
+
+        playlistService.togglePlaylistItem(id, itemId, checked)
+        .then(resp => {
+            dispatch(success(resp.data));
+        });
+
+    };
+
+
+    function request() {
+        return {
+            type: 'TOGGLE_PLAYLIST_REQUEST',
+        };
+    }
+    function success(result) {
+        return {
+            type: 'TOGGLE_PLAYLIST_SUCCESS',
+        };
+    }
+    function failure(error) {
+        return {
+            type: 'TOGGLE_PLAYLIST_FAILURE',
+            payload: {
+                error,
+            },
+        };
+    }
+}
+
+
 
 function getPlaylistById(Playlists, id) {
     return Playlists.find(Playlist => Playlist.id === id);

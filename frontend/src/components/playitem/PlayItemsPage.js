@@ -81,18 +81,7 @@ class PlayItemsPage extends Component {
                       </button>
                   </form> }
                 <div className="playitem-lists">
-                    { PLAYITEM_STATUSES.map(status => {
-                          const statusPlayItems = this.props.playitems.filter(
-                              playitem => playitem.status === status
-                          );
-                          return (
-                              <PlayItemList key={ status }
-                                  status={ status }
-                                  playitems={ statusPlayItems }
-                                            playlists={ this.props.playlists }
-                                  onStatusChange={ this.props.onStatusChange } />
-                              );
-                      }) }
+                    <PlayItemList playitems={ this.props.playitems } onStatusChange={ this.props.onStatusChange } />
                 </div>
             </div>
             );

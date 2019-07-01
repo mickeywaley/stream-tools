@@ -7,6 +7,7 @@ export const playlistService = {
     createPlaylist,
     editPlaylist,
     deletePlaylist,
+    togglePlaylistItem,
 
 };
 
@@ -29,4 +30,14 @@ function editPlaylist(id, params) {
 
 function deletePlaylist(id, params) {
     return client.delete(`/playlists/${id}`);
+}
+
+
+function togglePlaylistItem(id, item, checked) {
+
+    const params = {
+        item,
+        checked,
+    }
+    return client.put(`/playlists/${id}/item`, params);
 }

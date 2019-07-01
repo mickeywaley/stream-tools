@@ -1,6 +1,8 @@
 import traceback
 from datetime import datetime
 
+import bson
+from bson import ObjectId
 from flask import Blueprint, request, json, jsonify
 from flask_login import login_required, current_user
 
@@ -51,3 +53,40 @@ def create_playlist():
             return Result.gen_fail(None, 'Create playlist error.')
 
     return Result.gen_success(playlist, 'Create playlist success.')
+
+
+@playlist_blueprint.route('/<playlist_id>', methods=['GET'])
+def get_playlist_item(playlist_id):
+
+    # playlist = Playlist.objects(uid=uid, id=request.json['item']).first()
+
+    playlist = Playlist.objects.get(id=bson.objectid.ObjectId(playlist_id))
+
+    return Result.gen_success(playlist, 'get playlist success.')
+
+
+@playlist_blueprint.route('/<playlist_id>/item', methods=['PUT'])
+def toggle_playlist_item(playlist_id):
+    uid = 1
+    if not request.json \
+            or not 'item' in request.json  or not 'checked' in request.json:
+        return Result.gen_fail(None, 'Request not Json or invalid')
+
+    # playlist = Playlist.objects(uid=uid, id=request.json['item']).first()
+
+    playlist = Playlist.objects.get(id=bson.objectid.ObjectId(playlist_id))
+
+    item = request.json['item']
+
+    checked = request.json['checked']
+
+    if checked:
+        playlist.items.append(bson.objectid.ObjectId(item))
+    else:
+
+        if bson.objectid.ObjectId(item) in playlist.items:
+            playlist.items.remove(bson.objectid.ObjectId(item))
+
+    playlist.save()
+
+    return Result.gen_success(playlist, 'toggle_playlist_item success.')

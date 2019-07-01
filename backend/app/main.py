@@ -100,6 +100,15 @@ def is_number(s):
 
 @app.route('/start_thumb')
 def start_thumb():
+
+    # for obj in mongo.db.playitems.find():
+    #     try:
+    #
+    #         obj['thumb_time'] = datetime.fromtimestamp(obj['thumb_time'])
+    #         mongo.db.playitems.save(obj)
+    #     except KeyError:
+    #         pass
+
     if not thumb_index_job.is_alive():
         thumb_index_job.start()
 
